@@ -4,31 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- SEO -->
-  <title>Marché d'Aujourd'hui — La marketplace du Bénin</title>
-  <meta name="description" content="Achetez, vendez et cotisez localement en toute confiance. Marché d'Aujourd'hui connecte acheteurs, vendeurs et commerces locaux partout au Bénin." />
-  <meta name="keywords" content="marketplace bénin, acheter bénin, vendre bénin, parakou, cotonou, commerce local, marché en ligne" />
-  <link rel="canonical" href="https://marche-aujourdhui.bj" />
+  <!-- ═══════════════════════════════════════════
+       SEO
+  ═══════════════════════════════════════════ -->
+  <title>Bénin Connect — L'écosystème numérique du Bénin</title>
+  <meta name="description" content="Bénin Connect connecte les personnes, les commerces et les services du Bénin. Découvrez Marché d'Aujourd'hui, notre marketplace locale, et les prochains services de l'écosystème." />
+  <meta name="keywords" content="bénin connect, écosystème numérique bénin, marketplace bénin, marché aujourd'hui, commerce local bénin, JDS communication" />
+  <link rel="canonical" href="https://beninconnect.bj" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Marché d'Aujourd'hui — La marketplace du Bénin" />
-  <meta property="og:description" content="Achetez, vendez et cotisez localement en toute confiance. La vraie marketplace béninoise." />
+  <meta property="og:title" content="Bénin Connect — L'écosystème numérique du Bénin" />
+  <meta property="og:description" content="Connecter les personnes, les commerces et les services du Bénin." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://marche-aujourdhui.bj" />
-  <meta property="og:image" content="https://marche-app.onrender.com/og-image.jpg" />
+  <meta property="og:url" content="https://beninconnect.bj" />
   <meta property="og:locale" content="fr_BJ" />
-  <meta property="og:site_name" content="Marché d'Aujourd'hui" />
+  <meta property="og:site_name" content="Bénin Connect" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Marché d'Aujourd'hui — La marketplace du Bénin" />
-  <meta name="twitter:description" content="Achetez, vendez et cotisez localement en toute confiance." />
+  <meta name="twitter:title" content="Bénin Connect — L'écosystème numérique du Bénin" />
+  <meta name="twitter:description" content="Connecter les personnes, les commerces et les services du Bénin." />
 
-  <!-- Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛒</text></svg>" />
+  <!-- Favicon SVG inline -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%231B2E4B'/><text x='16' y='22' text-anchor='middle' fill='white' font-size='13' font-weight='700' font-family='Inter,system-ui,sans-serif'>BC</text></svg>" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
   <!-- Structured Data -->
@@ -36,1201 +38,1315 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Marché d'Aujourd'hui",
-    "description": "La marketplace du Bénin",
-    "url": "https://marche-aujourdhui.bj",
+    "name": "Bénin Connect",
+    "description": "L'écosystème numérique du Bénin",
+    "url": "https://beninconnect.bj",
+    "foundingLocation": "Parakou, Bénin",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+229-65-82-50-16",
-      "contactType": "customer service"
+      "contactType": "customer support"
+    },
+    "subOrganization": {
+      "@type": "Organization",
+      "name": "JDS Communication",
+      "description": "Agence de communication et de solutions digitales"
     }
   }
   </script>
 
   <style>
-    /* ============================================================
-       VARIABLES — Modifier ici pour changer les couleurs globalement
-    ============================================================ */
+    /* ═══════════════════════════════════════════
+       VARIABLES CENTRALISÉES
+       Modifier ici = modifie tout le site
+    ═══════════════════════════════════════════ */
     :root {
-      --c-green:        #1A6B3C;
-      --c-green-hover:  #155e34;
-      --c-green-light:  #2d8a52;
-      --c-green-pale:   #f0fdf4;
-      --c-green-border: #bbf7d0;
-      --c-orange:       #F4830A;
-      --c-orange-pale:  #fff7ed;
-      --c-white:        #ffffff;
-      --c-bg:           #fafafa;
-      --c-gray-50:      #f9fafb;
-      --c-gray-100:     #f3f4f6;
-      --c-gray-200:     #e5e7eb;
-      --c-gray-300:     #d1d5db;
-      --c-gray-400:     #9ca3af;
-      --c-gray-500:     #6b7280;
-      --c-gray-600:     #4b5563;
-      --c-gray-700:     #374151;
-      --c-gray-800:     #1f2937;
-      --c-gray-900:     #111827;
-      --c-dark:         #0a0f1a;
+      /* Bénin Connect — couleurs principales */
+      --bc-navy:        #1B2E4B;
+      --bc-navy-deep:   #0f1e32;
+      --bc-navy-light:  #243d63;
+      --bc-blue:        #0EA5E9;
+      --bc-blue-pale:   #e0f2fe;
+      --bc-orange:      #F4830A;
+      --bc-orange-pale: #fff7ed;
 
+      /* Produits — chacun sa couleur */
+      --p-marche:       #1A6B3C;
+      --p-marche-pale:  #f0fdf4;
+      --p-repertoire:   #7C3AED;
+      --p-repertoire-pale: #f5f3ff;
+      --p-services:     #0EA5E9;
+      --p-services-pale: #e0f2fe;
+      --p-jds:          #1B2E4B;
+
+      /* Neutres */
+      --white:          #ffffff;
+      --gray-50:        #f9fafb;
+      --gray-100:       #f3f4f6;
+      --gray-200:       #e5e7eb;
+      --gray-300:       #d1d5db;
+      --gray-400:       #9ca3af;
+      --gray-500:       #6b7280;
+      --gray-600:       #4b5563;
+      --gray-700:       #374151;
+      --gray-800:       #1f2937;
+      --gray-900:       #111827;
+
+      /* Typographie */
+      --font:           'Inter', system-ui, -apple-system, sans-serif;
+
+      /* Espacements */
       --radius-sm:  8px;
-      --radius:     16px;
-      --radius-lg:  24px;
-      --radius-xl:  32px;
+      --radius:     14px;
+      --radius-lg:  20px;
+      --radius-xl:  28px;
 
-      --shadow-sm:  0 1px 4px rgba(0,0,0,0.06);
-      --shadow:     0 4px 20px rgba(0,0,0,0.08);
-      --shadow-lg:  0 12px 48px rgba(0,0,0,0.12);
-      --shadow-xl:  0 24px 80px rgba(0,0,0,0.16);
-      --shadow-green: 0 8px 32px rgba(26,107,60,0.25);
-
-      --font: 'Inter', system-ui, sans-serif;
-      --app-url: "https://marche-app.onrender.com";
+      /* Ombres */
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow:     0 4px 16px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
+      --shadow-xl:  0 24px 64px rgba(0,0,0,0.12);
     }
 
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
     body {
       font-family: var(--font);
-      color: var(--c-gray-900);
-      background: var(--c-white);
+      color: var(--gray-900);
+      background: var(--white);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     img { max-width: 100%; display: block; }
-    a { color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
 
-    /* ============================================================
+    /* ═══════════════════════════════════════════
+       LAYOUT
+    ═══════════════════════════════════════════ */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    section { padding: 96px 0; }
+
+    /* ═══════════════════════════════════════════
+       TYPOGRAPHY HELPERS
+    ═══════════════════════════════════════════ */
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      color: var(--bc-blue); background: var(--bc-blue-pale);
+      border: 1px solid rgba(14,165,233,0.2);
+      padding: 6px 14px; border-radius: 50px; margin-bottom: 20px;
+    }
+    .eyebrow-white {
+      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.1);
+      border-color: rgba(255,255,255,0.15);
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900; line-height: 1.15;
+      color: var(--gray-900); margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .section-title-white { color: white; }
+    .section-sub {
+      font-size: 18px; color: var(--gray-500);
+      line-height: 1.7; max-width: 560px;
+    }
+    .section-sub-white { color: rgba(255,255,255,0.65); }
+    .tc { text-align: center; }
+    .tc .section-sub { margin: 0 auto; }
+
+    /* ═══════════════════════════════════════════
+       BUTTONS
+    ═══════════════════════════════════════════ */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font); font-weight: 700;
+      cursor: pointer; transition: all .22s ease;
+      text-decoration: none; white-space: nowrap;
+      border: none;
+    }
+    .btn-lg  { font-size: 16px; padding: 15px 30px; border-radius: 50px; }
+    .btn-md  { font-size: 14px; padding: 12px 24px; border-radius: 50px; }
+    .btn-sm  { font-size: 13px; padding: 9px 18px;  border-radius: 50px; }
+
+    .btn-navy {
+      background: var(--bc-navy); color: white;
+      box-shadow: 0 4px 20px rgba(27,46,75,.35);
+    }
+    .btn-navy:hover { background: var(--bc-navy-deep); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(27,46,75,.4); }
+
+    .btn-blue {
+      background: var(--bc-blue); color: white;
+      box-shadow: 0 4px 20px rgba(14,165,233,.35);
+    }
+    .btn-blue:hover { background: #0284c7; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(14,165,233,.45); }
+
+    .btn-green {
+      background: var(--p-marche); color: white;
+      box-shadow: 0 4px 20px rgba(26,107,60,.35);
+    }
+    .btn-green:hover { background: #155e34; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,107,60,.45); }
+
+    .btn-white {
+      background: white; color: var(--bc-navy);
+      box-shadow: 0 4px 20px rgba(0,0,0,.12);
+    }
+    .btn-white:hover { background: var(--gray-50); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,.18); }
+
+    .btn-outline-white {
+      background: transparent; color: white;
+      border: 1.5px solid rgba(255,255,255,.35);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.7); }
+
+    .btn-outline-navy {
+      background: transparent; color: var(--bc-navy);
+      border: 1.5px solid var(--bc-navy);
+    }
+    .btn-outline-navy:hover { background: var(--bc-navy); color: white; }
+
+    .btn-wa {
+      background: #25D366; color: white;
+      box-shadow: 0 4px 20px rgba(37,211,102,.35);
+    }
+    .btn-wa:hover { background: #1da851; transform: translateY(-2px); }
+
+    /* ═══════════════════════════════════════════
        NAV
-    ============================================================ */
+    ═══════════════════════════════════════════ */
     #nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
       height: 68px;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 32px;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      display: flex; align-items: center;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid transparent;
       transition: border-color .3s, box-shadow .3s;
     }
     #nav.scrolled {
-      border-color: var(--c-gray-200);
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      border-color: var(--gray-200);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
     }
-    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .nav-logo-emoji { font-size: 30px; line-height: 1; }
-    .nav-logo-name { font-size: 17px; font-weight: 800; color: var(--c-green); }
-    .nav-logo-tag { font-size: 10px; color: var(--c-gray-400); font-weight: 500; }
-    .nav-center { display: flex; align-items: center; gap: 36px; }
-    .nav-center a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--c-gray-600); transition: color .2s; }
-    .nav-center a:hover { color: var(--c-green); }
-    .nav-right { display: flex; align-items: center; gap: 12px; }
-    .nav-btn-ghost { text-decoration: none; font-size: 14px; font-weight: 600; color: var(--c-gray-700); padding: 8px 18px; border-radius: 50px; border: 1.5px solid var(--c-gray-200); transition: all .2s; }
-    .nav-btn-ghost:hover { border-color: var(--c-green); color: var(--c-green); background: var(--c-green-pale); }
-    .nav-btn-solid { text-decoration: none; font-size: 14px; font-weight: 700; color: white; padding: 10px 22px; border-radius: 50px; background: var(--c-green); transition: all .2s; box-shadow: var(--shadow-green); }
-    .nav-btn-solid:hover { background: var(--c-green-hover); transform: translateY(-1px); }
-    .nav-burger { display: none; background: none; border: none; font-size: 26px; cursor: pointer; color: var(--c-gray-700); padding: 4px; }
+    .nav-inner {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      width: 100%; max-width: 1160px;
+      margin: 0 auto; padding: 0 24px;
+    }
 
-    /* Mobile nav drawer */
-    #nav-drawer {
-      display: none;
-      position: fixed; top: 68px; left: 0; right: 0;
+    /* Logo */
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo-svg { flex-shrink: 0; }
+    .nav-logo-text { line-height: 1; }
+    .nav-logo-name { font-size: 15px; font-weight: 800; color: var(--bc-navy); letter-spacing: .3px; }
+    .nav-logo-tag { font-size: 9px; color: var(--gray-400); font-weight: 500; margin-top: 2px; letter-spacing: .5px; }
+
+    /* Links -->*/
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--gray-600); transition: color .2s; }
+    .nav-links a:hover { color: var(--bc-navy); }
+
+    /* CTA nav */
+    .nav-cta { display: flex; align-items: center; gap: 10px; }
+    .nav-cta-ghost {
+      font-size: 13px; font-weight: 600; color: var(--gray-600);
+      padding: 8px 16px; border-radius: 50px;
+      border: 1px solid var(--gray-200); transition: all .2s;
+    }
+    .nav-cta-ghost:hover { border-color: var(--bc-navy); color: var(--bc-navy); background: var(--gray-50); }
+    .nav-cta-solid {
+      font-size: 13px; font-weight: 700; color: white;
+      padding: 9px 20px; border-radius: 50px;
+      background: var(--p-marche);
+      box-shadow: 0 2px 12px rgba(26,107,60,.3);
+      transition: all .2s;
+    }
+    .nav-cta-solid:hover { background: #155e34; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,107,60,.4); }
+
+    .nav-burger {
+      display: none; font-size: 22px;
+      color: var(--gray-700); padding: 4px;
+    }
+
+    /* Mobile drawer */
+    #drawer {
+      display: none; position: fixed;
+      top: 68px; left: 0; right: 0;
       background: white; z-index: 999;
-      padding: 20px 24px 28px;
-      border-bottom: 1px solid var(--c-gray-200);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-      flex-direction: column; gap: 4px;
+      padding: 16px 24px 24px;
+      border-bottom: 1px solid var(--gray-200);
+      box-shadow: 0 8px 32px rgba(0,0,0,.08);
+      flex-direction: column; gap: 2px;
     }
-    #nav-drawer.open { display: flex; }
-    #nav-drawer a { text-decoration: none; font-size: 16px; font-weight: 500; color: var(--c-gray-700); padding: 12px 0; border-bottom: 1px solid var(--c-gray-100); }
-    #nav-drawer a:last-child { border: none; margin-top: 8px; background: var(--c-green); color: white; text-align: center; padding: 14px; border-radius: 50px; font-weight: 700; }
+    #drawer.open { display: flex; }
+    #drawer a {
+      font-size: 16px; font-weight: 500;
+      color: var(--gray-700);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex; align-items: center; gap: 10px;
+    }
+    #drawer a:last-child {
+      border: none; margin-top: 12px;
+      background: var(--p-marche); color: white;
+      justify-content: center; border-radius: 50px;
+      font-weight: 700; padding: 14px;
+    }
 
-    /* ============================================================
-       LAYOUT HELPERS
-    ============================================================ */
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
-    section { padding: 100px 0; }
-    .section-eyebrow {
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      min-height: 100vh;
+      padding-top: 68px;
+      background: var(--bc-navy);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-bg-orb {
+      position: absolute; border-radius: 50%; pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 600px; height: 600px;
+      top: -200px; right: -150px;
+      background: radial-gradient(circle, rgba(14,165,233,.12) 0%, transparent 65%);
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      bottom: -100px; left: -100px;
+      background: radial-gradient(circle, rgba(244,131,10,.08) 0%, transparent 65%);
+    }
+    .hero-orb-3 {
+      width: 300px; height: 300px;
+      top: 40%; left: 40%;
+      background: radial-gradient(circle, rgba(14,165,233,.05) 0%, transparent 65%);
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px; align-items: center;
+      position: relative; z-index: 1;
+      padding: 80px 0;
+    }
+    .hero-live {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-      color: var(--c-green); background: var(--c-green-pale);
-      border: 1px solid var(--c-green-border);
-      padding: 6px 16px; border-radius: 50px; margin-bottom: 20px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.85);
+      font-size: 12px; font-weight: 600;
+      padding: 7px 14px; border-radius: 50px;
+      margin-bottom: 28px;
     }
-    .section-title { font-size: clamp(28px, 4.5vw, 46px); font-weight: 900; line-height: 1.15; color: var(--c-gray-900); margin-bottom: 18px; }
-    .section-sub { font-size: 18px; color: var(--c-gray-500); line-height: 1.65; max-width: 580px; }
-    .tc { text-align: center; }
-    .tc .section-sub { margin: 0 auto; }
+    .hero-live-dot {
+      width: 7px; height: 7px;
+      background: #22d3ee; border-radius: 50%;
+      animation: blink 2.5s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:.5; transform:scale(1.3); }
+    }
+    .hero-h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      font-weight: 900; line-height: 1.1;
+      color: white; margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+    .hero-h1 .accent { color: var(--bc-orange); }
+    .hero-sub {
+      font-size: 18px; color: rgba(255,255,255,.65);
+      line-height: 1.7; margin-bottom: 40px;
+      max-width: 480px;
+    }
+    .hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+    .hero-metrics { display: flex; gap: 36px; flex-wrap: wrap; }
+    .hero-metric-val {
+      font-size: 28px; font-weight: 900;
+      color: white; line-height: 1;
+    }
+    .hero-metric-lbl {
+      font-size: 12px; color: rgba(255,255,255,.45);
+      margin-top: 4px;
+    }
+    .hero-metric-note {
+      font-size: 10px; color: rgba(255,255,255,.25);
+      margin-top: 16px; font-style: italic;
+    }
 
-    /* ============================================================
-       BUTTONS
-    ============================================================ */
-    .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-weight: 700; border: none; cursor: pointer; transition: all .22s; text-decoration: none; white-space: nowrap; }
-    .btn-lg { font-size: 16px; padding: 16px 32px; border-radius: 50px; }
-    .btn-md { font-size: 15px; padding: 13px 26px; border-radius: 50px; }
-    .btn-sm { font-size: 13px; padding: 9px 20px; border-radius: 50px; }
-    .btn-green { background: var(--c-green); color: white; box-shadow: var(--shadow-green); }
-    .btn-green:hover { background: var(--c-green-hover); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(26,107,60,0.35); }
-    .btn-white { background: white; color: var(--c-green); box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
-    .btn-white:hover { background: var(--c-gray-50); transform: translateY(-2px); }
-    .btn-outline-white { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.4); }
-    .btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.8); }
-    .btn-outline-green { background: transparent; color: var(--c-green); border: 2px solid var(--c-green); }
-    .btn-outline-green:hover { background: var(--c-green); color: white; }
-    .btn-wa { background: #25D366; color: white; box-shadow: 0 6px 24px rgba(37,211,102,0.35); }
-    .btn-wa:hover { background: #1da851; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,0.45); }
-    .btn-orange { background: var(--c-orange); color: white; box-shadow: 0 6px 24px rgba(244,131,10,0.3); }
-    .btn-orange:hover { background: #e07609; transform: translateY(-2px); }
+    /* Ecosystem SVG visual */
+    .hero-visual {
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .eco-svg-wrap {
+      position: relative;
+      width: 100%; max-width: 460px;
+    }
 
-    /* ============================================================
-       SCROLL ANIMATION
-    ============================================================ */
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    /* ═══════════════════════════════════════════
+       TRUST BAR
+    ═══════════════════════════════════════════ */
+    #trust-bar {
+      padding: 22px 0;
+      background: var(--gray-50);
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .trust-bar-inner {
+      display: flex; align-items: center;
+      justify-content: center; gap: 48px; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 13px; font-weight: 600; color: var(--gray-500);
+    }
+    .trust-item-icon {
+      width: 32px; height: 32px;
+      background: white; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; box-shadow: var(--shadow-sm);
+    }
+
+    /* ═══════════════════════════════════════════
+       MISSION
+    ═══════════════════════════════════════════ */
+    #mission { background: white; }
+    .mission-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 24px; margin-top: 60px;
+    }
+    .mission-card {
+      padding: 36px 28px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--gray-100);
+      transition: all .3s;
+    }
+    .mission-card:hover {
+      border-color: rgba(14,165,233,.25);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .mission-card:nth-child(1) .mission-icon-bg { background: var(--bc-blue-pale); }
+    .mission-card:nth-child(2) .mission-icon-bg { background: var(--bc-orange-pale); }
+    .mission-card:nth-child(3) .mission-icon-bg { background: var(--p-marche-pale); }
+    .mission-icon-bg {
+      width: 56px; height: 56px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 20px;
+    }
+    .mission-title {
+      font-size: 19px; font-weight: 800;
+      color: var(--gray-900); margin-bottom: 10px;
+    }
+    .mission-desc {
+      font-size: 15px; color: var(--gray-500); line-height: 1.65;
+    }
+
+    /* ═══════════════════════════════════════════
+       PRODUITS
+    ═══════════════════════════════════════════ */
+    #produits { background: var(--gray-50); }
+    .produits-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 20px; margin-top: 60px;
+    }
+    .prod-card {
+      background: white; border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1.5px solid var(--gray-100);
+      transition: all .3s;
+      display: flex; flex-direction: column;
+    }
+    .prod-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .prod-card-bar { height: 5px; }
+    .prod-card-bar.marche { background: var(--p-marche); }
+    .prod-card-bar.repertoire { background: var(--p-repertoire); }
+    .prod-card-bar.services { background: var(--p-services); }
+    .prod-card-body { padding: 28px 26px; flex: 1; display: flex; flex-direction: column; }
+    .prod-card-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 18px; }
+    .prod-icon { font-size: 36px; }
+    .prod-badge-live {
+      font-size: 10px; font-weight: 700;
+      padding: 4px 10px; border-radius: 50px;
+    }
+    .prod-badge-live.available {
+      background: #dcfce7; color: #15803d;
+    }
+    .prod-badge-live.soon {
+      background: var(--gray-100); color: var(--gray-400);
+    }
+    .prod-name { font-size: 20px; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+    .prod-desc { font-size: 14px; color: var(--gray-500); line-height: 1.6; flex: 1; margin-bottom: 24px; }
+    .prod-features {
+      list-style: none; display: flex; flex-direction: column;
+      gap: 8px; margin-bottom: 28px;
+    }
+    .prod-features li {
+      font-size: 13px; color: var(--gray-600);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .prod-features li::before {
+      content: '✓'; font-weight: 700; font-size: 13px; flex-shrink: 0;
+    }
+    .prod-features.marche li::before { color: var(--p-marche); }
+    .prod-features.repertoire li::before { color: var(--p-repertoire); opacity: .5; }
+    .prod-features.services li::before { color: var(--p-services); opacity: .5; }
+
+    /* Card principale Marché — plus grande */
+    .prod-card.featured {
+      grid-column: span 1;
+      border-color: rgba(26,107,60,.2);
+    }
+    .prod-card.featured:hover { border-color: rgba(26,107,60,.4); }
+
+    /* ═══════════════════════════════════════════
+       MARCHÉ FOCUS
+    ═══════════════════════════════════════════ */
+    #marche-focus {
+      background: linear-gradient(160deg, #f0fdf4 0%, white 60%);
+      border-top: 1px solid rgba(26,107,60,.1);
+      border-bottom: 1px solid rgba(26,107,60,.1);
+    }
+    .marche-focus-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .marche-feats { display: flex; flex-direction: column; gap: 20px; margin: 32px 0 36px; }
+    .marche-feat { display: flex; align-items: flex-start; gap: 16px; }
+    .marche-feat-icon {
+      width: 48px; height: 48px; border-radius: 14px;
+      background: var(--p-marche-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0; transition: all .25s;
+    }
+    .marche-feat:hover .marche-feat-icon { background: var(--p-marche); }
+    .marche-feat-title { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 3px; }
+    .marche-feat-desc { font-size: 14px; color: var(--gray-500); line-height: 1.55; }
+    .marche-panel {
+      background: var(--bc-navy);
+      border-radius: var(--radius-xl); padding: 36px;
+      color: white;
+    }
+    .marche-panel-title {
+      font-size: 13px; font-weight: 700;
+      color: rgba(255,255,255,.4);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+    .marche-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 28px; }
+    .marche-stat {
+      background: rgba(255,255,255,.07);
+      border-radius: var(--radius-sm); padding: 18px;
+    }
+    .marche-stat-val { font-size: 28px; font-weight: 900; color: var(--p-marche); line-height: 1; }
+    .marche-stat-lbl { font-size: 11px; color: rgba(255,255,255,.45); margin-top: 4px; }
+    .marche-checks { display: flex; flex-direction: column; gap: 11px; }
+    .marche-check {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: rgba(255,255,255,.8);
+    }
+    .marche-check::before { content: '✓'; color: #4ade80; font-weight: 800; flex-shrink: 0; }
+
+    /* ═══════════════════════════════════════════
+       ROADMAP
+    ═══════════════════════════════════════════ */
+    #roadmap { background: white; }
+    .roadmap-steps {
+      display: flex; align-items: flex-start; gap: 0;
+      margin-top: 64px; position: relative;
+    }
+    .roadmap-steps::before {
+      content: '';
+      position: absolute; top: 28px; left: 10%; right: 10%;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--p-marche) 0%, var(--p-marche) 25%, var(--gray-200) 25%);
+    }
+    .roadmap-step { flex: 1; text-align: center; padding: 0 12px; position: relative; }
+    .roadmap-num {
+      width: 56px; height: 56px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 18px; font-size: 22px;
+      position: relative; z-index: 1;
+      transition: all .3s;
+    }
+    .roadmap-step:nth-child(1) .roadmap-num { background: var(--p-marche); box-shadow: 0 4px 16px rgba(26,107,60,.35); }
+    .roadmap-step:nth-child(2) .roadmap-num { background: var(--p-repertoire); opacity: .5; }
+    .roadmap-step:nth-child(3) .roadmap-num { background: var(--p-services); opacity: .35; }
+    .roadmap-step:nth-child(4) .roadmap-num { background: var(--bc-orange); opacity: .25; }
+    .roadmap-step:hover .roadmap-num { opacity: 1 !important; transform: scale(1.08); }
+    .roadmap-phase {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px;
+      color: var(--gray-400); margin-bottom: 8px;
+    }
+    .roadmap-step:nth-child(1) .roadmap-phase { color: var(--p-marche); }
+    .roadmap-name { font-size: 17px; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+    .roadmap-desc { font-size: 13px; color: var(--gray-400); line-height: 1.55; }
+
+    /* ═══════════════════════════════════════════
+       JDS
+    ═══════════════════════════════════════════ */
+    #jds { background: var(--bc-navy); }
+    .jds-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .jds-separator {
+      width: 48px; height: 3px;
+      background: var(--bc-orange);
+      border-radius: 2px; margin: 20px 0;
+    }
+    .jds-text { font-size: 16px; color: rgba(255,255,255,.6); line-height: 1.7; margin-bottom: 32px; }
+    .jds-visual {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg); padding: 32px;
+    }
+    .jds-visual-title {
+      font-size: 12px; color: rgba(255,255,255,.35);
+      text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .jds-services { display: flex; flex-direction: column; gap: 12px; }
+    .jds-service {
+      display: flex; align-items: center; gap: 14px;
+      background: rgba(255,255,255,.05);
+      border-radius: var(--radius-sm); padding: 14px 16px;
+      transition: all .2s;
+    }
+    .jds-service:hover { background: rgba(255,255,255,.09); }
+    .jds-service-icon { font-size: 20px; flex-shrink: 0; }
+    .jds-service-name { font-size: 14px; font-weight: 600; color: rgba(255,255,255,.85); }
+    .jds-service-desc { font-size: 12px; color: rgba(255,255,255,.4); margin-top: 2px; }
+
+    /* ═══════════════════════════════════════════
+       CTA FINAL
+    ═══════════════════════════════════════════ */
+    #cta-final {
+      background: linear-gradient(145deg, var(--bc-navy) 0%, #0a1e35 100%);
+      text-align: center; padding: 100px 0;
+      position: relative; overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 800px; height: 800px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(14,165,233,.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .cta-final-inner { position: relative; z-index: 1; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 44px; }
+
+    /* ═══════════════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════════════ */
+    #contact { background: white; }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .contact-items { display: flex; flex-direction: column; gap: 20px; margin-top: 32px; }
+    .contact-item { display: flex; align-items: center; gap: 16px; }
+    .contact-icon {
+      width: 52px; height: 52px;
+      background: var(--gray-50); border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .contact-lbl { font-size: 11px; color: var(--gray-400); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+    .contact-val { font-size: 16px; font-weight: 700; color: var(--gray-900); }
+    .contact-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-xl); padding: 40px;
+    }
+    .contact-card-title { font-size: 22px; font-weight: 800; color: var(--gray-900); margin-bottom: 10px; }
+    .contact-card-sub { font-size: 15px; color: var(--gray-500); line-height: 1.65; margin-bottom: 28px; }
+    .contact-wa-btns { display: flex; flex-direction: column; gap: 12px; }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer { background: var(--bc-navy-deep); color: rgba(255,255,255,.45); padding: 72px 0 36px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px; margin-bottom: 56px;
+    }
+    .footer-brand-name { font-size: 18px; font-weight: 900; color: white; margin: 14px 0 10px; }
+    .footer-brand-desc { font-size: 14px; line-height: 1.65; margin-bottom: 20px; }
+    .footer-socials { display: flex; gap: 10px; }
+    .footer-social {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; transition: all .2s;
+    }
+    .footer-social:hover { background: var(--p-marche); transform: translateY(-2px); }
+    .footer-col-title {
+      font-size: 11px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 1.5px;
+      color: rgba(255,255,255,.6); margin-bottom: 18px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.35); transition: color .2s; }
+    .footer-links a:hover { color: var(--bc-blue); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12px; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { color: rgba(255,255,255,.25); transition: color .2s; }
+    .footer-bottom-links a:hover { color: var(--bc-blue); }
+
+    /* ═══════════════════════════════════════════
+       WHATSAPP FLOAT
+    ═══════════════════════════════════════════ */
+    #wa-float {
+      position: fixed; bottom: 26px; right: 26px; z-index: 990;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #25D366; color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 24px; box-shadow: 0 6px 24px rgba(37,211,102,.45);
+      transition: all .25s;
+    }
+    #wa-float:hover { transform: scale(1.1); box-shadow: 0 10px 32px rgba(37,211,102,.55); }
+
+    /* ═══════════════════════════════════════════
+       SCROLL REVEAL
+    ═══════════════════════════════════════════ */
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
     .reveal.in { opacity: 1; transform: none; }
     .reveal-d1 { transition-delay: .1s; }
     .reveal-d2 { transition-delay: .2s; }
     .reveal-d3 { transition-delay: .3s; }
     .reveal-d4 { transition-delay: .4s; }
 
-    /* ============================================================
-       HERO
-    ============================================================ */
-    #hero {
-      min-height: 100vh;
-      padding-top: 68px;
-      display: flex; align-items: center;
-      background: linear-gradient(150deg, #f0fdf6 0%, #ffffff 45%, #f8f3ff 100%);
-      position: relative; overflow: hidden;
-    }
-    #hero::before {
-      content: '';
-      position: absolute; top: -300px; right: -200px;
-      width: 700px; height: 700px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(26,107,60,.07) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    #hero::after {
-      content: '';
-      position: absolute; bottom: -200px; left: -150px;
-      width: 500px; height: 500px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(244,131,10,.05) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; padding: 60px 0; }
-    .hero-live-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: white; border: 1px solid var(--c-green-border);
-      padding: 8px 16px; border-radius: 50px;
-      font-size: 13px; font-weight: 600; color: var(--c-green);
-      margin-bottom: 28px; box-shadow: var(--shadow-sm);
-    }
-    .hero-live-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: live-pulse 2s infinite; }
-    @keyframes live-pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.4)} }
-    .hero-h1 { font-size: clamp(36px, 5.5vw, 60px); font-weight: 900; line-height: 1.1; color: var(--c-gray-900); margin-bottom: 16px; }
-    .hero-h1 em { font-style: normal; color: var(--c-green); position: relative; }
-    .hero-h1 em::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-      height: 4px; background: var(--c-orange); border-radius: 2px;
-      transform: scaleX(.95); transform-origin: left;
-    }
-    .hero-tagline { font-size: 19px; color: var(--c-gray-500); line-height: 1.6; margin-bottom: 36px; max-width: 480px; }
-    .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 52px; }
-    .hero-proof { display: flex; gap: 32px; flex-wrap: wrap; }
-    .hero-proof-item {}
-    .hero-proof-num { font-size: 26px; font-weight: 900; color: var(--c-gray-900); line-height: 1; }
-    .hero-proof-num sup { font-size: 14px; vertical-align: super; }
-    .hero-proof-lbl { font-size: 12px; color: var(--c-gray-400); margin-top: 3px; }
-    .hero-proof-note { font-size: 10px; color: var(--c-gray-300); margin-top: 10px; font-style: italic; }
-
-    /* Phone mockup */
-    .hero-visual { position: relative; display: flex; justify-content: center; }
-    .phone-wrap {
-      width: 290px;
-      background: var(--c-dark);
-      border-radius: 44px;
-      padding: 14px;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.08) inset;
-      position: relative;
-    }
-    .phone-notch { width: 90px; height: 28px; background: var(--c-dark); border-radius: 0 0 18px 18px; margin: 0 auto 4px; position: relative; z-index: 2; }
-    .phone-screen { background: #FDF6EC; border-radius: 32px; overflow: hidden; }
-    .ps-header { background: var(--c-green); padding: 14px 16px; display: flex; align-items: center; gap: 8px; }
-    .ps-header-logo { font-size: 20px; }
-    .ps-header-text { color: white; font-size: 13px; font-weight: 700; }
-    .ps-search { background: rgba(255,255,255,0.2); margin: 0 12px; border-radius: 20px; padding: 7px 14px; font-size: 11px; color: rgba(255,255,255,0.8); display: flex; align-items: center; gap: 6px; }
-    .ps-cats { display: flex; gap: 8px; padding: 10px 12px; overflow: hidden; }
-    .ps-cat { background: white; border-radius: 20px; padding: 5px 12px; font-size: 10px; font-weight: 600; color: var(--c-gray-700); white-space: nowrap; box-shadow: var(--shadow-sm); }
-    .ps-cat.active { background: var(--c-green); color: white; }
-    .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 4px 12px 16px; }
-    .ps-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
-    .ps-card-img { height: 72px; display: flex; align-items: center; justify-content: center; font-size: 30px; background: var(--c-gray-50); }
-    .ps-card-body { padding: 7px 9px; }
-    .ps-card-name { font-size: 9px; font-weight: 600; color: var(--c-gray-700); line-height: 1.3; }
-    .ps-card-price { font-size: 11px; font-weight: 800; color: var(--c-green); margin-top: 2px; }
-
-    /* Floating badges */
-    .float-badge {
-      position: absolute;
-      background: white;
-      border-radius: 14px;
-      padding: 11px 15px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-      display: flex; align-items: center; gap: 10px;
-      animation: float-y 4s ease-in-out infinite;
-    }
-    .float-badge-icon { font-size: 24px; }
-    .float-badge-lbl { font-size: 10px; color: var(--c-gray-400); }
-    .float-badge-val { font-size: 12px; font-weight: 700; color: var(--c-gray-900); }
-    .fb-1 { top: 16px; right: -40px; animation-delay: 0s; }
-    .fb-2 { bottom: 80px; left: -48px; animation-delay: .7s; }
-    .fb-3 { top: 50%; right: -36px; transform: translateY(-50%); animation-delay: 1.4s; }
-    @keyframes float-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-    .fb-3 { animation-name: float-y-center; }
-    @keyframes float-y-center { 0%,100%{transform:translateY(-50%)} 50%{transform:translateY(calc(-50% - 10px))} }
-
-    /* ============================================================
-       BRANDS / TRUST BAR
-    ============================================================ */
-    #trust-bar { padding: 28px 0; background: var(--c-gray-50); border-top: 1px solid var(--c-gray-100); border-bottom: 1px solid var(--c-gray-100); }
-    .trust-bar-inner { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
-    .trust-bar-item { display: flex; align-items: center; gap: 10px; color: var(--c-gray-500); font-size: 14px; font-weight: 600; }
-    .trust-bar-item span:first-child { font-size: 22px; }
-
-    /* ============================================================
-       WHY
-    ============================================================ */
-    #why { background: white; }
-    .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 64px; }
-    .why-card {
-      padding: 36px 32px;
-      border-radius: var(--radius-lg);
-      border: 1.5px solid var(--c-gray-100);
-      background: var(--c-gray-50);
-      transition: all .3s;
-      cursor: default;
-    }
-    .why-card:hover { background: var(--c-green-pale); border-color: var(--c-green-border); transform: translateY(-5px); box-shadow: var(--shadow); }
-    .why-icon-wrap { width: 60px; height: 60px; background: white; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; margin-bottom: 20px; box-shadow: var(--shadow-sm); }
-    .why-card:hover .why-icon-wrap { background: var(--c-green); }
-    .why-title { font-size: 19px; font-weight: 800; color: var(--c-gray-900); margin-bottom: 10px; }
-    .why-desc { font-size: 15px; color: var(--c-gray-500); line-height: 1.65; }
-
-    /* ============================================================
-       ECOSYSTEM / DISCOVER
-    ============================================================ */
-    #ecosystem { background: var(--c-gray-900); }
-    .eco-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .eco-text .section-title { color: white; }
-    .eco-text .section-sub { color: rgba(255,255,255,0.6); }
-    .eco-text .section-eyebrow { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.15); }
-    .eco-search-demo { background: rgba(255,255,255,0.07); border-radius: var(--radius); padding: 18px 20px; margin: 28px 0; display: flex; align-items: center; gap: 12px; border: 1px solid rgba(255,255,255,0.1); }
-    .eco-search-icon { font-size: 20px; }
-    .eco-search-text { font-size: 15px; color: rgba(255,255,255,0.5); flex: 1; }
-    .eco-search-modes { display: flex; gap: 8px; }
-    .eco-mode { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 20px; }
-    .eco-cats { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-    .eco-cat { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; padding: 9px 16px; border-radius: 50px; transition: all .2s; }
-    .eco-cat:hover { background: var(--c-green); border-color: var(--c-green); color: white; }
-    .eco-visual { display: flex; flex-direction: column; gap: 16px; }
-    .eco-card {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      display: flex; align-items: center; gap: 18px;
-      transition: all .25s;
-    }
-    .eco-card:hover { background: rgba(26,107,60,.25); border-color: rgba(26,107,60,.5); transform: translateX(6px); }
-    .eco-card-icon { font-size: 32px; flex-shrink: 0; }
-    .eco-card-title { font-size: 15px; font-weight: 700; color: white; margin-bottom: 3px; }
-    .eco-card-desc { font-size: 13px; color: rgba(255,255,255,.5); }
-    .eco-card-arrow { margin-left: auto; color: rgba(255,255,255,.3); font-size: 18px; }
-
-    /* ============================================================
-       HOW IT WORKS
-    ============================================================ */
-    #how { background: var(--c-green-pale); }
-    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px; position: relative; }
-    .how-grid::before {
-      content: ''; position: absolute;
-      top: 44px; left: calc(16.66% + 28px); right: calc(16.66% + 28px);
-      height: 2px; background: var(--c-green-border);
-    }
-    .how-step { text-align: center; }
-    .how-num {
-      width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 24px;
-      background: white; border: 2px solid var(--c-green-border);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; position: relative; z-index: 1;
-      box-shadow: var(--shadow);
-      transition: all .3s;
-    }
-    .how-step:hover .how-num { background: var(--c-green); border-color: var(--c-green); transform: scale(1.1); }
-    .how-step-title { font-size: 19px; font-weight: 800; color: var(--c-gray-900); margin-bottom: 10px; }
-    .how-step-desc { font-size: 15px; color: var(--c-gray-500); line-height: 1.6; }
-
-    /* ============================================================
-       SELLERS
-    ============================================================ */
-    #sellers { background: white; }
-    .sellers-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .sellers-features { display: flex; flex-direction: column; gap: 22px; margin: 36px 0; }
-    .sellers-feat { display: flex; align-items: flex-start; gap: 16px; }
-    .sellers-feat-icon { width: 52px; height: 52px; background: var(--c-green-pale); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; transition: all .25s; }
-    .sellers-feat:hover .sellers-feat-icon { background: var(--c-green); }
-    .sellers-feat-title { font-size: 16px; font-weight: 700; color: var(--c-gray-900); margin-bottom: 4px; }
-    .sellers-feat-desc { font-size: 14px; color: var(--c-gray-500); line-height: 1.55; }
-    .sellers-panel { background: linear-gradient(145deg, var(--c-gray-900) 0%, #0d2518 100%); border-radius: var(--radius-lg); padding: 36px; color: white; }
-    .sellers-panel-title { font-size: 16px; font-weight: 700; margin-bottom: 24px; color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: 1px; }
-    .sellers-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
-    .sellers-stat-box { background: rgba(255,255,255,.07); border-radius: var(--radius-sm); padding: 20px; }
-    .sellers-stat-val { font-size: 30px; font-weight: 900; color: var(--c-green); }
-    .sellers-stat-lbl { font-size: 12px; color: rgba(255,255,255,.5); margin-top: 4px; }
-    .sellers-check-list { display: flex; flex-direction: column; gap: 12px; }
-    .sellers-check { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.8); }
-    .sellers-check::before { content: '✓'; color: #4ade80; font-weight: 900; flex-shrink: 0; }
-
-    /* ============================================================
-       CATEGORIES
-    ============================================================ */
-    #categories { background: var(--c-bg); }
-    .cats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 56px; }
-    .cat-tile {
-      background: white; border-radius: var(--radius); padding: 28px 16px;
-      text-align: center; cursor: pointer; text-decoration: none;
-      border: 1.5px solid var(--c-gray-100);
-      transition: all .25s;
-    }
-    .cat-tile:hover { border-color: var(--c-green); background: var(--c-green-pale); transform: translateY(-5px); box-shadow: var(--shadow); }
-    .cat-tile-icon { font-size: 38px; margin-bottom: 12px; }
-    .cat-tile-name { font-size: 13px; font-weight: 700; color: var(--c-gray-700); }
-    .cat-tile-count { font-size: 11px; color: var(--c-gray-400); margin-top: 4px; }
-
-    /* ============================================================
-       FEATURED PRODUCTS
-    ============================================================ */
-    #featured { background: white; }
-    .featured-tabs { display: flex; gap: 8px; margin: 40px 0 32px; flex-wrap: wrap; }
-    .feat-tab { padding: 9px 20px; border-radius: 50px; font-size: 13px; font-weight: 700; cursor: pointer; border: 1.5px solid var(--c-gray-200); background: white; color: var(--c-gray-600); transition: all .2s; }
-    .feat-tab.active { background: var(--c-green); border-color: var(--c-green); color: white; }
-    .feat-tab:hover:not(.active) { border-color: var(--c-green); color: var(--c-green); }
-    .products-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .prod-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-sm); border: 1px solid var(--c-gray-100); transition: all .25s; cursor: pointer; }
-    .prod-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--c-green-border); }
-    .prod-img { height: 180px; background: var(--c-gray-50); display: flex; align-items: center; justify-content: center; font-size: 64px; position: relative; }
-    .prod-badge { position: absolute; top: 12px; left: 12px; background: var(--c-orange); color: white; font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 4px; }
-    .prod-body { padding: 16px; }
-    .prod-cat { font-size: 11px; font-weight: 600; color: var(--c-green); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 6px; }
-    .prod-name { font-size: 14px; font-weight: 700; color: var(--c-gray-800); margin-bottom: 8px; line-height: 1.3; }
-    .prod-footer { display: flex; align-items: center; justify-content: space-between; }
-    .prod-price { font-size: 18px; font-weight: 900; color: var(--c-green); }
-    .prod-loc { font-size: 11px; color: var(--c-gray-400); }
-    .featured-cta { text-align: center; margin-top: 44px; }
-
-    /* ============================================================
-       PLANS
-    ============================================================ */
-    #plans { background: var(--c-bg); }
-    .plans-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 64px; align-items: start; }
-    .plan-card { background: white; border-radius: var(--radius-lg); padding: 32px 24px; border: 2px solid var(--c-gray-100); position: relative; transition: all .3s; }
-    .plan-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--c-green-border); }
-    .plan-card.featured { background: linear-gradient(160deg, var(--c-green) 0%, #0d4a28 100%); border-color: var(--c-green); transform: scale(1.04); box-shadow: var(--shadow-xl); }
-    .plan-card.featured:hover { transform: scale(1.04) translateY(-4px); }
-    .plan-badge-top { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--c-orange); color: white; font-size: 11px; font-weight: 800; padding: 5px 18px; border-radius: 50px; white-space: nowrap; letter-spacing: .5px; }
-    .plan-emoji { font-size: 40px; margin-bottom: 14px; }
-    .plan-name { font-size: 20px; font-weight: 800; color: var(--c-gray-900); margin-bottom: 4px; }
-    .plan-card.featured .plan-name { color: white; }
-    .plan-price { font-size: 34px; font-weight: 900; color: var(--c-green); line-height: 1; margin: 8px 0 2px; }
-    .plan-card.featured .plan-price { color: white; }
-    .plan-period { font-size: 13px; color: var(--c-gray-400); margin-bottom: 28px; }
-    .plan-card.featured .plan-period { color: rgba(255,255,255,.6); }
-    .plan-sep { height: 1px; background: var(--c-gray-100); margin: 0 0 20px; }
-    .plan-card.featured .plan-sep { background: rgba(255,255,255,.15); }
-    .plan-feats { list-style: none; display: flex; flex-direction: column; gap: 11px; margin-bottom: 28px; }
-    .plan-feats li { font-size: 14px; color: var(--c-gray-600); display: flex; align-items: center; gap: 9px; }
-    .plan-card.featured .plan-feats li { color: rgba(255,255,255,.85); }
-    .plan-feats li::before { content: '✓'; font-weight: 900; font-size: 15px; color: var(--c-green); flex-shrink: 0; }
-    .plan-card.featured .plan-feats li::before { color: #4ade80; }
-    .plan-feats li.no::before { content: '✗'; color: var(--c-gray-300); }
-    .plan-btn { display: block; width: 100%; text-align: center; padding: 14px; border-radius: 50px; font-size: 15px; font-weight: 700; cursor: pointer; text-decoration: none; transition: all .2s; border: 2px solid var(--c-green); color: var(--c-green); background: transparent; }
-    .plan-btn:hover { background: var(--c-green); color: white; }
-    .plan-card.featured .plan-btn { background: white; color: var(--c-green); border-color: white; }
-    .plan-card.featured .plan-btn:hover { background: rgba(255,255,255,.9); }
-
-    /* ============================================================
-       TRUST
-    ============================================================ */
-    #trust { background: white; }
-    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 60px; }
-    .trust-card { text-align: center; padding: 44px 28px; border-radius: var(--radius-lg); border: 1.5px solid var(--c-gray-100); transition: all .3s; }
-    .trust-card:hover { border-color: var(--c-green-border); background: var(--c-green-pale); transform: translateY(-4px); }
-    .trust-icon { font-size: 52px; margin-bottom: 20px; }
-    .trust-title { font-size: 21px; font-weight: 800; color: var(--c-gray-900); margin-bottom: 12px; }
-    .trust-desc { font-size: 15px; color: var(--c-gray-500); line-height: 1.65; }
-
-    /* ============================================================
-       STATS
-    ============================================================ */
-    #stats { background: var(--c-dark); padding: 72px 0; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-    .stat-box { text-align: center; padding: 32px 20px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07); border-radius: var(--radius); }
-    .stat-num { font-size: 48px; font-weight: 900; color: var(--c-green); line-height: 1; margin-bottom: 8px; }
-    .stat-lbl { font-size: 14px; color: rgba(255,255,255,.5); }
-
-    /* ============================================================
-       TESTIMONIALS
-    ============================================================ */
-    #testimonials { background: var(--c-bg); }
-    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
-    .testi-card { background: white; border-radius: var(--radius-lg); padding: 32px; border: 1px solid var(--c-gray-100); transition: all .3s; }
-    .testi-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
-    .testi-stars { color: #f59e0b; font-size: 16px; letter-spacing: 2px; margin-bottom: 16px; }
-    .testi-text { font-size: 15px; color: var(--c-gray-600); line-height: 1.7; margin-bottom: 24px; font-style: italic; }
-    .testi-author { display: flex; align-items: center; gap: 13px; }
-    .testi-avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--c-green), #2d8a52); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: white; flex-shrink: 0; }
-    .testi-name { font-size: 15px; font-weight: 700; color: var(--c-gray-900); }
-    .testi-role { font-size: 12px; color: var(--c-gray-400); }
-
-    /* ============================================================
-       CTA FINAL
-    ============================================================ */
-    #cta-final { background: linear-gradient(150deg, var(--c-green) 0%, #0a3d20 100%); text-align: center; }
-    #cta-final .section-title { color: white; font-size: clamp(30px, 5vw, 52px); }
-    #cta-final .section-sub { color: rgba(255,255,255,.75); margin: 0 auto 44px; max-width: 560px; font-size: 19px; }
-    #cta-final .section-eyebrow { background: rgba(255,255,255,.12); color: rgba(255,255,255,.9); border-color: rgba(255,255,255,.2); }
-    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-    /* ============================================================
-       CONTACT
-    ============================================================ */
-    #contact { background: white; }
-    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .contact-items { display: flex; flex-direction: column; gap: 22px; margin-top: 36px; }
-    .contact-item { display: flex; align-items: center; gap: 18px; }
-    .contact-icon { width: 56px; height: 56px; background: var(--c-green-pale); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0; }
-    .contact-lbl { font-size: 12px; color: var(--c-gray-400); font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
-    .contact-val { font-size: 17px; font-weight: 700; color: var(--c-gray-900); }
-    .contact-card { background: var(--c-gray-50); border: 1px solid var(--c-gray-200); border-radius: var(--radius-lg); padding: 40px; }
-    .contact-card-title { font-size: 24px; font-weight: 800; margin-bottom: 12px; color: var(--c-gray-900); }
-    .contact-card-sub { font-size: 15px; color: var(--c-gray-500); margin-bottom: 28px; line-height: 1.6; }
-
-    /* ============================================================
-       FOOTER
-    ============================================================ */
-    footer { background: var(--c-dark); color: rgba(255,255,255,.5); padding: 72px 0 36px; }
-    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
-    .footer-brand-name { font-size: 20px; font-weight: 900; color: white; margin: 12px 0 10px; }
-    .footer-brand-desc { font-size: 14px; line-height: 1.65; margin-bottom: 24px; }
-    .footer-socials { display: flex; gap: 10px; }
-    .footer-social { width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,.07); display: flex; align-items: center; justify-content: center; font-size: 18px; text-decoration: none; transition: all .2s; }
-    .footer-social:hover { background: var(--c-green); transform: translateY(-2px); }
-    .footer-col-title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,.7); margin-bottom: 20px; }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer-links a { text-decoration: none; font-size: 14px; color: rgba(255,255,255,.4); transition: color .2s; }
-    .footer-links a:hover { color: var(--c-green); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,.07); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; flex-wrap: wrap; gap: 12px; }
-    .footer-bottom-links { display: flex; gap: 24px; }
-    .footer-bottom-links a { text-decoration: none; color: rgba(255,255,255,.3); transition: color .2s; }
-    .footer-bottom-links a:hover { color: var(--c-green); }
-
-    /* ============================================================
-       WHATSAPP FLOAT
-    ============================================================ */
-    #wa-float {
-      position: fixed; bottom: 28px; right: 28px; z-index: 990;
-      width: 58px; height: 58px; border-radius: 50%;
-      background: #25D366; color: white;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px; text-decoration: none;
-      box-shadow: 0 8px 28px rgba(37,211,102,0.45);
-      transition: all .25s;
-    }
-    #wa-float:hover { transform: scale(1.12); box-shadow: 0 12px 36px rgba(37,211,102,0.55); }
-
-    /* ============================================================
+    /* ═══════════════════════════════════════════
        RESPONSIVE
-    ============================================================ */
+    ═══════════════════════════════════════════ */
     @media (max-width: 1024px) {
-      .cats-grid { grid-template-columns: repeat(4, 1fr); }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .plans-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr 1fr; }
       .hero-inner { gap: 40px; }
-      .eco-inner { gap: 40px; }
-      .sellers-inner { gap: 40px; }
+      .marche-focus-inner { gap: 48px; }
+      .jds-inner { gap: 48px; }
       .contact-grid { gap: 48px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .produits-grid { grid-template-columns: 1fr; }
+      .mission-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 768px) {
-      section { padding: 72px 0; }
+      section { padding: 64px 0; }
       .container { padding: 0 20px; }
-      #nav { padding: 0 20px; }
-      .nav-center, .nav-right { display: none; }
+      .nav-links, .nav-cta { display: none; }
       .nav-burger { display: block; }
-      .hero-inner { grid-template-columns: 1fr; }
-      .phone-wrap { width: 240px; }
-      .fb-1, .fb-2, .fb-3 { display: none; }
-      .why-grid { grid-template-columns: 1fr; }
-      .eco-inner { grid-template-columns: 1fr; }
-      .how-grid { grid-template-columns: 1fr; }
-      .how-grid::before { display: none; }
-      .sellers-inner { grid-template-columns: 1fr; }
-      .cats-grid { grid-template-columns: repeat(3, 1fr); }
-      .products-grid { grid-template-columns: repeat(2, 1fr); }
-      .plans-grid { grid-template-columns: 1fr; }
-      .plan-card.featured { transform: none; }
-      .trust-grid { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .testi-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-inner { grid-template-columns: 1fr; gap: 0; }
+      .hero-visual { display: none; }
+      .hero-h1 { font-size: clamp(30px, 8vw, 42px); }
+      .hero-sub { font-size: 16px; }
       .hero-ctas { flex-direction: column; }
       .hero-ctas .btn { text-align: center; justify-content: center; }
+      .hero-metrics { gap: 20px; }
+      .trust-bar-inner { gap: 20px; }
+      .mission-grid { grid-template-columns: 1fr; }
+      .produits-grid { grid-template-columns: 1fr; }
+      .marche-focus-inner { grid-template-columns: 1fr; }
+      .roadmap-steps { flex-direction: column; gap: 32px; }
+      .roadmap-steps::before { display: none; }
+      .roadmap-step { padding: 0; text-align: left; display: flex; align-items: flex-start; gap: 16px; }
+      .roadmap-num { width: 44px; height: 44px; font-size: 18px; margin: 0; flex-shrink: 0; }
+      .roadmap-inner { flex: 1; }
+      .jds-inner { grid-template-columns: 1fr; }
       .cta-btns { flex-direction: column; align-items: center; }
-      .trust-bar-inner { gap: 24px; }
-      .hero-visual { order: -1; }
-      .section-title { font-size: 28px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
-    @media (max-width: 480px) {
-      .cats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-      .hero-proof { gap: 20px; }
+    @media (max-width: 375px) {
+      .hero-h1 { font-size: 28px; }
+      .hero-ctas .btn { font-size: 14px; padding: 13px 20px; }
     }
   </style>
 </head>
 <body>
 
-<!-- ============================================================
-     CONFIG — Modifier ici pour changer les URLs / téléphone
-============================================================ -->
+<!-- ═══════════════════════════════════════════
+     CONFIG CENTRALISÉE
+     Modifier ici pour changer URL, contacts, etc.
+═══════════════════════════════════════════ -->
 <script>
-const CONFIG = {
-  appUrl:        'https://marche-app.onrender.com',
-  signupUrl:     'https://marche-app.onrender.com',
-  sellerUrl:     'https://marche-app.onrender.com',
-  loginUrl:      'https://marche-app.onrender.com',
-  whatsapp:      '22965825016',
-  email:         'joinotamegnon@gmail.com',
-  siteUrl:       'https://marche-aujourdhui.bj',
+const BC = {
+  /* URLs */
+  marche:   'https://marche-app.onrender.com',
+  site:     'https://beninconnect.bj',
+  jds:      '#contact',
 
-  /* Stats Hero — Modifier librement */
-  stats: [
-    { num: '500',  suffix: '+', label: 'Produits publiés' },
-    { num: '8',    suffix: '+', label: 'Vendeurs actifs' },
-    { num: '3',    suffix: '',  label: 'Villes couvertes' },
-    { num: '100',  suffix: '%', label: 'Local & gratuit' },
-  ],
+  /* Contact */
+  phone:    '22965825016',
+  email:    'joinotamegnon@gmail.com',
+  location: 'Parakou, Bénin',
 
-  /* Plans — Modifier prix et features ici */
-  plans: [
-    {
-      emoji: '🆓', name: 'Gratuit', price: '0 FCFA', period: 'Pour débuter', featured: false,
-      features: [
-        { label: '3 produits / mois', ok: true },
-        { label: '1 photo par produit', ok: true },
-        { label: '30 jours de visibilité', ok: true },
-        { label: 'Messagerie intégrée', ok: true },
-        { label: 'Boost produit', ok: false },
-        { label: 'Badge vérifié', ok: false },
-      ],
-      cta: 'Commencer gratuitement', ctaUrl: 'signup'
-    },
-    {
-      emoji: '🥉', name: 'Bronze', price: '2 000 FCFA', period: '/ mois', featured: false,
-      features: [
-        { label: '10 produits / mois', ok: true },
-        { label: '3 photos par produit', ok: true },
-        { label: '30 jours de visibilité', ok: true },
-        { label: 'Messagerie intégrée', ok: true },
-        { label: '1 boost / mois', ok: true },
-        { label: 'Badge vérifié', ok: false },
-      ],
-      cta: 'Choisir Bronze', ctaUrl: 'seller'
-    },
-    {
-      emoji: '🥇', name: 'Gold', price: '5 000 FCFA', period: '/ mois', featured: true, badge: '⭐ Recommandé',
-      features: [
-        { label: '25 produits / mois', ok: true },
-        { label: '3 photos + 3 vidéos', ok: true },
-        { label: '30 jours de visibilité', ok: true },
-        { label: '3 boosts / mois', ok: true },
-        { label: 'Badge vérifié ✅', ok: true },
-        { label: 'Statistiques ventes', ok: true },
-      ],
-      cta: 'Choisir Gold', ctaUrl: 'seller'
-    },
-    {
-      emoji: '💎', name: 'Premium', price: '10 000 FCFA', period: '/ mois', featured: false,
-      features: [
-        { label: '50 produits / mois', ok: true },
-        { label: '5 photos + 5 vidéos', ok: true },
-        { label: 'Boost permanent 🚀', ok: true },
-        { label: 'Badge vérifié ✅', ok: true },
-        { label: 'Stats avancées', ok: true },
-        { label: 'Page boutique dédiée', ok: true },
-      ],
-      cta: 'Choisir Premium', ctaUrl: 'seller'
-    },
-  ],
+  /* Messages WhatsApp */
+  wa: {
+    info:  "Bonjour, je souhaite obtenir plus d'informations sur Bénin Connect.",
+    sell:  "Bonjour, je veux présenter mon entreprise sur Bénin Connect.",
+    jds:   "Bonjour, je souhaite contacter JDS Communication.",
+    float: "Bonjour, j'ai une question sur Bénin Connect.",
+  },
 
-  /* Produits en vedette — Remplacer par API plus tard */
-  products: [
-    { emoji:'🍅', badge:'Populaire', cat:'Alimentation', name:'Tomates fraîches du marché', price:'2 500 FCFA', loc:'Parakou' },
-    { emoji:'📱', badge:'Nouveau',   cat:'Électronique', name:'Samsung Galaxy série A',    price:'45 000 FCFA', loc:'Cotonou' },
-    { emoji:'👗', badge:'',          cat:'Mode',         name:'Robe wax africaine premium', price:'8 000 FCFA', loc:'Parakou' },
-    { emoji:'🛋️', badge:'',          cat:'Maison',       name:'Canapé salon design',        price:'120 000 FCFA', loc:'Cotonou' },
+  /* Roadmap — modifier labels ici */
+  roadmap: [
+    { phase: "Aujourd'hui", icon: "✅", name: "Marché d'Aujourd'hui", desc: "Marketplace achat & vente locale", active: true },
+    { phase: "Prochaine étape", icon: "📍", name: "Répertoire", desc: "Annuaire des commerces & professionnels", active: false },
+    { phase: "À venir", icon: "🚚", name: "Services", desc: "Transport, livraison & logistique", active: false },
+    { phase: "Vision", icon: "🌍", name: "Écosystème complet", desc: "Bénin Connect comme référence nationale", active: false },
   ],
 };
+function waLink(key) {
+  return `https://wa.me/${BC.phone}?text=${encodeURIComponent(BC.wa[key])}`;
+}
 </script>
 
-<!-- ============================================================
-     NAV
-============================================================ -->
-<nav id="nav">
-  <a href="#" class="nav-logo">
-    <span class="nav-logo-emoji">🛒</span>
-    <div>
-      <div class="nav-logo-name">Marché d'Aujourd'hui</div>
-      <div class="nav-logo-tag">La marketplace du Bénin 🇧🇯</div>
+<!-- ═══════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════ -->
+<nav id="nav" role="navigation" aria-label="Navigation principale">
+  <div class="nav-inner">
+    <!-- LOGO SVG -->
+    <a href="#" class="nav-logo" aria-label="Bénin Connect — Accueil">
+      <svg class="nav-logo-svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect width="36" height="36" rx="9" fill="#1B2E4B"/>
+        <text x="18" y="24" text-anchor="middle" fill="white" font-size="14" font-weight="800" font-family="Inter,system-ui,sans-serif">BC</text>
+        <circle cx="28" cy="8" r="4" fill="#0EA5E9" opacity="0.9"/>
+      </svg>
+      <div class="nav-logo-text">
+        <div class="nav-logo-name">BÉNIN CONNECT</div>
+        <div class="nav-logo-tag">ÉCOSYSTÈME NUMÉRIQUE DU BÉNIN</div>
+      </div>
+    </a>
+
+    <!-- LINKS -->
+    <div class="nav-links" role="list">
+      <a href="#produits">Nos produits</a>
+      <a href="#roadmap">Vision</a>
+      <a href="#jds">À propos</a>
+      <a href="#contact">Contact</a>
     </div>
-  </a>
-  <div class="nav-center">
-    <a href="#why">Pourquoi nous</a>
-    <a href="#categories">Catégories</a>
-    <a href="#plans">Plans</a>
-    <a href="#contact">Contact</a>
+
+    <!-- CTA -->
+    <div class="nav-cta">
+      <a href="#contact" class="nav-cta-ghost">En savoir plus</a>
+      <a id="nav-marche" href="#" class="nav-cta-solid">Accéder à Marché →</a>
+    </div>
+
+    <button class="nav-burger" onclick="toggleNav()" aria-label="Ouvrir le menu" aria-expanded="false" id="burger-btn">☰</button>
   </div>
-  <div class="nav-right">
-    <a id="nav-login" href="#" class="nav-btn-ghost">Se connecter</a>
-    <a id="nav-signup" href="#" class="nav-btn-solid">Commencer gratuitement</a>
-  </div>
-  <button class="nav-burger" onclick="toggleNav()" aria-label="Menu">☰</button>
 </nav>
-<div id="nav-drawer">
-  <a href="#why" onclick="closeNav()">Pourquoi nous</a>
-  <a href="#categories" onclick="closeNav()">Catégories</a>
-  <a href="#plans" onclick="closeNav()">Plans vendeurs</a>
-  <a href="#contact" onclick="closeNav()">Contact</a>
-  <a id="drawer-cta" href="#" onclick="closeNav()">→ Accéder à la marketplace</a>
+
+<!-- MOBILE DRAWER -->
+<div id="drawer" role="dialog" aria-label="Menu mobile">
+  <a href="#produits" onclick="closeNav()">🧩 Nos produits</a>
+  <a href="#roadmap" onclick="closeNav()">🗺️ Vision</a>
+  <a href="#jds" onclick="closeNav()">🏢 À propos</a>
+  <a href="#contact" onclick="closeNav()">📞 Contact</a>
+  <a id="drawer-marche" href="#" onclick="closeNav()">🛒 Accéder à Marché d'Aujourd'hui →</a>
 </div>
 
-<!-- ============================================================
+<!-- ═══════════════════════════════════════════
      HERO
-============================================================ -->
-<section id="hero">
+═══════════════════════════════════════════ -->
+<section id="hero" aria-labelledby="hero-title">
+  <div class="hero-bg-orb hero-orb-1" aria-hidden="true"></div>
+  <div class="hero-bg-orb hero-orb-2" aria-hidden="true"></div>
+  <div class="hero-bg-orb hero-orb-3" aria-hidden="true"></div>
+
   <div class="container">
     <div class="hero-inner">
       <!-- TEXT -->
       <div class="reveal">
-        <div class="hero-live-pill">
-          <span class="hero-live-dot"></span>
+        <div class="hero-live" aria-label="Plateforme active">
+          <span class="hero-live-dot" aria-hidden="true"></span>
           Plateforme active · Bénin 🇧🇯
         </div>
-        <h1 class="hero-h1">
-          Le marché du Bénin,<br>désormais dans<br>
-          <em>votre poche.</em>
+        <h1 class="hero-h1" id="hero-title">
+          Connecter les personnes,<br>
+          les commerces et les<br>
+          <span class="accent">services du Bénin.</span>
         </h1>
-        <p class="hero-tagline">
-          Achetez, vendez et cotisez localement en toute confiance.<br>
-          Simple, rapide et 100% béninois.
+        <p class="hero-sub">
+          Bénin Connect est l'écosystème numérique qui regroupe les initiatives digitales locales au même endroit — simple, accessible, 100% béninois.
         </p>
         <div class="hero-ctas">
-          <a id="hero-cta-buy" href="#" class="btn btn-lg btn-green">🛒 Acheter maintenant</a>
-          <a id="hero-cta-sell" href="#" class="btn btn-lg btn-outline-green">🏪 Commencer à vendre</a>
+          <a id="hero-cta-marche" href="#" class="btn btn-lg btn-blue">🛒 Découvrir Marché d'Aujourd'hui</a>
+          <a href="#produits" class="btn btn-lg btn-outline-white">Voir tous nos produits</a>
         </div>
-        <div class="hero-proof" id="hero-stats"></div>
-        <p class="hero-proof-note">* Chiffres indicatifs — mis à jour régulièrement</p>
+        <div class="hero-metrics" aria-label="Indicateurs clés">
+          <div class="hero-metric-item">
+            <div class="hero-metric-val">500+</div>
+            <div class="hero-metric-lbl">Produits publiés</div>
+          </div>
+          <div class="hero-metric-item">
+            <div class="hero-metric-val">8+</div>
+            <div class="hero-metric-lbl">Vendeurs actifs</div>
+          </div>
+          <div class="hero-metric-item">
+            <div class="hero-metric-val">3</div>
+            <div class="hero-metric-lbl">Villes couvertes</div>
+          </div>
+        </div>
+        <p class="hero-metric-note">* Données du produit Marché d'Aujourd'hui — mises à jour régulièrement</p>
       </div>
 
-      <!-- PHONE MOCKUP -->
-      <div class="hero-visual reveal reveal-d2">
-        <div style="position:relative;display:inline-block;">
-          <div class="phone-wrap">
-            <div class="phone-notch"></div>
-            <div class="phone-screen">
-              <div class="ps-header">
-                <span class="ps-header-logo">🛒</span>
-                <span class="ps-header-text">Marché d'Aujourd'hui</span>
-              </div>
-              <div class="ps-search">🔍 Rechercher un produit...</div>
-              <div class="ps-cats">
-                <span class="ps-cat active">Tout</span>
-                <span class="ps-cat">📱 Tech</span>
-                <span class="ps-cat">👗 Mode</span>
-                <span class="ps-cat">🍅 Alim.</span>
-              </div>
-              <div class="ps-grid">
-                <div class="ps-card"><div class="ps-card-img">🍅</div><div class="ps-card-body"><div class="ps-card-name">Tomates fraîches</div><div class="ps-card-price">2 500 F</div></div></div>
-                <div class="ps-card"><div class="ps-card-img">📱</div><div class="ps-card-body"><div class="ps-card-name">Samsung Galaxy</div><div class="ps-card-price">45 000 F</div></div></div>
-                <div class="ps-card"><div class="ps-card-img">👗</div><div class="ps-card-body"><div class="ps-card-name">Robe wax</div><div class="ps-card-price">8 000 F</div></div></div>
-                <div class="ps-card"><div class="ps-card-img">🛋️</div><div class="ps-card-body"><div class="ps-card-name">Canapé salon</div><div class="ps-card-price">120 000 F</div></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="float-badge fb-1">
-            <span class="float-badge-icon">🚀</span>
-            <div><div class="float-badge-lbl">Nouveau produit</div><div class="float-badge-val">Publié à l'instant</div></div>
-          </div>
-          <div class="float-badge fb-2">
-            <span class="float-badge-icon">💬</span>
-            <div><div class="float-badge-lbl">Message reçu</div><div class="float-badge-val">Je suis intéressé !</div></div>
-          </div>
-          <div class="float-badge fb-3">
-            <span class="float-badge-icon">✅</span>
-            <div><div class="float-badge-lbl">Vente conclue</div><div class="float-badge-val">+12 000 FCFA</div></div>
-          </div>
+      <!-- ECOSYSTEM SVG -->
+      <div class="hero-visual reveal reveal-d2" aria-hidden="true">
+        <div class="eco-svg-wrap">
+          <svg viewBox="0 0 460 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+            <!-- Connexions -->
+            <line x1="230" y1="170" x2="100" y2="80"  stroke="rgba(26,107,60,0.5)"  stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="230" y1="170" x2="360" y2="80"  stroke="rgba(124,58,237,0.4)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="230" y1="190" x2="100" y2="300" stroke="rgba(14,165,233,0.4)" stroke-width="1.5" stroke-dasharray="5,3"/>
+            <line x1="230" y1="190" x2="360" y2="300" stroke="rgba(255,255,255,0.15)" stroke-width="1.5" stroke-dasharray="5,3"/>
+
+            <!-- Centre : Bénin Connect -->
+            <circle cx="230" cy="180" r="52" fill="rgba(14,165,233,0.08)"/>
+            <circle cx="230" cy="180" r="38" fill="rgba(14,165,233,0.14)"/>
+            <circle cx="230" cy="180" r="26" fill="#0EA5E9"/>
+            <text x="230" y="175" text-anchor="middle" fill="white" font-size="10" font-weight="700" font-family="Inter,system-ui,sans-serif">BÉNIN</text>
+            <text x="230" y="188" text-anchor="middle" fill="white" font-size="10" font-weight="700" font-family="Inter,system-ui,sans-serif">CONNECT</text>
+
+            <!-- Marché d'Aujourd'hui -->
+            <circle cx="100" cy="72" r="44" fill="rgba(26,107,60,0.12)"/>
+            <circle cx="100" cy="72" r="32" fill="rgba(26,107,60,0.2)"/>
+            <circle cx="100" cy="72" r="22" fill="#1A6B3C"/>
+            <text x="100" y="68" text-anchor="middle" fill="white" font-size="14" font-family="Inter,system-ui,sans-serif">🛒</text>
+            <text x="100" y="82" text-anchor="middle" fill="white" font-size="7.5" font-weight="700" font-family="Inter,system-ui,sans-serif">MARCHÉ</text>
+            <rect x="58" y="104" width="84" height="22" rx="11" fill="rgba(26,107,60,0.9)"/>
+            <text x="100" y="119" text-anchor="middle" fill="#86efac" font-size="9" font-weight="700" font-family="Inter,system-ui,sans-serif">✅ DISPONIBLE</text>
+
+            <!-- Répertoire -->
+            <circle cx="360" cy="72" r="44" fill="rgba(124,58,237,0.1)"/>
+            <circle cx="360" cy="72" r="32" fill="rgba(124,58,237,0.15)"/>
+            <circle cx="360" cy="72" r="22" fill="rgba(124,58,237,0.5)"/>
+            <text x="360" y="76" text-anchor="middle" fill="white" font-size="14" font-family="Inter,system-ui,sans-serif">📍</text>
+            <text x="360" y="90" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="8" font-weight="600" font-family="Inter,system-ui,sans-serif">RÉPERTOIRE</text>
+            <rect x="316" y="104" width="88" height="22" rx="11" fill="rgba(255,255,255,0.08)"/>
+            <text x="360" y="119" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="9" font-weight="600" font-family="Inter,system-ui,sans-serif">🔜 BIENTÔT</text>
+
+            <!-- Services -->
+            <circle cx="100" cy="300" r="44" fill="rgba(14,165,233,0.1)"/>
+            <circle cx="100" cy="300" r="32" fill="rgba(14,165,233,0.15)"/>
+            <circle cx="100" cy="300" r="22" fill="rgba(14,165,233,0.45)"/>
+            <text x="100" y="305" text-anchor="middle" fill="white" font-size="14" font-family="Inter,system-ui,sans-serif">🚚</text>
+            <text x="100" y="318" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="8" font-weight="600" font-family="Inter,system-ui,sans-serif">SERVICES</text>
+            <rect x="56" y="332" width="88" height="22" rx="11" fill="rgba(255,255,255,0.08)"/>
+            <text x="100" y="347" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="9" font-weight="600" font-family="Inter,system-ui,sans-serif">🔜 BIENTÔT</text>
+
+            <!-- JDS -->
+            <circle cx="360" cy="300" r="36" fill="rgba(255,255,255,0.05)"/>
+            <circle cx="360" cy="300" r="24" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="360" cy="300" r="16" fill="rgba(255,255,255,0.12)"/>
+            <text x="360" y="296" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="9" font-weight="800" font-family="Inter,system-ui,sans-serif">JDS</text>
+            <text x="360" y="309" text-anchor="middle" fill="rgba(255,255,255,0.35)" font-size="7" font-family="Inter,system-ui,sans-serif">AGENCE</text>
+          </svg>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TRUST BAR -->
-<div id="trust-bar">
+<!-- ═══════════════════════════════════════════
+     TRUST BAR
+═══════════════════════════════════════════ -->
+<div id="trust-bar" aria-label="Nos engagements">
   <div class="container">
     <div class="trust-bar-inner">
-      <div class="trust-bar-item"><span>🔒</span><span>Plateforme sécurisée</span></div>
-      <div class="trust-bar-item"><span>📍</span><span>100% local Bénin</span></div>
-      <div class="trust-bar-item"><span>🤝</span><span>Mise en relation directe</span></div>
-      <div class="trust-bar-item"><span>⚡</span><span>Publication en 2 minutes</span></div>
-      <div class="trust-bar-item"><span>🎧</span><span>Support disponible</span></div>
+      <div class="trust-item"><div class="trust-item-icon">🔒</div> Plateforme sécurisée</div>
+      <div class="trust-item"><div class="trust-item-icon">📍</div> 100% local Bénin</div>
+      <div class="trust-item"><div class="trust-item-icon">🤝</div> Mise en relation directe</div>
+      <div class="trust-item"><div class="trust-item-icon">⚡</div> Publication en 2 minutes</div>
+      <div class="trust-item"><div class="trust-item-icon">🎧</div> Support disponible</div>
     </div>
   </div>
 </div>
 
-<!-- ============================================================
-     WHY
-============================================================ -->
-<section id="why">
+<!-- ═══════════════════════════════════════════
+     MISSION
+═══════════════════════════════════════════ -->
+<section id="mission" aria-labelledby="mission-title">
   <div class="container">
     <div class="tc reveal">
-      <span class="section-eyebrow">✨ Nos avantages</span>
-      <h2 class="section-title">Pourquoi choisir Marché d'Aujourd'hui ?</h2>
-      <p class="section-sub">Une plateforme pensée pour le commerce local béninois, accessible à tous et simple à utiliser.</p>
+      <span class="eyebrow">🎯 Notre mission</span>
+      <h2 class="section-title" id="mission-title">Une vision nationale pour le numérique béninois</h2>
+      <p class="section-sub">Bénin Connect est né d'une conviction : le Bénin mérite un écosystème numérique local, construit par des Béninois, pour les Béninois.</p>
     </div>
-    <div class="why-grid">
-      <div class="why-card reveal reveal-d1">
-        <div class="why-icon-wrap">🔎</div>
-        <div class="why-title">Recherche rapide et intuitive</div>
-        <div class="why-desc">Trouvez en quelques secondes le produit ou service dont vous avez besoin, parmi des centaines d'annonces locales vérifiées.</div>
+    <div class="mission-grid">
+      <div class="mission-card reveal reveal-d1">
+        <div class="mission-icon-bg">🌍</div>
+        <h3 class="mission-title">Local</h3>
+        <p class="mission-desc">Pensé pour les réalités locales, construit pour connecter le Bénin. Chaque fonctionnalité est conçue pour répondre aux vrais besoins du terrain.</p>
       </div>
-      <div class="why-card reveal reveal-d2">
-        <div class="why-icon-wrap">📍</div>
-        <div class="why-title">Vendeurs et produits proches de vous</div>
-        <div class="why-desc">Achetez local et soutenez les commerçants de votre ville. Disponible à Parakou, Cotonou, Abomey et toutes les communes.</div>
+      <div class="mission-card reveal reveal-d2">
+        <div class="mission-icon-bg">⚡</div>
+        <h3 class="mission-title">Digital</h3>
+        <p class="mission-desc">Des solutions numériques accessibles à tous, même avec une connexion lente. Mobile-first, simple, rapide et adaptée au contexte africain.</p>
       </div>
-      <div class="why-card reveal reveal-d3">
-        <div class="why-icon-wrap">🤝</div>
-        <div class="why-title">Mise en relation directe</div>
-        <div class="why-desc">Échangez directement avec le vendeur via la messagerie intégrée ou WhatsApp. Pas d'intermédiaire, pas de commission cachée.</div>
-      </div>
-      <div class="why-card reveal reveal-d4">
-        <div class="why-icon-wrap">🛡️</div>
-        <div class="why-title">Plateforme sécurisée et fiable</div>
-        <div class="why-desc">Vendeurs vérifiés, signalement de contenu inapproprié, et support admin disponible pour chaque problème signalé.</div>
+      <div class="mission-card reveal reveal-d3">
+        <div class="mission-icon-bg">🤝</div>
+        <h3 class="mission-title">Confiance</h3>
+        <p class="mission-desc">Une plateforme transparente, sécurisée, sans frais cachés. La confiance entre acheteurs, vendeurs et prestataires est au cœur de tout.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     ECOSYSTEM / DISCOVER
-============================================================ -->
-<section id="ecosystem">
+<!-- ═══════════════════════════════════════════
+     PRODUITS
+═══════════════════════════════════════════ -->
+<section id="produits" aria-labelledby="produits-title">
   <div class="container">
-    <div class="eco-inner">
+    <div class="tc reveal">
+      <span class="eyebrow">🧩 Nos produits</span>
+      <h2 class="section-title" id="produits-title">Un écosystème qui grandit</h2>
+      <p class="section-sub">Chaque produit de Bénin Connect répond à un besoin précis du marché local. Marché d'Aujourd'hui est disponible dès maintenant.</p>
+    </div>
+    <div class="produits-grid">
+
+      <!-- MARCHÉ D'AUJOURD'HUI — produit principal -->
+      <div class="prod-card featured reveal reveal-d1">
+        <div class="prod-card-bar marche"></div>
+        <div class="prod-card-body">
+          <div class="prod-card-header">
+            <span class="prod-icon">🛒</span>
+            <span class="prod-badge-live available">✅ Disponible maintenant</span>
+          </div>
+          <h3 class="prod-name">Marché d'Aujourd'hui</h3>
+          <p class="prod-desc">La marketplace locale du Bénin. Achetez, vendez et développez votre activité commerciale en ligne, simplement.</p>
+          <ul class="prod-features marche">
+            <li>Publication de produits en 2 minutes</li>
+            <li>Messagerie directe acheteur-vendeur</li>
+            <li>Tableau de bord vendeur complet</li>
+            <li>Boost de visibilité des produits</li>
+            <li>Disponible sur mobile & desktop</li>
+          </ul>
+          <a id="prod-marche-cta" href="#" class="btn btn-md btn-green" style="width:100%;justify-content:center">🛒 Accéder à Marché d'Aujourd'hui →</a>
+        </div>
+      </div>
+
+      <!-- RÉPERTOIRE -->
+      <div class="prod-card reveal reveal-d2">
+        <div class="prod-card-bar repertoire"></div>
+        <div class="prod-card-body">
+          <div class="prod-card-header">
+            <span class="prod-icon">📍</span>
+            <span class="prod-badge-live soon">🔜 Bientôt disponible</span>
+          </div>
+          <h3 class="prod-name">Répertoire</h3>
+          <p class="prod-desc">L'annuaire numérique des commerces, professionnels et services locaux du Bénin. Restaurants, hôtels, artisans et plus encore.</p>
+          <ul class="prod-features repertoire">
+            <li>Recherche par ville et catégorie</li>
+            <li>Fiche entreprise complète</li>
+            <li>Horaires, photos et contacts</li>
+            <li>Avis clients</li>
+            <li>Géolocalisation</li>
+          </ul>
+          <div class="btn btn-md btn-outline-navy" style="width:100%;justify-content:center;opacity:.4;pointer-events:none">🔜 En cours de développement</div>
+        </div>
+      </div>
+
+      <!-- SERVICES -->
+      <div class="prod-card reveal reveal-d3">
+        <div class="prod-card-bar services"></div>
+        <div class="prod-card-body">
+          <div class="prod-card-header">
+            <span class="prod-icon">🚚</span>
+            <span class="prod-badge-live soon">🔜 Bientôt disponible</span>
+          </div>
+          <h3 class="prod-name">Services</h3>
+          <p class="prod-desc">Transport, livraison et logistique locale. Connectez vous aux prestataires de services de votre région en quelques clics.</p>
+          <ul class="prod-features services">
+            <li>Transport interurbain</li>
+            <li>Livraison de colis</li>
+            <li>Logistique locale</li>
+            <li>Mise en relation prestataires</li>
+            <li>Suivi en temps réel</li>
+          </ul>
+          <div class="btn btn-md btn-outline-navy" style="width:100%;justify-content:center;opacity:.4;pointer-events:none">🔜 En cours de développement</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MARCHÉ FOCUS
+═══════════════════════════════════════════ -->
+<section id="marche-focus" aria-labelledby="marche-title">
+  <div class="container">
+    <div class="marche-focus-inner">
       <div class="reveal">
-        <span class="section-eyebrow">🌍 Écosystème local</span>
-        <h2 class="section-title">Tout le marché local au même endroit.</h2>
-        <p class="section-sub">Recherchez par texte, photo ou voix. Découvrez produits, services, restaurants, hôtels et commerces locaux.</p>
-        <div class="eco-search-demo">
-          <span class="eco-search-icon">🔍</span>
-          <span class="eco-search-text">Rechercher un produit, service, vendeur...</span>
-          <div class="eco-search-modes">
-            <span class="eco-mode">📝 Texte</span>
-            <span class="eco-mode">📷 Photo</span>
-            <span class="eco-mode">🎤 Voix</span>
+        <span class="eyebrow">🛒 Marché d'Aujourd'hui</span>
+        <h2 class="section-title" id="marche-title">Votre boutique mérite d'être visible par plus de clients.</h2>
+        <p class="section-sub">Vous vendez sur WhatsApp ou Facebook ? Passez à la vitesse supérieure. Marché d'Aujourd'hui vous donne les outils d'une vraie boutique en ligne.</p>
+        <div class="marche-feats">
+          <div class="marche-feat">
+            <div class="marche-feat-icon">📦</div>
+            <div>
+              <div class="marche-feat-title">Publication en 2 minutes</div>
+              <div class="marche-feat-desc">Photos, description, prix. Votre produit est en ligne immédiatement, visible par des milliers d'acheteurs.</div>
+            </div>
+          </div>
+          <div class="marche-feat">
+            <div class="marche-feat-icon">📊</div>
+            <div>
+              <div class="marche-feat-title">Tableau de bord vendeur</div>
+              <div class="marche-feat-desc">Commandes, messages, statistiques et gestion de votre boutique en un seul endroit.</div>
+            </div>
+          </div>
+          <div class="marche-feat">
+            <div class="marche-feat-icon">🚀</div>
+            <div>
+              <div class="marche-feat-title">Boost de visibilité</div>
+              <div class="marche-feat-desc">Mettez vos produits en avant dès 500 FCFA. Touchez plus d'acheteurs, vendez plus vite.</div>
+            </div>
+          </div>
+          <div class="marche-feat">
+            <div class="marche-feat-icon">📍</div>
+            <div>
+              <div class="marche-feat-title">Ciblage local intelligent</div>
+              <div class="marche-feat-desc">Vos produits sont visibles en priorité par les acheteurs de votre ville et de votre région.</div>
+            </div>
           </div>
         </div>
-        <div class="eco-cats">
-          <span class="eco-cat">🛍️ Produits</span>
-          <span class="eco-cat">🔧 Services</span>
-          <span class="eco-cat">🏨 Hôtels</span>
-          <span class="eco-cat">🍽️ Restaurants</span>
-          <span class="eco-cat">🏪 Commerces</span>
-          <span class="eco-cat">🚗 Transports</span>
-          <span class="eco-cat">🏗️ Construction</span>
-          <span class="eco-cat">💼 Emplois</span>
-        </div>
+        <a id="marche-focus-cta" href="#" class="btn btn-lg btn-green">🏪 Commencer à vendre gratuitement</a>
       </div>
-      <div class="eco-visual reveal reveal-d2">
-        <div class="eco-card">
-          <span class="eco-card-icon">🛍️</span>
-          <div><div class="eco-card-title">Marketplace produits</div><div class="eco-card-desc">Achetez et vendez tout type de produit local</div></div>
-          <span class="eco-card-arrow">→</span>
+
+      <div class="marche-panel reveal reveal-d2">
+        <div class="marche-panel-title">Tableau de bord — Marché d'Aujourd'hui</div>
+        <div class="marche-stats-grid">
+          <div class="marche-stat"><div class="marche-stat-val">30j</div><div class="marche-stat-lbl">Visibilité par annonce</div></div>
+          <div class="marche-stat"><div class="marche-stat-val">3</div><div class="marche-stat-lbl">Produits gratuits/mois</div></div>
+          <div class="marche-stat"><div class="marche-stat-val">500F</div><div class="marche-stat-lbl">Boost 7 jours</div></div>
+          <div class="marche-stat"><div class="marche-stat-val">24h</div><div class="marche-stat-lbl">Support réactif</div></div>
         </div>
-        <div class="eco-card">
-          <span class="eco-card-icon">🔧</span>
-          <div><div class="eco-card-title">Annuaire services</div><div class="eco-card-desc">Trouvez artisans, prestataires et techniciens</div></div>
-          <span class="eco-card-arrow">→</span>
-        </div>
-        <div class="eco-card">
-          <span class="eco-card-icon">🏪</span>
-          <div><div class="eco-card-title">Boutiques locales</div><div class="eco-card-desc">Page boutique dédiée pour chaque vendeur</div></div>
-          <span class="eco-card-arrow">→</span>
-        </div>
-        <div class="eco-card">
-          <span class="eco-card-icon">💬</span>
-          <div><div class="eco-card-title">Messagerie intégrée</div><div class="eco-card-desc">Négociez et finalisez directement sur la plateforme</div></div>
-          <span class="eco-card-arrow">→</span>
-        </div>
-        <div class="eco-card">
-          <span class="eco-card-icon">🚀</span>
-          <div><div class="eco-card-title">Boost de visibilité</div><div class="eco-card-desc">Sponsorisez vos produits dès 500 FCFA</div></div>
-          <span class="eco-card-arrow">→</span>
+        <div class="marche-checks">
+          <div class="marche-check">Inscription gratuite en 2 minutes</div>
+          <div class="marche-check">Première publication immédiate</div>
+          <div class="marche-check">Mise en relation directe avec acheteurs</div>
+          <div class="marche-check">Gestion commandes intégrée</div>
+          <div class="marche-check">Plans payants à partir de 2 000 FCFA/mois</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     HOW IT WORKS
-============================================================ -->
-<section id="how">
+<!-- ═══════════════════════════════════════════
+     ROADMAP
+═══════════════════════════════════════════ -->
+<section id="roadmap" aria-labelledby="roadmap-title">
   <div class="container">
     <div class="tc reveal">
-      <span class="section-eyebrow">📖 Mode d'emploi</span>
-      <h2 class="section-title">Comment ça marche ?</h2>
-      <p class="section-sub">En 3 étapes simples, commencez à acheter ou à vendre sur Marché d'Aujourd'hui.</p>
+      <span class="eyebrow">🗺️ Notre vision</span>
+      <h2 class="section-title" id="roadmap-title">Ce que Bénin Connect deviendra</h2>
+      <p class="section-sub">Une vision progressive, construite étape par étape, avec des fondations solides à chaque phase.</p>
     </div>
-    <div class="how-grid">
-      <div class="how-step reveal reveal-d1">
-        <div class="how-num">🔍</div>
-        <div class="how-step-title">Recherchez</div>
-        <div class="how-step-desc">Parcourez les catégories ou tapez directement ce que vous cherchez. Des centaines de produits locaux vous attendent.</div>
-      </div>
-      <div class="how-step reveal reveal-d2">
-        <div class="how-num">💬</div>
-        <div class="how-step-title">Contactez</div>
-        <div class="how-step-desc">Échangez directement avec le vendeur via la messagerie intégrée ou WhatsApp pour négocier et poser vos questions.</div>
-      </div>
-      <div class="how-step reveal reveal-d3">
-        <div class="how-num">✅</div>
-        <div class="how-step-title">Achetez ou vendez</div>
-        <div class="how-step-desc">Finalisez votre transaction simplement. Paiement à la livraison ou mobile money selon votre accord.</div>
-      </div>
+    <div class="roadmap-steps reveal reveal-d1" id="roadmap-container">
+      <!-- Injecté par JS -->
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     SELLERS
-============================================================ -->
-<section id="sellers">
+<!-- ═══════════════════════════════════════════
+     JDS COMMUNICATION
+═══════════════════════════════════════════ -->
+<section id="jds" aria-labelledby="jds-title">
   <div class="container">
-    <div class="sellers-inner">
+    <div class="jds-inner">
       <div class="reveal">
-        <span class="section-eyebrow">🏪 Espace vendeur</span>
-        <h2 class="section-title">Votre boutique mérite d'être visible par plus de clients.</h2>
-        <p class="section-sub">Vous vendez sur WhatsApp ou Facebook ? Passez à la vitesse supérieure avec Marché d'Aujourd'hui.</p>
-        <div class="sellers-features">
-          <div class="sellers-feat">
-            <div class="sellers-feat-icon">📦</div>
-            <div><div class="sellers-feat-title">Publication en 2 minutes</div><div class="sellers-feat-desc">Publiez vos produits avec photos, description et prix. Visibles immédiatement.</div></div>
+        <span class="eyebrow eyebrow-white">🏢 À l'origine de l'écosystème</span>
+        <h2 class="section-title section-title-white" id="jds-title">JDS Communication</h2>
+        <div class="jds-separator"></div>
+        <p class="jds-text">
+          JDS Communication est l'agence de communication et de solutions digitales à l'origine de Bénin Connect et de ses initiatives. Structure locale implantée à Parakou, elle accompagne les entrepreneurs, entreprises et institutions dans leur transformation numérique.
+        </p>
+        <p class="jds-text" style="margin-top:-12px">
+          Bénin Connect est la vision digitale de JDS — construire un écosystème numérique de référence pour le Bénin.
+        </p>
+        <a id="jds-wa-cta" href="#" class="btn btn-md btn-outline-white">Contacter JDS Communication →</a>
+      </div>
+
+      <div class="jds-visual reveal reveal-d2">
+        <div class="jds-visual-title">Domaines d'expertise JDS</div>
+        <div class="jds-services">
+          <div class="jds-service">
+            <div class="jds-service-icon">💻</div>
+            <div>
+              <div class="jds-service-name">Développement digital</div>
+              <div class="jds-service-desc">Applications mobiles, plateformes web, solutions sur mesure</div>
+            </div>
           </div>
-          <div class="sellers-feat">
-            <div class="sellers-feat-icon">📊</div>
-            <div><div class="sellers-feat-title">Tableau de bord vendeur</div><div class="sellers-feat-desc">Suivez vos commandes, messages et statistiques en temps réel.</div></div>
+          <div class="jds-service">
+            <div class="jds-service-icon">📢</div>
+            <div>
+              <div class="jds-service-name">Communication & marketing</div>
+              <div class="jds-service-desc">Stratégie, identité visuelle, réseaux sociaux</div>
+            </div>
           </div>
-          <div class="sellers-feat">
-            <div class="sellers-feat-icon">🚀</div>
-            <div><div class="sellers-feat-title">Boost de visibilité</div><div class="sellers-feat-desc">Mettez vos produits en avant pour toucher plus d'acheteurs, dès 500 FCFA.</div></div>
+          <div class="jds-service">
+            <div class="jds-service-icon">🌍</div>
+            <div>
+              <div class="jds-service-name">Écosystème Bénin Connect</div>
+              <div class="jds-service-desc">Marché, Répertoire, Services — l'infrastructure numérique locale</div>
+            </div>
           </div>
-          <div class="sellers-feat">
-            <div class="sellers-feat-icon">📍</div>
-            <div><div class="sellers-feat-title">Ciblage local intelligent</div><div class="sellers-feat-desc">Vos produits sont visibles en priorité par les acheteurs de votre ville.</div></div>
+          <div class="jds-service">
+            <div class="jds-service-icon">🤝</div>
+            <div>
+              <div class="jds-service-name">Accompagnement entreprises</div>
+              <div class="jds-service-desc">Conseil, formation et transformation numérique</div>
+            </div>
           </div>
         </div>
-        <a id="sellers-cta" href="#" class="btn btn-lg btn-green">🏪 Créer ma boutique gratuitement</a>
-      </div>
-      <div class="sellers-panel reveal reveal-d2">
-        <div class="sellers-panel-title">Votre tableau de bord vendeur</div>
-        <div class="sellers-stats">
-          <div class="sellers-stat-box"><div class="sellers-stat-val">30j</div><div class="sellers-stat-lbl">Visibilité annonce</div></div>
-          <div class="sellers-stat-box"><div class="sellers-stat-val">3</div><div class="sellers-stat-lbl">Produits gratuits</div></div>
-          <div class="sellers-stat-box"><div class="sellers-stat-val">500F</div><div class="sellers-stat-lbl">Boost 7 jours</div></div>
-          <div class="sellers-stat-box"><div class="sellers-stat-val">24h</div><div class="sellers-stat-lbl">Réponse support</div></div>
-        </div>
-        <div class="sellers-check-list">
-          <div class="sellers-check">Inscription gratuite en 2 minutes</div>
-          <div class="sellers-check">Première publication immédiate</div>
-          <div class="sellers-check">Mise en relation directe acheteurs</div>
-          <div class="sellers-check">Gestion commandes intégrée</div>
-          <div class="sellers-check">Statistiques de ventes (Gold/Premium)</div>
-          <div class="sellers-check">Badge vendeur vérifié disponible</div>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
-     CATEGORIES
-============================================================ -->
-<section id="categories">
-  <div class="container">
-    <div class="tc reveal">
-      <span class="section-eyebrow">🗂️ Catégories</span>
-      <h2 class="section-title">Trouvez tout ce dont vous avez besoin</h2>
-      <p class="section-sub">Des centaines de produits dans toutes les catégories, proposés par des vendeurs locaux vérifiés.</p>
-    </div>
-    <div class="cats-grid reveal reveal-d1" id="cats-grid">
-      <!-- Injecté par JS -->
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     FEATURED PRODUCTS
-============================================================ -->
-<section id="featured">
-  <div class="container">
-    <div class="tc reveal">
-      <span class="section-eyebrow">⭐ En vedette</span>
-      <h2 class="section-title">Produits populaires du moment</h2>
-      <p class="section-sub">Sélectionnés par notre équipe parmi les meilleures offres disponibles.</p>
-    </div>
-    <div class="featured-tabs">
-      <button class="feat-tab active" data-tab="popular" onclick="switchTab(this)">🔥 Populaires</button>
-      <button class="feat-tab" data-tab="new" onclick="switchTab(this)">🆕 Nouveautés</button>
-      <button class="feat-tab" data-tab="near" onclick="switchTab(this)">📍 Près de vous</button>
-      <button class="feat-tab" data-tab="promo" onclick="switchTab(this)">🏷️ Promotions</button>
-    </div>
-    <div class="products-grid reveal" id="products-grid">
-      <!-- Injecté par JS -->
-    </div>
-    <div class="featured-cta reveal">
-      <a id="see-all-products" href="#" class="btn btn-md btn-outline-green">Voir tous les produits →</a>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     PLANS
-============================================================ -->
-<section id="plans">
-  <div class="container">
-    <div class="tc reveal">
-      <span class="section-eyebrow">💳 Plans vendeurs</span>
-      <h2 class="section-title">Choisissez le plan adapté<br>à votre activité</h2>
-      <p class="section-sub">Commencez gratuitement. Évoluez quand vous êtes prêt. Aucun engagement.</p>
-    </div>
-    <div class="plans-grid reveal" id="plans-grid">
-      <!-- Injecté par JS -->
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TRUST
-============================================================ -->
-<section id="trust">
-  <div class="container">
-    <div class="tc reveal">
-      <span class="section-eyebrow">🤝 Confiance</span>
-      <h2 class="section-title">Une marketplace pensée pour<br>le commerce local.</h2>
-      <p class="section-sub">Transparence, proximité et sécurité au cœur de chaque transaction sur Marché d'Aujourd'hui.</p>
-    </div>
-    <div class="trust-grid">
-      <div class="trust-card reveal reveal-d1">
-        <div class="trust-icon">🔒</div>
-        <div class="trust-title">Sécurité garantie</div>
-        <div class="trust-desc">Données protégées, vendeurs vérifiés et système de signalement rapide pour chaque problème rencontré.</div>
-      </div>
-      <div class="trust-card reveal reveal-d2">
-        <div class="trust-icon">🤝</div>
-        <div class="trust-title">Aucun frais caché</div>
-        <div class="trust-desc">Transactions directes entre acheteurs et vendeurs. Pas d'intermédiaire, pas de commission prélevée sur vos ventes.</div>
-      </div>
-      <div class="trust-card reveal reveal-d3">
-        <div class="trust-icon">🎧</div>
-        <div class="trust-title">Support réactif</div>
-        <div class="trust-desc">Notre équipe répond sous 24h via WhatsApp. Signalements traités rapidement par nos administrateurs.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     STATS
-============================================================ -->
-<section id="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-box reveal reveal-d1">
-        <div class="stat-num" data-target="500">0</div>
-        <div class="stat-lbl">Produits publiés</div>
-      </div>
-      <div class="stat-box reveal reveal-d2">
-        <div class="stat-num" data-target="8">0</div>
-        <div class="stat-lbl">Vendeurs actifs</div>
-      </div>
-      <div class="stat-box reveal reveal-d3">
-        <div class="stat-num" data-target="3">0</div>
-        <div class="stat-lbl">Villes couvertes</div>
-      </div>
-      <div class="stat-box reveal reveal-d4">
-        <div class="stat-num" data-target="100">0</div>
-        <div class="stat-lbl">% gratuit pour démarrer</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     TESTIMONIALS
-============================================================ -->
-<section id="testimonials">
-  <div class="container">
-    <div class="tc reveal">
-      <span class="section-eyebrow">💬 Témoignages</span>
-      <h2 class="section-title">Ce que disent nos vendeurs<br>et acheteurs</h2>
-      <p class="section-sub">Des retours authentiques de notre communauté béninoise.</p>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card reveal reveal-d1">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">« J'ai publié mes premières tomates en 5 minutes et j'ai reçu des commandes le même jour. C'est vraiment simple et efficace pour les petits commerces comme le mien. »</div>
-        <div class="testi-author">
-          <div class="testi-avatar">A</div>
-          <div><div class="testi-name">Aminata K.</div><div class="testi-role">Vendeuse alimentaire · Parakou</div></div>
-        </div>
-      </div>
-      <div class="testi-card reveal reveal-d2">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">« Grâce au plan Gold, j'ai boosté mes produits et j'ai doublé mes ventes en 2 mois. La plateforme est vraiment professionnelle et facile à utiliser. »</div>
-        <div class="testi-author">
-          <div class="testi-avatar">E</div>
-          <div><div class="testi-name">Enock T.</div><div class="testi-role">Vendeur électronique · Cotonou</div></div>
-        </div>
-      </div>
-      <div class="testi-card reveal reveal-d3">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-text">« Avant je cherchais des heures sur les réseaux sociaux. Maintenant je trouve tout ce dont j'ai besoin en quelques secondes sur Marché d'Aujourd'hui. »</div>
-        <div class="testi-author">
-          <div class="testi-avatar">B</div>
-          <div><div class="testi-name">Bénédiction S.</div><div class="testi-role">Acheteur régulier · Parakou</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
+<!-- ═══════════════════════════════════════════
      CTA FINAL
-============================================================ -->
-<section id="cta-final">
-  <div class="container">
+═══════════════════════════════════════════ -->
+<section id="cta-final" aria-labelledby="cta-title">
+  <div class="container cta-final-inner">
     <div class="reveal">
-      <span class="section-eyebrow">🚀 Rejoignez-nous</span>
-      <h2 class="section-title" style="margin-top:16px">Prêt à découvrir une nouvelle<br>façon d'acheter et de vendre au Bénin ?</h2>
-      <p class="section-sub">Rejoignez des centaines d'utilisateurs qui font confiance à Marché d'Aujourd'hui pour leurs achats et ventes quotidiennes.</p>
+      <span class="eyebrow eyebrow-white">🚀 Rejoignez l'écosystème</span>
+      <h2 class="section-title section-title-white" id="cta-title" style="margin-top:16px">
+        Prêt à faire partie du<br>Bénin numérique ?
+      </h2>
+      <p class="section-sub section-sub-white tc" style="margin:0 auto">
+        Que vous soyez acheteur, vendeur ou entrepreneur — Bénin Connect est fait pour vous. Commencez par Marché d'Aujourd'hui, disponible maintenant.
+      </p>
       <div class="cta-btns">
-        <a id="cta-create" href="#" class="btn btn-lg btn-white">🛒 Créer mon compte</a>
-        <a id="cta-sell" href="#" class="btn btn-lg btn-outline-white">🏪 Commencer à vendre</a>
+        <a id="cta-marche" href="#" class="btn btn-lg btn-white">🛒 Accéder à Marché d'Aujourd'hui</a>
+        <a id="cta-wa" href="#" class="btn btn-lg btn-outline-white">💬 Nous contacter sur WhatsApp</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
+<!-- ═══════════════════════════════════════════
      CONTACT
-============================================================ -->
-<section id="contact">
+═══════════════════════════════════════════ -->
+<section id="contact" aria-labelledby="contact-title">
   <div class="container">
     <div class="contact-grid">
       <div class="reveal">
-        <span class="section-eyebrow">📞 Contact</span>
-        <h2 class="section-title">Besoin d'aide ?<br>On est là pour vous.</h2>
-        <p class="section-sub">Notre équipe vous répond généralement sous 2h en journée. N'hésitez pas à nous écrire.</p>
+        <span class="eyebrow">📞 Contact</span>
+        <h2 class="section-title" id="contact-title">Parlons de votre projet.</h2>
+        <p class="section-sub">Notre équipe est disponible pour répondre à vos questions sur Bénin Connect, Marché d'Aujourd'hui ou JDS Communication.</p>
         <div class="contact-items">
           <div class="contact-item">
             <div class="contact-icon">💬</div>
-            <div><div class="contact-lbl">WhatsApp support</div><div class="contact-val">+229 65 82 50 16</div></div>
+            <div>
+              <div class="contact-lbl">WhatsApp</div>
+              <div class="contact-val" id="contact-phone">+229 65 82 50 16</div>
+            </div>
           </div>
           <div class="contact-item">
             <div class="contact-icon">📧</div>
-            <div><div class="contact-lbl">Email</div><div class="contact-val">joinotamegnon@gmail.com</div></div>
+            <div>
+              <div class="contact-lbl">Email</div>
+              <div class="contact-val" id="contact-email">joinotamegnon@gmail.com</div>
+            </div>
           </div>
           <div class="contact-item">
             <div class="contact-icon">📍</div>
-            <div><div class="contact-lbl">Disponible dans</div><div class="contact-val">Parakou · Cotonou · Abomey</div></div>
+            <div>
+              <div class="contact-lbl">Localisation</div>
+              <div class="contact-val" id="contact-location">Parakou, Bénin</div>
+            </div>
           </div>
         </div>
       </div>
+
       <div class="contact-card reveal reveal-d2">
-        <div style="font-size:42px;margin-bottom:16px">💬</div>
-        <div class="contact-card-title">Nous contacter sur WhatsApp</div>
-        <div class="contact-card-sub">Posez vos questions, signalez un problème ou parlez-nous de votre activité. Nous répondons rapidement.</div>
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <a id="wa-info" href="#" class="btn btn-wa btn-md">📱 Je veux plus d'informations</a>
-          <a id="wa-sell" href="#" class="btn btn-md btn-outline-green">🏪 Je veux vendre sur Marché d'Aujourd'hui</a>
+        <div class="contact-card-title">Écrivez-nous sur WhatsApp</div>
+        <div class="contact-card-sub">Choisissez le sujet de votre message. Nous vous répondons généralement sous 2 heures en journée.</div>
+        <div class="contact-wa-btns">
+          <a id="wa-info" href="#" class="btn btn-md btn-wa" style="justify-content:center">📱 Informations sur Bénin Connect</a>
+          <a id="wa-sell" href="#" class="btn btn-md" style="justify-content:center;border:1.5px solid var(--p-marche);color:var(--p-marche);border-radius:50px;font-weight:700">🏪 Je veux vendre sur Marché</a>
+          <a id="wa-jds-contact" href="#" class="btn btn-md btn-outline-navy" style="justify-content:center">🏢 Contacter JDS Communication</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================================
+<!-- ═══════════════════════════════════════════
      FOOTER
-============================================================ -->
-<footer>
+═══════════════════════════════════════════ -->
+<footer role="contentinfo">
   <div class="container">
-    <div class="footer-top">
+    <div class="footer-grid">
       <div>
         <div style="display:flex;align-items:center;gap:10px">
-          <span style="font-size:28px">🛒</span>
-          <div class="footer-brand-name">Marché d'Aujourd'hui</div>
+          <svg width="32" height="32" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect width="36" height="36" rx="9" fill="#0EA5E9" opacity="0.15"/>
+            <rect width="36" height="36" rx="9" fill="none" stroke="rgba(14,165,233,0.3)" stroke-width="1"/>
+            <text x="18" y="24" text-anchor="middle" fill="white" font-size="13" font-weight="800" font-family="Inter,system-ui,sans-serif">BC</text>
+          </svg>
         </div>
-        <div class="footer-brand-desc">La marketplace du Bénin. Achetez, vendez et développez votre activité localement en toute confiance.</div>
+        <div class="footer-brand-name">BÉNIN CONNECT</div>
+        <div class="footer-brand-desc">L'écosystème numérique du Bénin. Connecter les personnes, les commerces et les services, partout au Bénin.</div>
         <div class="footer-socials">
-          <a href="#" class="footer-social" title="WhatsApp">💬</a>
-          <a href="#" class="footer-social" title="Email">📧</a>
-          <a href="#" class="footer-social" title="Facebook">📘</a>
+          <a href="#" class="footer-social" title="WhatsApp" aria-label="WhatsApp">💬</a>
+          <a href="#" class="footer-social" title="Email" aria-label="Email">📧</a>
+          <a href="#" class="footer-social" title="Facebook" aria-label="Facebook">📘</a>
         </div>
       </div>
       <div>
-        <div class="footer-col-title">Marketplace</div>
+        <div class="footer-col-title">Écosystème</div>
         <ul class="footer-links">
-          <li><a href="#" id="footer-home">Accueil</a></li>
-          <li><a href="#categories">Catégories</a></li>
-          <li><a href="#featured">Produits</a></li>
-          <li><a href="#" id="footer-app">Accéder à l'app</a></li>
+          <li><a id="footer-marche" href="#">Marché d'Aujourd'hui</a></li>
+          <li><a href="#produits">Répertoire (bientôt)</a></li>
+          <li><a href="#produits">Services (bientôt)</a></li>
+          <li><a href="#roadmap">Notre vision</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Vendeurs</div>
+        <div class="footer-col-title">Organisation</div>
         <ul class="footer-links">
-          <li><a href="#plans">Plans et tarifs</a></li>
-          <li><a href="#" id="footer-signup">Créer un compte</a></li>
-          <li><a href="#" id="footer-publish">Publier un produit</a></li>
-          <li><a href="#contact">Support vendeur</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Informations</div>
-        <ul class="footer-links">
-          <li><a href="#why">À propos</a></li>
+          <li><a href="#mission">Notre mission</a></li>
+          <li><a href="#jds">JDS Communication</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="#">Carrières</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Légal</div>
+        <ul class="footer-links">
           <li><a href="#">Confidentialité</a></li>
           <li><a href="#">Conditions d'utilisation</a></li>
+          <li><a href="#">Mentions légales</a></li>
+          <li><a href="#">Cookies</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <div>© 2024 Marché d'Aujourd'hui — JDS Communication · Bénin 🇧🇯</div>
+      <div>© 2024 Bénin Connect — JDS Communication · Parakou, Bénin 🇧🇯</div>
       <div class="footer-bottom-links">
         <a href="#">Confidentialité</a>
         <a href="#">CGU</a>
@@ -1240,186 +1356,93 @@ const CONFIG = {
   </div>
 </footer>
 
-<!-- WhatsApp float -->
-<a id="wa-float" href="#" title="Nous contacter" aria-label="WhatsApp">💬</a>
+<!-- WhatsApp Float -->
+<a id="wa-float" href="#" aria-label="Nous contacter sur WhatsApp" title="WhatsApp">💬</a>
 
-<!-- ============================================================
+<!-- ═══════════════════════════════════════════
      JAVASCRIPT
-============================================================ -->
+═══════════════════════════════════════════ -->
 <script>
-/* --- URL helpers --- */
-function url(key) {
-  const map = { signup: CONFIG.signupUrl, seller: CONFIG.sellerUrl, login: CONFIG.loginUrl, app: CONFIG.appUrl };
-  return map[key] || CONFIG.appUrl;
-}
-function waUrl(msg) {
-  return `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
-}
-
-/* --- Inject all links from CONFIG --- */
+/* ── Inject all links from CONFIG ── */
 function initLinks() {
   const links = {
-    'nav-login':          CONFIG.loginUrl,
-    'nav-signup':         CONFIG.signupUrl,
-    'drawer-cta':         CONFIG.appUrl,
-    'hero-cta-buy':       CONFIG.appUrl,
-    'hero-cta-sell':      CONFIG.sellerUrl,
-    'sellers-cta':        CONFIG.sellerUrl,
-    'see-all-products':   CONFIG.appUrl,
-    'cta-create':         CONFIG.signupUrl,
-    'cta-sell':           CONFIG.sellerUrl,
-    'footer-home':        CONFIG.appUrl,
-    'footer-app':         CONFIG.appUrl,
-    'footer-signup':      CONFIG.signupUrl,
-    'footer-publish':     CONFIG.sellerUrl,
-    'wa-info':    waUrl("Bonjour, je souhaite obtenir plus d'informations sur Marché d'Aujourd'hui."),
-    'wa-sell':    waUrl("Bonjour, je veux vendre sur Marché d'Aujourd'hui. Pouvez-vous m'aider ?"),
-    'wa-float':   waUrl("Bonjour, j'ai besoin d'aide sur Marché d'Aujourd'hui."),
+    'nav-marche':        BC.marche,
+    'drawer-marche':     BC.marche,
+    'hero-cta-marche':   BC.marche,
+    'prod-marche-cta':   BC.marche,
+    'marche-focus-cta':  BC.marche,
+    'cta-marche':        BC.marche,
+    'footer-marche':     BC.marche,
+    'jds-wa-cta':        waLink('jds'),
+    'wa-info':           waLink('info'),
+    'wa-sell':           waLink('sell'),
+    'wa-jds-contact':    waLink('jds'),
+    'cta-wa':            waLink('info'),
+    'wa-float':          waLink('float'),
   };
   Object.entries(links).forEach(([id, href]) => {
     const el = document.getElementById(id);
     if (el) el.href = href;
   });
+  /* Contact details from config */
+  const pEl = document.getElementById('contact-phone');
+  const eEl = document.getElementById('contact-email');
+  const lEl = document.getElementById('contact-location');
+  if (pEl) pEl.textContent = '+229 ' + BC.phone.slice(3,5) + ' ' + BC.phone.slice(5,7) + ' ' + BC.phone.slice(7,9) + ' ' + BC.phone.slice(9);
+  if (eEl) eEl.textContent = BC.email;
+  if (lEl) lEl.textContent = BC.location;
 }
 
-/* --- Hero stats --- */
-function renderStats() {
-  const container = document.getElementById('hero-stats');
+/* ── Roadmap ── */
+function renderRoadmap() {
+  const container = document.getElementById('roadmap-container');
   if (!container) return;
-  container.innerHTML = CONFIG.stats.map(s => `
-    <div class="hero-proof-item">
-      <div class="hero-proof-num">${s.num}<sup>${s.suffix}</sup></div>
-      <div class="hero-proof-lbl">${s.label}</div>
-    </div>
-  `).join('');
-}
-
-/* --- Categories --- */
-const CATS = [
-  { emoji:'📱', name:'Électronique', count:'85+' },
-  { emoji:'👗', name:'Mode', count:'60+' },
-  { emoji:'🏠', name:'Maison', count:'45+' },
-  { emoji:'🍅', name:'Alimentation', count:'120+' },
-  { emoji:'🚗', name:'Auto & Moto', count:'30+' },
-  { emoji:'💄', name:'Beauté', count:'55+' },
-  { emoji:'🔧', name:'Services', count:'40+' },
-  { emoji:'🧱', name:'Construction', count:'25+' },
-  { emoji:'🌾', name:'Agriculture', count:'35+' },
-  { emoji:'🍼', name:'Bébé', count:'20+' },
-];
-function renderCats() {
-  const el = document.getElementById('cats-grid');
-  if (!el) return;
-  el.innerHTML = CATS.map(c => `
-    <a href="${CONFIG.appUrl}" class="cat-tile">
-      <div class="cat-tile-icon">${c.emoji}</div>
-      <div class="cat-tile-name">${c.name}</div>
-      <div class="cat-tile-count">${c.count} produits</div>
-    </a>
-  `).join('');
-}
-
-/* --- Products --- */
-function renderProducts() {
-  const el = document.getElementById('products-grid');
-  if (!el) return;
-  el.innerHTML = CONFIG.products.map(p => `
-    <div class="prod-card" onclick="window.location='${CONFIG.appUrl}'">
-      <div class="prod-img">
-        ${p.badge ? `<span class="prod-badge">${p.badge}</span>` : ''}
-        ${p.emoji}
-      </div>
-      <div class="prod-body">
-        <div class="prod-cat">${p.cat}</div>
-        <div class="prod-name">${p.name}</div>
-        <div class="prod-footer">
-          <div class="prod-price">${p.price}</div>
-          <div class="prod-loc">📍 ${p.loc}</div>
-        </div>
+  container.innerHTML = BC.roadmap.map(step => `
+    <div class="roadmap-step">
+      <div class="roadmap-num">${step.icon}</div>
+      <div class="roadmap-inner">
+        <div class="roadmap-phase">${step.phase}</div>
+        <div class="roadmap-name">${step.name}</div>
+        <div class="roadmap-desc">${step.desc}</div>
       </div>
     </div>
   `).join('');
 }
 
-/* --- Plans --- */
-function renderPlans() {
-  const el = document.getElementById('plans-grid');
-  if (!el) return;
-  el.innerHTML = CONFIG.plans.map(p => `
-    <div class="plan-card ${p.featured ? 'featured' : ''}">
-      ${p.badge ? `<span class="plan-badge-top">${p.badge}</span>` : ''}
-      <div class="plan-emoji">${p.emoji}</div>
-      <div class="plan-name">${p.name}</div>
-      <div class="plan-price">${p.price}</div>
-      <div class="plan-period">${p.period}</div>
-      <div class="plan-sep"></div>
-      <ul class="plan-feats">
-        ${p.features.map(f => `<li class="${f.ok ? '' : 'no'}">${f.label}</li>`).join('')}
-      </ul>
-      <a href="${url(p.ctaUrl)}" class="plan-btn">${p.cta}</a>
-    </div>
-  `).join('');
-}
-
-/* --- Featured tabs (simulation) --- */
-function switchTab(btn) {
-  document.querySelectorAll('.feat-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  /* Ici on peut filtrer par tab plus tard avec une vraie API */
-}
-
-/* --- Nav scroll effect --- */
+/* ── Nav scroll ── */
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
 
-/* --- Mobile nav --- */
+/* ── Mobile nav ── */
 function toggleNav() {
-  document.getElementById('nav-drawer').classList.toggle('open');
+  const drawer = document.getElementById('drawer');
+  const btn = document.getElementById('burger-btn');
+  const isOpen = drawer.classList.toggle('open');
+  btn.textContent = isOpen ? '✕' : '☰';
+  btn.setAttribute('aria-expanded', isOpen);
 }
 function closeNav() {
-  document.getElementById('nav-drawer').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('burger-btn').textContent = '☰';
+  document.getElementById('burger-btn').setAttribute('aria-expanded', 'false');
 }
 document.addEventListener('click', e => {
-  const drawer = document.getElementById('nav-drawer');
-  const burger = document.querySelector('.nav-burger');
-  if (!drawer.contains(e.target) && !burger.contains(e.target)) closeNav();
+  const d = document.getElementById('drawer');
+  const b = document.getElementById('burger-btn');
+  if (d.classList.contains('open') && !d.contains(e.target) && !b.contains(e.target)) closeNav();
 });
 
-/* --- Scroll reveal --- */
+/* ── Scroll reveal ── */
 const revealObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
-}, { threshold: 0.1 });
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
-/* --- Animated counters --- */
-const counterObs = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (!entry.isIntersecting) return;
-    const el = entry.target;
-    const target = parseInt(el.getAttribute('data-target'));
-    const isPercent = el.textContent.includes('%') || el.closest('.stat-box')?.querySelector('.stat-lbl')?.textContent.includes('%');
-    const duration = 1600;
-    const start = Date.now();
-    const tick = () => {
-      const p = Math.min((Date.now() - start) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(eased * target) + (target === 100 ? '%' : '+');
-      if (p < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-    counterObs.unobserve(el);
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('[data-target]').forEach(el => counterObs.observe(el));
-
-/* --- Init --- */
+/* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
   initLinks();
-  renderStats();
-  renderCats();
-  renderProducts();
-  renderPlans();
+  renderRoadmap();
 });
 </script>
 </body>
