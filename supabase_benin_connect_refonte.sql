@@ -1,11 +1,11 @@
 -- =================================================================================
 -- REFONTE ET MODERNISATION DE BÉNIN CONNECT (https://benin-connect.com)
--- Script SQL Additif & Non-Destructif (Sécurité RLS incluse)
+-- Script SQL Additif & Non-Destructif (Sécurité RLS & Grants inclus)
 -- Réutilise les tables existantes : profiles, vendors, products, categories,
 -- reviews, notifications, et les tables jds_* (JDS PARTENAIRES).
 -- =================================================================================
 
--- 1. TABLE : platform_followers (Section 10 — Abonnés Bénin Connect sans création de compte)
+-- 1. TABLE : platform_followers (Abonnés Bénin Connect sans création de compte)
 CREATE TABLE IF NOT EXISTS public.platform_followers (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
@@ -28,8 +28,8 @@ CREATE INDEX IF NOT EXISTS idx_platform_followers_phone ON public.platform_follo
 CREATE INDEX IF NOT EXISTS idx_platform_followers_created ON public.platform_followers(created_at DESC);
 
 ALTER TABLE public.platform_followers ENABLE ROW LEVEL SECURITY;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.platform_followers TO anon, authenticated, service_role;
 
--- Seul le Super Admin peut consulter la liste des abonnés (noms, téléphones, e-mails)
 DROP POLICY IF EXISTS "Lecture publique du nombre d'abonnes" ON public.platform_followers;
 DROP POLICY IF EXISTS "Lecture abonnes reservee au Super Admin" ON public.platform_followers;
 CREATE POLICY "Lecture abonnes reservee au Super Admin"
@@ -41,7 +41,6 @@ CREATE POLICY "Lecture abonnes reservee au Super Admin"
     )
   );
 
--- Inscription libre par formulaire simple (sans création de compte)
 DROP POLICY IF EXISTS "Insertion abonnement utilisateur" ON public.platform_followers;
 DROP POLICY IF EXISTS "Insertion publique abonnement Benin Connect" ON public.platform_followers;
 CREATE POLICY "Insertion publique abonnement Benin Connect"
@@ -68,8 +67,6 @@ CREATE POLICY "Suppression abonnement utilisateur"
     )
   );
 
--- Fonction RPC sécurisée pour afficher uniquement le compteur public d'abonnés actifs
--- sans jamais exposer la liste des noms/numéros aux visiteurs publics
 CREATE OR REPLACE FUNCTION public.get_platform_followers_count()
 RETURNS INTEGER
 LANGUAGE sql
@@ -83,7 +80,6 @@ $$;
 
 GRANT EXECUTE ON FUNCTION public.get_platform_followers_count() TO anon, authenticated;
 
--- Fonction RPC sécurisée pour permettre le désabonnement facile par numéro de téléphone ou e-mail
 CREATE OR REPLACE FUNCTION public.unsubscribe_platform_follower(p_contact TEXT)
 RETURNS BOOLEAN
 LANGUAGE plpgsql
@@ -106,7 +102,7 @@ $$;
 
 GRANT EXECUTE ON FUNCTION public.unsubscribe_platform_follower(TEXT) TO anon, authenticated;
 
--- 2. TABLE : platform_reviews (Section 10 — Avis Bénin Connect & Marché d'Aujourd'hui avec validation Super Admin)
+-- 2. TABLE : platform_reviews (Avis Bénin Connect & Marché d'Aujourd'hui avec validation Super Admin)
 CREATE TABLE IF NOT EXISTS public.platform_reviews (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
@@ -130,6 +126,7 @@ ALTER TABLE public.platform_reviews ALTER COLUMN status SET DEFAULT 'pending';
 CREATE INDEX IF NOT EXISTS idx_platform_reviews_target_status ON public.platform_reviews(target_type, status, created_at DESC);
 
 ALTER TABLE public.platform_reviews ENABLE ROW LEVEL SECURITY;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.platform_reviews TO anon, authenticated, service_role;
 
 DROP POLICY IF EXISTS "Lecture publique des avis valides" ON public.platform_reviews;
 CREATE POLICY "Lecture publique des avis valides"
@@ -189,6 +186,7 @@ CREATE TABLE IF NOT EXISTS public.platform_news (
 CREATE INDEX IF NOT EXISTS idx_platform_news_published ON public.platform_news(is_published, created_at DESC);
 
 ALTER TABLE public.platform_news ENABLE ROW LEVEL SECURITY;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE public.platform_news TO anon, authenticated, service_role;
 
 DROP POLICY IF EXISTS "Lecture publique des actualites publiees" ON public.platform_news;
 CREATE POLICY "Lecture publique des actualites publiees"
@@ -211,11 +209,13 @@ CREATE POLICY "Gestion actualites par admin"
     )
   );
 
--- 4. TABLE : platform_analytics (Statistiques d'audience & clics)
+-- 4. TABLE : platform_analytics (Statistiques d'audience & compteur global dédupliqué Bénin Connect + Marché d'Aujourd'hui)
 CREATE TABLE IF NOT EXISTS public.platform_analytics (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   visitor_id TEXT NOT NULL,
   user_id UUID REFERENCES public.profiles(id) ON DELETE SET NULL,
+  platform TEXT DEFAULT 'benin_connect',
+  traffic_source TEXT DEFAULT 'direct',
   event_type TEXT NOT NULL CHECK (event_type IN ('page_view', 'button_click', 'signup', 'follow', 'unfollow', 'review_submit', 'marche_open', 'partner_portal_open')),
   event_target TEXT,
   page_path TEXT DEFAULT '/',
@@ -224,10 +224,15 @@ CREATE TABLE IF NOT EXISTS public.platform_analytics (
   created_at TIMESTAMPTZ DEFAULT now()
 );
 
+ALTER TABLE public.platform_analytics ADD COLUMN IF NOT EXISTS platform TEXT DEFAULT 'benin_connect';
+ALTER TABLE public.platform_analytics ADD COLUMN IF NOT EXISTS traffic_source TEXT DEFAULT 'direct';
+
 CREATE INDEX IF NOT EXISTS idx_platform_analytics_event_date ON public.platform_analytics(event_type, created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_platform_analytics_visitor ON public.platform_analytics(visitor_id);
+CREATE INDEX IF NOT EXISTS idx_platform_analytics_platform ON public.platform_analytics(platform, created_at DESC);
 
 ALTER TABLE public.platform_analytics ENABLE ROW LEVEL SECURITY;
+GRANT SELECT, INSERT ON TABLE public.platform_analytics TO anon, authenticated, service_role;
 
 DROP POLICY IF EXISTS "Insertion publique analytics" ON public.platform_analytics;
 CREATE POLICY "Insertion publique analytics"
@@ -243,3 +248,34 @@ CREATE POLICY "Lecture analytics audience"
       WHERE id = auth.uid() AND role IN ('super_admin', 'admin', 'regional_admin')
     )
   );
+
+-- Fonction RPC sécurisée retournant uniquement le compteur global cumulé de visiteurs uniques
+-- de l'écosystème (Bénin Connect + Marché d'Aujourd'hui) dédupliqué, sans exposer de données privées
+CREATE OR REPLACE FUNCTION public.get_ecosystem_visitors_count()
+RETURNS INTEGER
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public
+AS $$
+DECLARE
+  v_historical_users INTEGER := 0;
+  v_tracked_anon_visitors INTEGER := 0;
+BEGIN
+  -- 1. Visiteurs historiques authentifiés depuis le lancement (profiles + vendors dédupliqués)
+  SELECT COUNT(DISTINCT id)::INTEGER INTO v_historical_users
+  FROM (
+    SELECT id FROM public.profiles
+    UNION
+    SELECT id FROM public.vendors
+  ) u;
+
+  -- 2. Visiteurs uniques mesurés dans platform_analytics non déjà comptés comme user_id
+  SELECT COUNT(DISTINCT visitor_id)::INTEGER INTO v_tracked_anon_visitors
+  FROM public.platform_analytics
+  WHERE user_id IS NULL;
+
+  RETURN COALESCE(v_historical_users, 0) + COALESCE(v_tracked_anon_visitors, 0);
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION public.get_ecosystem_visitors_count() TO anon, authenticated;
