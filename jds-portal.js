@@ -64,7 +64,7 @@
   let supervisorTab = 'overview';
   let supervisorTeamData = null;
 
-  // Génère un code unique au format JOIE-JDSBA01 / TIKTOK-JDS01
+  // Génère un code unique au format MARCEL-JDSBA01 / TIKTOK-JDS01
   async function generatePartnerCode(fullName, role) {
     const sb = getSb();
     const prefix = cleanPrefix(fullName);
@@ -239,7 +239,7 @@
             <label style="display:block; font-size:12px; font-weight:700; color:#334155; margin-bottom:5px;">
               Identifiant partenaire, Code, Téléphone ou Email
             </label>
-            <input id="jds-login-identifier" type="text" required class="bc-input" placeholder="Ex: JOIE-JDSBA01 ou +229 01..." />
+            <input id="jds-login-identifier" type="text" required class="bc-input" placeholder="Ex: MARCEL-JDSBA02 ou +229 01..." />
           </div>
           <div>
             <label style="display:block; font-size:12px; font-weight:700; color:#334155; margin-bottom:5px;">
@@ -284,8 +284,9 @@
 
   window.openJdsForgotPassword = function () {
     const idVal = document.getElementById('jds-login-identifier')?.value || '';
-    const msg = `Bonjour Administration JDS PARTENAIRES, je souhaite réinitialiser mon mot de passe partenaire. Identifiant / Téléphone : ${idVal || '(à préciser)'}`;
-    window.open(`https://wa.me/22965825016?text=${encodeURIComponent(msg)}`, '_blank');
+    const subject = 'Réinitialisation mot de passe — JDS Partenaires (Bénin Connect)';
+    const body = `Bonjour Bénin Connect,\n\nJe souhaite réinitialiser mon mot de passe partenaire JDS.\nIdentifiant / Code : ${idVal || '(à préciser)'}`;
+    window.location.href = `mailto:digitaljds34@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   window.submitJdsPartnerLogin = async function () {

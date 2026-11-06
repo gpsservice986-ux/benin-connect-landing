@@ -12,13 +12,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bénin Connect — Le numérique au service du commerce et des opportunités au Bénin</title>
-  <meta name="description" content="Bénin Connect connecte les commerçants, acheteurs et partenaires au Bénin. Découvrez Marché d'Aujourd'hui et l'Espace JDS Partenaires." />
+  <meta name="description" content="Découvrez de nouvelles possibilités pour acheter, vendre, promouvoir vos activités et saisir des opportunités grâce à un écosystème numérique pensé pour le Bénin." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://benin-connect.com/" />
 
   <!-- Open Graph / WhatsApp / Facebook -->
-  <meta property="og:title" content="Bénin Connect — Commerce & Opportunités au Bénin" />
-  <meta property="og:description" content="Achetez, vendez avec Marché d'Aujourd'hui et développez votre réseau avec JDS Partenaires." />
+  <meta property="og:title" content="Bénin Connect — Le numérique au service du commerce et des opportunités au Bénin" />
+  <meta property="og:description" content="Découvrez Marché d'Aujourd'hui, les solutions de JDS Communication & JDS Digital, et l'espace JDS Partenaires." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://benin-connect.com/" />
   <meta property="og:site_name" content="Bénin Connect" />
@@ -39,8 +39,8 @@
     "publisher": {
       "@type": "Organization",
       "name": "JDS Communication",
-      "location": "Parakou, Bénin",
-      "telephone": "+229-65-82-50-16"
+      "location": "Parakou, République du Bénin",
+      "email": "digitaljds34@gmail.com"
     }
   }
   </script>
@@ -51,6 +51,7 @@
   <style>
     :root {
       --blue: #0F4C81;
+      --blue-dark: #0A2E52;
       --blue-hover: #1D4ED8;
       --blue-soft: #EFF6FF;
       --blue-border: #BFDBFE;
@@ -66,12 +67,14 @@
       --text-sub: #475569;
       --text-muted: #64748B;
       --green: #15803D;
+      --green-soft: #DCFCE7;
       --gold: #F59E0B;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --radius: 14px;
-      --radius-lg: 20px;
-      --shadow-sm: 0 2px 10px rgba(15, 23, 42, 0.04);
-      --shadow-md: 0 10px 30px rgba(15, 23, 42, 0.07);
+      --radius: 16px;
+      --radius-lg: 22px;
+      --shadow-sm: 0 4px 14px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 14px 34px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 22px 48px rgba(15, 23, 42, 0.13);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -80,243 +83,529 @@
       font-family: var(--font);
       color: var(--text);
       background: var(--white);
-      line-height: 1.55;
+      line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
     a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
+    img, video { max-width: 100%; display: block; }
     button, input, select, textarea { font-family: inherit; }
 
-    .container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-    section { padding: 68px 0; }
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    section { padding: 72px 0; }
     .section-alt { background: var(--gray-bg); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
     .eyebrow {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.7px;
+      font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.7px;
       color: var(--blue); background: var(--blue-soft); border: 1px solid var(--blue-border);
-      padding: 5px 12px; border-radius: 999px; margin-bottom: 12px;
+      padding: 6px 13px; border-radius: 999px; margin-bottom: 12px;
     }
     .eyebrow.violet { color: var(--violet); background: var(--violet-soft); border-color: var(--violet-border); }
 
-    .section-header { text-align: center; max-width: 640px; margin: 0 auto 36px; }
-    .section-title { font-size: clamp(23px, 3.2vw, 34px); font-weight: 900; letter-spacing: -0.4px; line-height: 1.2; margin-bottom: 8px; }
-    .section-desc { font-size: 15.5px; color: var(--text-sub); }
+    .section-header { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    .section-title { font-size: clamp(24px, 3.2vw, 35px); font-weight: 900; letter-spacing: -0.5px; line-height: 1.22; margin-bottom: 10px; color: var(--text); }
+    .section-desc { font-size: 15.5px; color: var(--text-sub); line-height: 1.6; }
 
-    /* BOUTONS UNIFORMES & ÉLÉGANTS */
+    /* BOUTONS MODERNES, HARMONIEUX ET RÉACTIFS */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      font-weight: 700; font-size: 14px; padding: 11px 22px; border-radius: 999px;
+      font-weight: 700; font-size: 14px; padding: 12px 24px; border-radius: 999px;
       border: 1.5px solid transparent; cursor: pointer;
-      transition: background 0.16s ease, transform 0.16s ease, border-color 0.16s ease;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       white-space: nowrap;
+      text-align: center;
     }
-    .btn:active { transform: scale(0.98); }
-    .bc-btn-blue { background: var(--blue); color: var(--white); }
-    .bc-btn-blue:hover { background: var(--blue-hover); }
-    .bc-btn-violet { background: var(--violet); color: var(--white); }
-    .bc-btn-violet:hover { background: var(--violet-hover); }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0) scale(0.98); }
+    .bc-btn-blue { background: var(--blue); color: var(--white); box-shadow: 0 6px 18px rgba(15, 76, 129, 0.22); }
+    .bc-btn-blue:hover { background: var(--blue-hover); box-shadow: 0 10px 24px rgba(29, 78, 216, 0.28); }
+    .bc-btn-violet { background: var(--violet); color: var(--white); box-shadow: 0 6px 18px rgba(109, 40, 217, 0.22); }
+    .bc-btn-violet:hover { background: var(--violet-hover); box-shadow: 0 10px 24px rgba(91, 33, 182, 0.28); }
     .bc-btn-outline { background: var(--white); color: var(--blue); border-color: var(--border); }
     .bc-btn-outline:hover { border-color: var(--blue); background: var(--blue-soft); }
 
     .bc-input {
-      width: 100%; padding: 11px 14px; border-radius: 10px;
+      width: 100%; padding: 12px 14px; border-radius: 12px;
       border: 1.5px solid var(--border); background: var(--white);
       font-size: 14px; color: var(--text); outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
-    .bc-input:focus { border-color: var(--blue); }
+    .bc-input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(15, 76, 129, 0.1); }
 
     /* ================= 1. NAVIGATION UNIQUE ================= */
     #navbar {
       position: sticky; top: 0; z-index: 1000;
-      height: 68px; background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(8px); border-bottom: 1px solid var(--border);
+      height: 70px; background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
       display: flex; align-items: center;
     }
     .nav-inner {
       display: flex; align-items: center; justify-content: space-between;
-      width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 20px; gap: 16px;
+      width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 20px; gap: 16px;
     }
-    .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 16px; color: var(--blue); }
+    .nav-brand { display: flex; align-items: center; gap: 10px; font-weight: 900; font-size: 16.5px; color: var(--blue); letter-spacing: -0.3px; }
     .nav-brand-badge {
-      width: 36px; height: 36px; border-radius: 10px;
+      width: 38px; height: 38px; border-radius: 11px;
       background: linear-gradient(135deg, var(--blue) 0%, var(--violet) 100%);
       color: var(--white); display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 900;
+      font-size: 14px; font-weight: 900; box-shadow: 0 4px 12px rgba(15, 76, 129, 0.25);
     }
-    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-links { display: flex; align-items: center; gap: 22px; }
     .nav-links a { font-size: 14px; font-weight: 600; color: var(--text-sub); transition: color 0.15s; }
     .nav-links a:hover { color: var(--blue); }
 
     .nav-right { display: flex; align-items: center; gap: 10px; }
-    .nav-connect-btn {
-      background: transparent; border: 1.5px solid var(--border);
-      color: var(--text); font-weight: 700; font-size: 13.5px;
-      padding: 8px 16px; border-radius: 999px; cursor: pointer;
-    }
-    .nav-connect-btn:hover { border-color: var(--blue); color: var(--blue); }
 
     .nav-burger {
-      display: none; width: 40px; height: 40px; border-radius: 10px;
+      display: none; width: 42px; height: 42px; border-radius: 11px;
       border: 1px solid var(--border); background: var(--gray-bg);
       font-size: 19px; cursor: pointer; align-items: center; justify-content: center;
+      color: var(--text);
     }
 
     #mobile-menu {
-      display: none; position: fixed; top: 68px; left: 0; right: 0; z-index: 999;
+      display: none; position: fixed; top: 70px; left: 0; right: 0; z-index: 999;
       background: var(--white); border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow-md); padding: 16px 20px 22px;
+      box-shadow: var(--shadow-md); padding: 16px 20px 24px;
       flex-direction: column; gap: 4px;
     }
     #mobile-menu.open { display: flex; }
     #mobile-menu a, #mobile-menu button.m-link {
       text-align: left; background: none; border: none;
-      padding: 11px 6px; font-size: 15px; font-weight: 600; color: var(--text);
+      padding: 12px 6px; font-size: 15px; font-weight: 600; color: var(--text);
       border-bottom: 1px solid var(--gray-muted); cursor: pointer;
     }
 
-    /* ================= 2. BANNIÈRE D'ACCUEIL (HERO ÉPURÉ) ================= */
+    /* ================= 2. SECTION PRINCIPALE : HERO ================= */
     #hero {
-      padding: 64px 0 60px;
-      background: linear-gradient(135deg, #0A2E52 0%, var(--blue) 60%, #3B1D82 100%);
+      padding: 68px 0 60px;
+      background: linear-gradient(135deg, #082340 0%, var(--blue) 58%, #3B1D82 100%);
       color: var(--white);
+      position: relative;
+      overflow: hidden;
     }
     .hero-wrap {
       display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 44px; align-items: center;
     }
     .hero-title {
-      font-size: clamp(28px, 4.2vw, 44px); font-weight: 900;
-      line-height: 1.14; letter-spacing: -0.7px; margin-bottom: 14px;
+      font-size: clamp(28px, 4.1vw, 44px); font-weight: 900;
+      line-height: 1.15; letter-spacing: -0.7px; margin-bottom: 16px;
     }
     .hero-sub {
-      font-size: 16px; color: rgba(255, 255, 255, 0.86);
-      max-width: 520px; margin-bottom: 26px; line-height: 1.6;
+      font-size: 16.5px; color: rgba(255, 255, 255, 0.9);
+      max-width: 560px; margin-bottom: 28px; line-height: 1.65;
     }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .hero-btn-primary {
+      background: var(--white); color: var(--blue); font-weight: 800;
+      padding: 13px 26px; font-size: 14.5px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+    }
+    .hero-btn-primary:hover { background: #F8FAFC; color: var(--blue-hover); }
+    .hero-btn-secondary {
+      background: rgba(109, 40, 217, 0.92); color: var(--white);
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      padding: 13px 26px; font-size: 14.5px; font-weight: 800;
+    }
+    .hero-btn-secondary:hover { background: var(--violet); }
+
+    /* STATISTIQUES DE LA PLATEFORME (Uniquement chiffres réels > 0, zéro tiret, zéro compteur à 0) */
     .hero-metrics {
-      display: flex; gap: 28px; flex-wrap: wrap;
-      padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.16);
+      display: none; gap: 32px; flex-wrap: wrap;
+      margin-top: 32px; padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
     }
-    .hero-metric-val { font-size: 22px; font-weight: 900; color: var(--white); line-height: 1.1; }
-    .hero-metric-lbl { font-size: 12px; color: rgba(255, 255, 255, 0.72); font-weight: 500; }
+    .hero-metric-item { display: none; }
+    .hero-metric-val { font-size: 26px; font-weight: 900; color: var(--white); line-height: 1.1; letter-spacing: -0.5px; }
+    .hero-metric-lbl { font-size: 12.5px; color: rgba(255, 255, 255, 0.8); font-weight: 600; margin-top: 4px; }
 
     .hero-card {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: var(--radius-lg); padding: 14px;
+      box-shadow: 0 20px 44px rgba(0, 0, 0, 0.22);
     }
     .hero-card img {
-      width: 100%; height: 250px; object-fit: cover; border-radius: 14px;
+      width: 100%; height: 270px; object-fit: cover; border-radius: 15px;
     }
 
-    /* ================= 3. SÉLECTION DE PRODUITS (4 À 6 PRODUITS RÉELS) ================= */
+    /* ================= 3. ESPACE PUBLICITAIRE (SOUS LES STATISTIQUES) ================= */
+    #pub-banner-section {
+      padding: 28px 0 8px;
+      background: var(--white);
+      display: none; /* Affiché uniquement lorsqu'au moins une publicité active existe */
+    }
+    .ad-carousel-shell {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      background: #0F172A;
+    }
+    .ad-slide {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      min-height: 240px;
+      align-items: center;
+      color: var(--white);
+      position: relative;
+    }
+    .ad-slide.no-media {
+      grid-template-columns: 1fr;
+    }
+    .ad-slide-content {
+      padding: 30px 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+      z-index: 2;
+    }
+    .ad-badge-row {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    }
+    .ad-sponsor-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: var(--white);
+      font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.6px;
+      padding: 4px 11px; border-radius: 999px;
+    }
+    .ad-slide-title {
+      font-size: clamp(20px, 2.6vw, 28px);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.3px;
+    }
+    .ad-slide-sub {
+      font-size: 14.5px;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 540px;
+      line-height: 1.55;
+    }
+    .ad-slide-price {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 4px 12px;
+      border-radius: 8px;
+      font-weight: 900;
+      font-size: 15px;
+      color: #FDE68A;
+      width: fit-content;
+    }
+    .ad-slide-media {
+      height: 100%;
+      min-height: 240px;
+      max-height: 310px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(0, 0, 0, 0.25);
+    }
+    .ad-slide-media img,
+    .ad-slide-media video {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      max-height: 310px;
+      object-fit: cover;
+    }
+    .ad-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 18px;
+      background: rgba(15, 23, 42, 0.92);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 12px;
+    }
+    .ad-dots {
+      display: flex; align-items: center; gap: 7px;
+    }
+    .ad-dot {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.3);
+      border: none; cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .ad-dot.active {
+      width: 24px;
+      background: var(--white);
+    }
+    .ad-nav-btns {
+      display: flex; gap: 6px;
+    }
+    .ad-nav-btn {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white); cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800;
+    }
+    .ad-nav-btn:hover { background: rgba(255, 255, 255, 0.2); }
+
+    /* ================= 4. SECTION MARCHÉ D'AUJOURD'HUI (6 PRODUITS EN DIRECT) ================= */
     .products-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
     }
     .prod-card {
       background: var(--white); border: 1px solid var(--border);
       border-radius: var(--radius); overflow: hidden;
       display: flex; flex-direction: column;
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .prod-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
-    .prod-img-wrap { height: 180px; background: var(--gray-muted); position: relative; overflow: hidden; }
-    .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .prod-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .prod-img-wrap { height: 190px; background: var(--gray-muted); position: relative; overflow: hidden; }
+    .prod-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+    .prod-card:hover .prod-img-wrap img { transform: scale(1.03); }
     .prod-city {
-      position: absolute; bottom: 8px; right: 8px;
-      background: rgba(15, 23, 42, 0.76); color: var(--white);
-      font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 999px;
+      position: absolute; bottom: 10px; right: 10px;
+      background: rgba(15, 23, 42, 0.8); color: var(--white);
+      font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 999px;
     }
-    .prod-body { padding: 15px; display: flex; flex-direction: column; flex: 1; }
-    .prod-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
-    .prod-price { font-size: 16px; font-weight: 900; color: var(--blue); margin-bottom: 6px; }
-    .prod-vendor { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; flex: 1; }
+    .prod-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
+    .prod-title { font-size: 15.5px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .prod-price { font-size: 16.5px; font-weight: 900; color: var(--blue); margin-bottom: 6px; }
+    .prod-vendor { font-size: 12.5px; color: var(--text-muted); margin-bottom: 14px; flex: 1; }
 
-    /* ================= 4. PRÉSENTATION DES SERVICES & À PROPOS ================= */
-    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .service-card {
+    /* ================= 5. SECTION NOS SERVICES & SECTION JDS COMMUNICATION ================= */
+    .services-single-wrap {
+      max-width: 780px; margin: 0 auto;
+    }
+    .service-featured-card {
       background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 24px;
-      display: flex; flex-direction: column; gap: 10px;
+      border-radius: var(--radius-lg); padding: 32px;
+      box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .service-head {
+      display: flex; align-items: center; gap: 14px;
     }
     .service-icon {
-      width: 44px; height: 44px; border-radius: 12px;
+      width: 52px; height: 52px; border-radius: 14px;
       background: var(--blue-soft); color: var(--blue);
-      display: flex; align-items: center; justify-content: center; font-size: 22px;
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+      flex-shrink: 0;
+    }
+    .service-bullets {
+      list-style: none;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+    }
+    .service-bullets li {
+      background: var(--gray-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex; align-items: flex-start; gap: 8px;
     }
 
-    /* ================= 5. ESPACE PARTENAIRES (JDS PARTENAIRES) ================= */
-    .partner-box {
-      background: linear-gradient(135deg, #2E1065 0%, var(--violet) 60%, var(--blue) 100%);
-      color: var(--white); border-radius: var(--radius-lg); padding: 40px 32px;
-      display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; align-items: center;
+    /* SECTION 8 : JDS COMMUNICATION */
+    .jds-comm-card {
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 38px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 34px;
+      align-items: center;
     }
-    .partner-roles { display: flex; flex-direction: column; gap: 10px; }
-    .partner-role-item {
-      background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 12px; padding: 12px 16px; font-size: 13.5px;
+    .jds-comm-quote {
+      font-size: 16px;
+      color: var(--text);
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .jds-pillars {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .jds-pillar-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--blue);
+      border-radius: 12px;
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+    }
+    .jds-pillar-item.violet { border-left-color: var(--violet); }
+    .jds-pillar-title { font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .jds-pillar-desc { font-size: 12.5px; color: var(--text-sub); line-height: 1.5; }
+
+    /* ================= 6. SECTION JDS PARTENAIRES (ULTRA-ÉPURÉE) ================= */
+    .partner-minimal-box {
+      background: linear-gradient(135deg, #2E1065 0%, var(--violet) 58%, var(--blue) 100%);
+      color: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 48px 36px;
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
     }
 
-    /* ================= 6. AVIS, CONFIANCE & ABONNÉS (SECTION UNIFIÉE) ================= */
-    .community-bar {
-      background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 18px 22px;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 16px; margin-bottom: 24px;
+    /* ================= 7. SECTION AVIS ET COMMUNAUTÉ ================= */
+    .avis-top-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
     }
+    .subscriber-strip {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .subscriber-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .sub-count-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border: 1px solid var(--blue-border);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 13px;
+      border-radius: 999px;
+    }
+    .sub-goal-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--violet-soft);
+      color: var(--violet);
+      border: 1px solid var(--violet-border);
+      font-weight: 800;
+      font-size: 12.5px;
+      padding: 6px 13px;
+      border-radius: 999px;
+    }
+
     .reviews-header-bar {
       display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 14px; margin-bottom: 20px;
+      flex-wrap: wrap; gap: 14px; margin-bottom: 22px;
     }
-    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
     .review-card {
       background: var(--white); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 16px;
-      display: flex; flex-direction: column; justify-content: space-between; gap: 10px;
+      border-radius: var(--radius); padding: 20px;
+      display: flex; flex-direction: column; justify-content: space-between; gap: 14px;
+      box-shadow: var(--shadow-sm);
     }
-    .star-picker { display: inline-flex; gap: 6px; font-size: 26px; cursor: pointer; user-select: none; }
+    .review-author-row {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .review-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      color: var(--white); font-weight: 800; font-size: 15px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; overflow: hidden;
+      border: 2px solid var(--blue-soft);
+    }
+    .review-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .review-demo-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10.5px; font-weight: 800;
+      background: #FEF3C7; color: #92400E; border: 1px solid #FDE68A;
+      padding: 2px 8px; border-radius: 999px;
+    }
+    .review-platform-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 700;
+      background: var(--gray-muted); color: var(--text-sub);
+      padding: 3px 9px; border-radius: 999px;
+    }
+    .star-picker { display: inline-flex; gap: 6px; font-size: 28px; cursor: pointer; user-select: none; }
 
-    /* ================= 7. ACTUALITÉS ET CONTACT ================= */
+    /* ================= 8. ACTUALITÉS ET CONTACT ================= */
     .news-contact-grid {
-      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: start;
+      display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 30px; align-items: start;
     }
-    .news-list { display: flex; flex-direction: column; gap: 12px; }
+    .news-list { display: flex; flex-direction: column; gap: 14px; }
     .news-item {
       background: var(--gray-bg); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 16px;
+      border-radius: var(--radius); padding: 18px;
     }
     .contact-panel {
       background: var(--gray-bg); border: 1px solid var(--border);
-      border-radius: var(--radius-lg); padding: 26px;
-      display: flex; flex-direction: column; gap: 14px;
+      border-radius: var(--radius-lg); padding: 30px;
+      display: flex; flex-direction: column; gap: 16px;
+      box-shadow: var(--shadow-sm);
     }
 
-    /* PIED DE PAGE COMPACT */
+    /* ================= 9. PIED DE PAGE COMPLET ================= */
     footer {
-      background: #0B192C; color: rgba(255, 255, 255, 0.72);
-      padding: 28px 0; font-size: 13px;
+      background: #0B192C; color: rgba(255, 255, 255, 0.78);
+      padding: 36px 0; font-size: 13.5px;
     }
     .footer-inner {
       display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 16px;
+      flex-wrap: wrap; gap: 20px;
     }
+    .footer-links {
+      display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
+    }
+    .footer-links a, .footer-links button {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 13px;
+      font-weight: 600;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover, .footer-links button:hover { color: var(--white); text-decoration: underline; }
 
     /* MODALES */
     .bc-modal-backdrop {
       display: none; position: fixed; inset: 0; z-index: 2000;
-      background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(3px);
+      background: rgba(15, 23, 42, 0.62); backdrop-filter: blur(4px);
       align-items: center; justify-content: center; padding: 16px;
     }
     .bc-modal-backdrop.open { display: flex; }
     .bc-modal-box {
       background: var(--white); border-radius: var(--radius-lg);
-      width: 100%; max-width: 460px; max-height: 90vh; overflow-y: auto;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25); border: 1px solid var(--border);
+      width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+      box-shadow: 0 24px 54px rgba(0, 0, 0, 0.28); border: 1px solid var(--border);
     }
     .bc-modal-box.wide { max-width: 900px; }
     .bc-modal-header {
-      padding: 15px 20px; border-bottom: 1px solid var(--border);
+      padding: 16px 22px; border-bottom: 1px solid var(--border);
       display: flex; justify-content: space-between; align-items: center;
       background: var(--gray-bg); position: sticky; top: 0; z-index: 5;
     }
@@ -333,15 +622,18 @@
     @media (max-width: 960px) {
       .nav-links { display: none; }
       .nav-burger { display: inline-flex; }
-      .hero-wrap, .partner-box, .news-contact-grid { grid-template-columns: 1fr; }
-      .products-grid, .services-grid, .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+      .hero-wrap, .jds-comm-card, .news-contact-grid, .ad-slide { grid-template-columns: 1fr; }
+      .ad-slide-media { min-height: 200px; max-height: 240px; }
+      .products-grid, .reviews-grid, .service-bullets { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 600px) {
-      section { padding: 48px 0; }
-      .nav-connect-btn { display: none; }
-      .products-grid, .services-grid, .reviews-grid { grid-template-columns: 1fr; }
+      section { padding: 52px 0; }
+      .products-grid, .reviews-grid, .service-bullets { grid-template-columns: 1fr; }
       .hero-actions .btn { width: 100%; }
-      .partner-box { padding: 26px 20px; }
+      .jds-comm-card { padding: 24px 20px; }
+      .partner-minimal-box { padding: 34px 20px; }
+      .ad-slide-content { padding: 22px 20px; }
+      .avis-top-row { align-items: flex-start; }
     }
   </style>
 </head>
@@ -357,16 +649,17 @@
 
       <nav class="nav-links" aria-label="Menu principal">
         <a href="#hero">Accueil</a>
-        <a href="#marche">Marché</a>
-        <a href="#services">Services</a>
-        <a href="#apropos">À propos</a>
+        <a href="#marche">Marché d'Aujourd'hui</a>
+        <a href="#services">Nos Services</a>
+        <a href="#jds-communication">JDS Communication</a>
+        <a href="#avis">Avis & Communauté</a>
         <a href="#contact">Contact</a>
       </nav>
 
       <div class="nav-right">
-        <button id="nav-auth-btn" class="nav-connect-btn" onclick="handleNavAuthClick()">
-          Connexion
-        </button>
+        <a href="https://marche.benin-connect.com" class="btn bc-btn-outline" style="padding:9px 16px; font-size:13px;" onclick="trackBcEvent('marche_open', 'nav_marche')">
+          🛒 Marché
+        </a>
         <button class="btn bc-btn-violet" style="padding:9px 16px; font-size:13px;" onclick="window.openJdsPartnerPortal()">
           🤝 Espace Partenaires
         </button>
@@ -375,63 +668,59 @@
     </div>
   </header>
 
-  <!-- Menu Mobile simple et sans doublon -->
+  <!-- Menu Mobile épuré -->
   <div id="mobile-menu">
     <a href="#hero" onclick="closeMobileMenu()">Accueil</a>
-    <a href="#marche" onclick="closeMobileMenu()">Marché</a>
-    <a href="#services" onclick="closeMobileMenu()">Services</a>
-    <a href="#apropos" onclick="closeMobileMenu()">À propos</a>
+    <a href="#marche" onclick="closeMobileMenu()">Marché d'Aujourd'hui</a>
+    <a href="#services" onclick="closeMobileMenu()">Nos Services</a>
+    <a href="#jds-communication" onclick="closeMobileMenu()">JDS Communication</a>
+    <a href="#avis" onclick="closeMobileMenu()">Avis & Communauté</a>
     <a href="#contact" onclick="closeMobileMenu()">Contact</a>
-    <button class="m-link" id="mobile-auth-btn" onclick="closeMobileMenu(); handleNavAuthClick();">Connexion</button>
-    <button class="btn bc-btn-violet" style="margin-top:10px; width:100%;" onclick="closeMobileMenu(); window.openJdsPartnerPortal();">
+    <a href="https://marche.benin-connect.com" class="btn bc-btn-blue" style="margin-top:10px; width:100%;" onclick="closeMobileMenu(); trackBcEvent('marche_open', 'mobile_nav_marche')">
+      🛒 Accéder à Marché d'Aujourd'hui
+    </a>
+    <button class="btn bc-btn-violet" style="margin-top:8px; width:100%;" onclick="closeMobileMenu(); window.openJdsPartnerPortal();">
       🤝 Espace Partenaires
     </button>
   </div>
 
-  <!-- ================= 2. BANNIÈRE D'ACCUEIL ================= -->
+  <!-- ================= 2. SECTION PRINCIPALE : HERO (SECTION 3 & 4) ================= -->
   <section id="hero">
     <div class="container">
       <div class="hero-wrap">
         <div>
-          <span class="eyebrow" style="background:rgba(255,255,255,0.12); color:#E0F2FE; border-color:rgba(255,255,255,0.2);">
-            🇧🇯 Écosystème Numérique du Bénin
+          <span class="eyebrow" style="background:rgba(255,255,255,0.12); color:#E0F2FE; border-color:rgba(255,255,255,0.22);">
+            🇧🇯 Écosystème Numérique au Bénin
           </span>
           <h1 class="hero-title">
             Le numérique au service du commerce et des opportunités au Bénin.
           </h1>
           <p class="hero-sub">
-            Découvrez une nouvelle manière d'acheter, de vendre, de développer votre activité et de créer des opportunités grâce au numérique.
+            Découvrez de nouvelles possibilités pour acheter, vendre, promouvoir vos activités et saisir des opportunités grâce à un écosystème numérique pensé pour le Bénin.
           </p>
 
           <div class="hero-actions">
-            <a href="https://marche.benin-connect.com" class="btn" style="background:white; color:var(--blue); padding:13px 24px;" onclick="trackBcEvent('marche_open', 'hero_marche')">
-              🛒 Découvrir le Marché
+            <a href="https://marche.benin-connect.com" class="btn hero-btn-primary" onclick="trackBcEvent('marche_open', 'hero_marche')">
+              🛒 Accéder à Marché d'Aujourd'hui
             </a>
-            <button class="btn bc-btn-violet" style="padding:13px 24px;" onclick="window.openJdsPartnerPortal()">
+            <button class="btn hero-btn-secondary" onclick="window.openJdsPartnerPortal()">
               🤝 Espace Partenaires
-            </button>
-            <button class="btn" style="background:transparent; color:white; border-color:rgba(255,255,255,0.35); padding:13px 20px;" onclick="openRegisterModal('vendeur')">
-              🏪 Créer un compte vendeur
             </button>
           </div>
 
-          <!-- Indicateurs réels issus de la base (sans section statistique redondante) -->
-          <div class="hero-metrics">
-            <div>
-              <div class="hero-metric-val" id="stat-products">—</div>
+          <!-- Section 4 : Uniquement Produits actifs, Vendeurs vérifiés, Villes couvertes (sans tirets ni compteurs à 0) -->
+          <div class="hero-metrics" id="hero-metrics-bar">
+            <div class="hero-metric-item" id="metric-box-products">
+              <div class="hero-metric-val" id="stat-products"></div>
               <div class="hero-metric-lbl">Produits actifs</div>
             </div>
-            <div>
-              <div class="hero-metric-val" id="stat-vendors">—</div>
+            <div class="hero-metric-item" id="metric-box-vendors">
+              <div class="hero-metric-val" id="stat-vendors"></div>
               <div class="hero-metric-lbl">Vendeurs vérifiés</div>
             </div>
-            <div>
-              <div class="hero-metric-val" id="stat-cities">—</div>
+            <div class="hero-metric-item" id="metric-box-cities">
+              <div class="hero-metric-val" id="stat-cities"></div>
               <div class="hero-metric-lbl">Villes couvertes</div>
-            </div>
-            <div>
-              <div class="hero-metric-val" id="stat-followers">—</div>
-              <div class="hero-metric-lbl">Abonnés Bénin Connect</div>
             </div>
           </div>
         </div>
@@ -439,7 +728,7 @@
         <div class="hero-card">
           <img
             src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=720&auto=format&fit=crop&q=75"
-            alt="Commerce local au Bénin avec Bénin Connect"
+            alt="Commerce et opportunités au Bénin avec Bénin Connect"
             fetchpriority="high"
           />
         </div>
@@ -447,12 +736,29 @@
     </div>
   </section>
 
-  <!-- ================= 3. SÉLECTION DE PRODUITS (4 À 6 PRODUITS RÉELS) ================= -->
+  <!-- ================= 3. ESPACE PUBLICITAIRE DE LA PAGE D'ACCUEIL (SECTION 5) ================= -->
+  <!-- Situé immédiatement sous la zone de statistiques et piloté exclusivement par le Super Admin -->
+  <div id="pub-banner-section" aria-label="Espace publicitaire officiel Bénin Connect">
+    <div class="container">
+      <div class="ad-carousel-shell" id="ad-carousel-shell">
+        <div id="ad-slide-viewport"></div>
+        <div class="ad-controls-bar" id="ad-controls-bar" style="display:none;">
+          <div class="ad-dots" id="ad-dots-container"></div>
+          <div class="ad-nav-btns">
+            <button type="button" class="ad-nav-btn" onclick="stepAdBanner(-1)" aria-label="Publicité précédente">◀</button>
+            <button type="button" class="ad-nav-btn" onclick="stepAdBanner(1)" aria-label="Publicité suivante">▶</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 4. SECTION MARCHÉ D'AUJOURD'HUI (SECTION 6) ================= -->
   <section id="marche">
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">🛒 Marché d'Aujourd'hui</span>
-        <h2 class="section-title">Achetez et vendez plus facilement partout au Bénin.</h2>
+        <h2 class="section-title">Marché d'Aujourd'hui, acheter et vendre plus facilement partout au Bénin.</h2>
         <p class="section-desc">
           Aperçu en direct des produits publiés par nos commerçants. Retrouvez la recherche avancée et tous les filtres sur Marché d'Aujourd'hui.
         </p>
@@ -460,155 +766,201 @@
 
       <div id="home-products-grid" class="products-grid">
         <div style="grid-column:1/-1; text-align:center; padding:32px; color:var(--text-muted);">
-          ⏳ Chargement de la sélection de produits...
+          ⏳ Chargement de la sélection de produits en direct...
         </div>
       </div>
 
-      <div style="text-align:center; margin-top:32px;">
-        <a href="https://marche.benin-connect.com" class="btn bc-btn-blue" style="padding:13px 28px; font-size:14.5px;" onclick="trackBcEvent('marche_open', 'voir_tout_le_catalogue')">
-          Voir tout le catalogue sur Marché d'Aujourd'hui →
+      <div style="text-align:center; margin-top:34px;">
+        <a href="https://marche.benin-connect.com" class="btn bc-btn-blue" style="padding:14px 30px; font-size:15px;" onclick="trackBcEvent('marche_open', 'voir_tout_le_catalogue')">
+          Accéder à Marché d'Aujourd'hui →
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ================= 4. PRÉSENTATION DES SERVICES & À PROPOS ================= -->
+  <!-- ================= 5. SECTION NOS SERVICES (SECTION 7) ================= -->
   <section id="services" class="section-alt">
     <div class="container">
       <div class="section-header">
         <span class="eyebrow">🧩 Nos Services</span>
-        <h2 class="section-title">Un écosystème simple et adapté au Bénin</h2>
+        <h2 class="section-title">Un écosystème simple et adapté au Bénin.</h2>
         <p class="section-desc">
-          Des outils numériques conçus pour fonctionner rapidement sur smartphone Android, même avec une connexion limitée.
+          Des outils numériques conçus pour fonctionner rapidement sur smartphone, même avec une connexion limitée.
         </p>
       </div>
 
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">🛒</div>
-          <h3 style="font-size:17px; font-weight:800;">Marché d'Aujourd'hui</h3>
-          <p style="font-size:14px; color:var(--text-sub); flex:1;">
-            Publiez vos articles en 2 minutes, discutez en direct avec vos clients via la messagerie intégrée ou WhatsApp et développez vos ventes locales.
-          </p>
-          <a href="https://marche.benin-connect.com" style="font-size:13.5px; font-weight:800; color:var(--blue);">Accéder à la marketplace →</a>
-        </div>
+      <!-- Carte unique : Marché d'Aujourd'hui (la carte Visibilité et solutions pro est supprimée conformément à la Section 7) -->
+      <div class="services-single-wrap">
+        <div class="service-featured-card">
+          <div class="service-head">
+            <div class="service-icon">🛒</div>
+            <div>
+              <h3 style="font-size:20px; font-weight:900; color:var(--text);">Marché d'Aujourd'hui</h3>
+              <p style="font-size:14px; color:var(--text-sub);">La marketplace locale pensée pour les commerçants et les acheteurs au Bénin.</p>
+            </div>
+          </div>
 
-        <div class="service-card">
-          <div class="service-icon" style="background:var(--violet-soft); color:var(--violet);">📍</div>
-          <h3 style="font-size:17px; font-weight:800;">Visibilité & Solutions Pro</h3>
-          <p style="font-size:14px; color:var(--text-sub); flex:1;">
-            Boutiques dédiées, mise en avant des produits sponsorisés et accompagnement commercial de proximité dans les villes du Bénin.
-          </p>
-          <button onclick="openRegisterModal('vendeur')" style="background:none; border:none; text-align:left; font-size:13.5px; font-weight:800; color:var(--violet); cursor:pointer;">
-            Ouvrir un compte professionnel →
-          </button>
-        </div>
+          <ul class="service-bullets">
+            <li>
+              <span style="color:var(--blue); font-weight:900;">✓</span>
+              <span>Publier vos articles en 2 minutes</span>
+            </li>
+            <li>
+              <span style="color:var(--blue); font-weight:900;">✓</span>
+              <span>Discuter en direct avec les vendeurs via la messagerie intégrée ou WhatsApp</span>
+            </li>
+            <li>
+              <span style="color:var(--blue); font-weight:900;">✓</span>
+              <span>Développer vos ventes locales</span>
+            </li>
+          </ul>
 
-        <div class="service-card" id="apropos">
-          <div class="service-icon">🏢</div>
-          <h3 style="font-size:17px; font-weight:800;">À propos — JDS Communication</h3>
-          <p style="font-size:14px; color:var(--text-sub); flex:1;">
-            Bénin Connect est développé et porté par <strong>JDS Communication</strong> (Parakou, Bénin), agence spécialisée en solutions digitales et communication.
-          </p>
-          <a href="#contact" style="font-size:13.5px; font-weight:800; color:var(--blue);">Contacter JDS Communication →</a>
+          <div style="display:flex; justify-content:flex-start; pt:4px;">
+            <a href="https://marche.benin-connect.com" class="btn bc-btn-blue" onclick="trackBcEvent('marche_open', 'services_card')">
+              Accéder à la marketplace →
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 5. ESPACE PARTENAIRES (JDS PARTENAIRES) ================= -->
-  <section id="partenaires">
+  <!-- ================= 6. SECTION JDS COMMUNICATION (SECTION 8) ================= -->
+  <section id="jds-communication">
     <div class="container">
-      <div class="partner-box">
+      <div class="jds-comm-card">
         <div>
-          <span class="eyebrow" style="background:rgba(255,255,255,0.15); color:white; border-color:rgba(255,255,255,0.25);">
-            🤝 JDS PARTENAIRES
-          </span>
-          <h2 style="font-size:clamp(22px, 3vw, 32px); font-weight:900; margin-bottom:10px;">
-            Devenez Partenaire de Bénin Connect
+          <span class="eyebrow">🏢 JDS Communication & JDS Digital</span>
+          <h2 class="section-title" style="margin-bottom:16px;">
+            JDS Communication, au service de vos projets et de vos ambitions.
           </h2>
-          <p style="font-size:15px; color:rgba(255,255,255,0.86); margin-bottom:22px; max-width:500px;">
-            Participez au développement du commerce numérique au Bénin et développez votre réseau. Chaque partenaire accède directement à son tableau de bord selon son rôle.
-          </p>
-          <button class="btn" style="background:white; color:var(--violet); font-weight:900; padding:13px 26px;" onclick="window.openJdsPartnerPortal()">
-            🚀 Accéder à l'Espace Partenaires
-          </button>
+          <div class="jds-comm-quote">
+            <p>
+              <strong>JDS Communication, au service de vos projets et de vos ambitions.</strong>
+            </p>
+            <p>
+              Nous intervenons dans la communication, la publicité, le marketing, l’événementiel et les solutions numériques.
+            </p>
+            <p>
+              À travers <strong>JDS Digital</strong>, nous développons des plateformes innovantes, dont <strong>Bénin Connect</strong>.
+            </p>
+          </div>
+          <a href="#contact" class="btn bc-btn-blue">
+            ✉️ Contacter JDS Communication
+          </a>
         </div>
 
-        <div class="partner-roles">
-          <div class="partner-role-item">
-            <strong>🎖️ Brand Ambassadors (BA)</strong> — Code personnel unique, suivi des inscriptions, objectifs et commissions.
+        <div class="jds-pillars">
+          <div class="jds-pillar-item">
+            <div class="jds-pillar-title">📢 JDS Communication — Structure principale</div>
+            <div class="jds-pillar-desc">
+              Communication institutionnelle et commerciale, publicité, marketing, production audiovisuelle, événementiel, activités terrain, animations commerciales et campagnes de sensibilisation.
+            </div>
           </div>
-          <div class="partner-role-item">
-            <strong>👔 Superviseurs BA</strong> — Recrutement d'équipe, suivi des performances individuelles et classement.
+          <div class="jds-pillar-item violet">
+            <div class="jds-pillar-title">💻 JDS Digital — Branche numérique</div>
+            <div class="jds-pillar-desc">
+              Pôle technologique de JDS Communication dédié à la conception de solutions numériques modernes et d'outils digitaux adaptés aux réalités locales.
+            </div>
           </div>
-          <div class="partner-role-item">
-            <strong>🌟 Influenceurs Partenaires</strong> — Code promo, lien de parrainage et statistiques de campagnes en temps réel.
+          <div class="jds-pillar-item">
+            <div class="jds-pillar-title">🇧🇯 Bénin Connect — Développé par JDS Digital</div>
+            <div class="jds-pillar-desc">
+              Plateforme numérique propulsée par JDS Digital réunissant la marketplace Marché d'Aujourd'hui et les services de mise en relation au Bénin.
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ================= 6. AVIS, CONFIANCE & ABONNÉS ================= -->
-  <section id="avis" class="section-alt">
+  <!-- ================= 7. SECTION JDS PARTENAIRES (SECTION 9 — SIMPLIFIÉE) ================= -->
+  <section id="partenaires" class="section-alt">
     <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">⭐ Avis & Communauté</span>
-        <h2 class="section-title">Ils font confiance à Bénin Connect</h2>
-        <p class="section-desc">
-          Suivez la plateforme et consultez les évaluations vérifiées. Les avis de Bénin Connect et de Marché d'Aujourd'hui restent strictement distincts.
+      <div class="partner-minimal-box">
+        <span class="eyebrow" style="background:rgba(255,255,255,0.16); color:var(--white); border-color:rgba(255,255,255,0.28); margin-bottom:2px;">
+          🤝 Espace Partenaire Officiel
+        </span>
+        <h2 style="font-size:clamp(24px, 3.2vw, 34px); font-weight:900; letter-spacing:0.4px;">
+          JDS PARTENAIRES
+        </h2>
+        <p style="font-size:16px; color:rgba(255,255,255,0.92); max-width:520px; margin-bottom:10px;">
+          Espace réservé aux partenaires de JDS Communication.
         </p>
+        <button class="btn" style="background:var(--white); color:var(--violet); font-weight:900; padding:14px 30px; font-size:14.5px; box-shadow:0 10px 25px rgba(0,0,0,0.2);" onclick="window.openJdsPartnerPortal()">
+          ACCÉDER À L'ESPACE PARTENAIRE
+        </button>
       </div>
+    </div>
+  </section>
 
-      <!-- Barre unifiée : Suivre Bénin Connect -->
-      <div class="community-bar">
+  <!-- ================= 8. SECTION AVIS ET COMMUNAUTÉ (SECTION 10) ================= -->
+  <section id="avis">
+    <div class="container">
+      <!-- Alignement harmonieux du titre et des éléments de présentation sur la même ligne -->
+      <div class="avis-top-row">
         <div>
-          <strong style="font-size:15px; color:var(--text);">🔔 Suivre Bénin Connect</strong>
-          <div id="follow-status-label" style="font-size:13px; color:var(--text-sub); margin-top:2px;">
-            Rejoignez les abonnés pour recevoir les actualités de la plateforme.
-          </div>
+          <span class="eyebrow">⭐ Avis & Communauté</span>
+          <h2 class="section-title" style="margin-bottom:4px;">Ils utilisent Bénin Connect et Marché d'Aujourd'hui</h2>
+          <p class="section-desc">
+            Découvrez les témoignages de nos utilisateurs et rejoignez la communauté Bénin Connect.
+          </p>
         </div>
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-          <label style="font-size:12.5px; color:var(--text-sub); display:inline-flex; align-items:center; gap:6px; cursor:pointer;">
-            <input type="checkbox" id="follow-consent" checked style="accent-color:var(--blue);" />
-            Recevoir les notifications
-          </label>
-          <button id="follow-btn" class="btn bc-btn-blue" onclick="toggleFollowPlatform()">
-            🔔 Suivre Bénin Connect
+          <div style="display:flex; align-items:center; gap:8px; background:var(--gray-bg); padding:8px 14px; border-radius:999px; border:1px solid var(--border);">
+            <strong id="rev-avg-score" style="font-size:18px; font-weight:900; color:var(--blue);">4.9 / 5</strong>
+            <span id="rev-avg-stars" style="color:var(--gold); font-size:15px;">★★★★★</span>
+            <span id="rev-total-count" style="font-size:12px; color:var(--text-sub);"></span>
+          </div>
+          <button class="btn bc-btn-violet" onclick="openGiveReviewModal()">
+            ✍️ Donner votre avis
           </button>
         </div>
       </div>
 
-      <!-- Sélecteur de catégorie d'avis (A vs B jamais mélangés) + Résumé + Bouton Donner mon avis -->
+      <!-- Barre Abonnés Bénin Connect moderne (Compteur réel + Objectif : 500 abonnés + bouton S'ABONNER sans création de compte) -->
+      <div class="subscriber-strip">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:4px;">
+            <strong style="font-size:15.5px; color:var(--text);">🔔 Abonnés Bénin Connect</strong>
+            <div class="subscriber-badges">
+              <span class="sub-count-pill" id="public-followers-badge">0 abonné inscrit</span>
+              <span class="sub-goal-pill">🎯 Objectif : 500 abonnés</span>
+            </div>
+          </div>
+          <p style="font-size:13px; color:var(--text-sub);">
+            Recevez les nouveautés, opportunités et annonces importantes de Bénin Connect sans créer de compte.
+          </p>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+          <button class="btn bc-btn-blue" style="padding:10px 22px; font-size:13.5px;" onclick="openSubscribeModal()">
+            🔔 S'ABONNER
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtres de consultation des avis (Bénin Connect & Marché d'Aujourd'hui) -->
       <div class="reviews-header-bar">
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
-          <button id="tab-rev-bc" class="btn bc-btn-blue" onclick="switchReviewCategory('benin_connect')">
-            🏛️ Avis Bénin Connect
+          <button id="tab-rev-all" class="btn bc-btn-blue" style="padding:9px 18px; font-size:13px;" onclick="switchReviewCategory('all')">
+            ✨ Tous les avis
           </button>
-          <button id="tab-rev-marche" class="btn bc-btn-outline" onclick="switchReviewCategory('marche_aujourdhui')">
-            🛒 Avis Marché d'Aujourd'hui
+          <button id="tab-rev-bc" class="btn bc-btn-outline" style="padding:9px 18px; font-size:13px;" onclick="switchReviewCategory('benin_connect')">
+            🏛️ Bénin Connect
           </button>
-        </div>
-
-        <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
-          <div style="display:flex; align-items:center; gap:8px;">
-            <strong id="rev-avg-score" style="font-size:22px; font-weight:900; color:var(--blue);">— / 5</strong>
-            <span id="rev-avg-stars" style="color:var(--gold); font-size:17px;">★★★★★</span>
-            <span id="rev-total-count" style="font-size:12.5px; color:var(--text-sub);">(0 avis)</span>
-          </div>
-          <button class="btn bc-btn-violet" onclick="openGiveReviewModal()">
-            ✍️ Donner mon avis
+          <button id="tab-rev-marche" class="btn bc-btn-outline" style="padding:9px 18px; font-size:13px;" onclick="switchReviewCategory('marche_aujourdhui')">
+            🛒 Marché d'Aujourd'hui
           </button>
         </div>
+        <div id="demo-reviews-notice" style="font-size:12px; color:var(--text-muted); font-weight:600;"></div>
       </div>
 
       <div id="reviews-grid" class="reviews-grid"></div>
     </div>
   </section>
 
-  <!-- ================= 7. ACTUALITÉS ET CONTACT ================= -->
-  <section id="contact">
+  <!-- ================= 9. SECTION ACTUALITÉS ET CONTACT (SECTION 12) ================= -->
+  <section id="contact" class="section-alt">
     <div class="container">
       <div class="news-contact-grid">
         <!-- Colonne Gauche : Actualités Bénin Connect -->
@@ -616,7 +968,7 @@
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:8px;">
             <div>
               <span class="eyebrow">📰 Actualités</span>
-              <h2 style="font-size:22px; font-weight:900;">Actualités Bénin Connect</h2>
+              <h2 style="font-size:23px; font-weight:900;">Actualités de l'écosystème</h2>
             </div>
             <button id="admin-news-btn" class="btn bc-btn-violet" style="display:none; padding:8px 14px; font-size:12px;" onclick="document.getElementById('admin-news-modal').classList.add('open')">
               ➕ Publier (Admin)
@@ -625,174 +977,183 @@
           <div id="news-list" class="news-list"></div>
         </div>
 
-        <!-- Colonne Droite : Contact direct -->
-        <div class="contact-panel">
+        <!-- Colonne Droite : Section Contact officielle (Section 12) -->
+        <div class="contact-panel" style="background:var(--white);">
           <div>
-            <span class="eyebrow violet">📞 Contact</span>
-            <h2 style="font-size:22px; font-weight:900; margin-bottom:6px;">Parlons de votre activité</h2>
+            <span class="eyebrow violet">✉️ Contact</span>
+            <h2 style="font-size:23px; font-weight:900; margin-bottom:8px;">Contacter Bénin Connect</h2>
+            <p style="font-size:14.5px; color:var(--text); font-weight:600; margin-bottom:6px;">
+              Notre équipe basée à Parakou vous répond rapidement.
+            </p>
             <p style="font-size:14px; color:var(--text-sub);">
-              Notre équipe basée à Parakou vous répond rapidement sur WhatsApp ou par téléphone.
+              Écrivez-nous par e-mail pour toute question ou demande d'information concernant Bénin Connect.
             </p>
           </div>
 
-          <div style="font-size:13.5px; display:flex; flex-direction:column; gap:8px; color:var(--text-sub);">
-            <div>📍 <strong>Siège :</strong> Parakou, République du Bénin</div>
-            <div>📞 <strong>Téléphone / WhatsApp :</strong> <a href="https://wa.me/22965825016" style="color:var(--blue); font-weight:700;">+229 65 82 50 16</a></div>
-            <div>📧 <strong>Email :</strong> <a href="mailto:joinotamegnon@gmail.com" style="color:var(--blue); font-weight:700;">joinotamegnon@gmail.com</a></div>
+          <div style="font-size:14px; display:flex; flex-direction:column; gap:10px; color:var(--text-sub); background:var(--gray-bg); padding:16px; border-radius:12px; border:1px solid var(--border);">
+            <div>🏛️ <strong>Nom public :</strong> Bénin Connect</div>
+            <div>📍 <strong>Siège :</strong> Parakou, République du Bénin.</div>
+            <div>📧 <strong>E-mail :</strong> <a href="mailto:digitaljds34@gmail.com" style="color:var(--blue); font-weight:800;">digitaljds34@gmail.com</a></div>
           </div>
 
-          <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
-            <a href="https://wa.me/22965825016?text=Bonjour%20B%C3%A9nin%20Connect%2C%20je%20souhaite%20avoir%20des%20informations." target="_blank" rel="noopener" class="btn bc-btn-blue" style="width:100%;">
-              💬 Écrire sur WhatsApp
+          <div style="margin-top:4px;">
+            <a href="mailto:digitaljds34@gmail.com?subject=Demande%20d'information%20%E2%80%94%20B%C3%A9nin%20Connect" class="btn bc-btn-blue" style="width:100%; padding:14px 24px; font-size:14.5px;">
+              ✉️ NOUS ÉCRIRE PAR E-MAIL
             </a>
-            <button class="btn bc-btn-outline" style="width:100%;" onclick="openRegisterModal('client')">
-              🚀 Créer un compte sur Bénin Connect
-            </button>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PIED DE PAGE COMPACT -->
+  <!-- ================= 10. PIED DE PAGE / FOOTER (SECTION 14) ================= -->
   <footer>
     <div class="container footer-inner">
       <div>
-        <strong style="color:white;">BÉNIN CONNECT</strong> — Propulsé par JDS Communication · Parakou, Bénin 🇧🇯
+        <strong style="color:var(--white);">Bénin Connect</strong> – Propulsé par JDS Communication, Parakou, Bénin.
       </div>
-      <div style="display:flex; gap:18px; flex-wrap:wrap;">
+      <div class="footer-links">
         <a href="https://marche.benin-connect.com">Marché d'Aujourd'hui</a>
-        <a href="#" onclick="event.preventDefault(); window.openJdsPartnerPortal();">Espace Partenaires</a>
+        <button type="button" onclick="window.openJdsPartnerPortal()">Espace Partenaires</button>
+        <button type="button" onclick="openLegalModal('mentions')">Mentions légales</button>
+        <button type="button" onclick="openLegalModal('confidentialite')">Politique de confidentialité</button>
+        <button type="button" onclick="openLegalModal('conditions')">Conditions d'utilisation</button>
         <a href="sitemap.xml">Sitemap</a>
       </div>
     </div>
   </footer>
 
-  <!-- ================= MODALE 1A : CONNEXION SÉPARÉE (SECTION 5) ================= -->
-  <div id="login-modal" class="bc-modal-backdrop">
+  <!-- ================= MODALE 1 : S'ABONNER À BÉNIN CONNECT (SANS CRÉATION DE COMPTE - SECTION 10) ================= -->
+  <div id="subscribe-modal" class="bc-modal-backdrop">
     <div class="bc-modal-box">
       <div class="bc-modal-header">
-        <strong style="font-size:15.5px; color:var(--blue);">🔐 Connexion à Bénin Connect</strong>
-        <button class="bc-modal-close" onclick="closeBcModal('login-modal')">✕</button>
+        <strong style="font-size:15.5px; color:var(--blue);">🔔 S'abonner à Bénin Connect</strong>
+        <button class="bc-modal-close" onclick="closeBcModal('subscribe-modal')">✕</button>
       </div>
-      <div style="padding:20px;">
-        <div id="login-error-box" style="display:none; background:#fef2f2; color:#dc2626; padding:10px 12px; border-radius:10px; font-size:13px; font-weight:600; margin-bottom:12px;"></div>
-        <form onsubmit="event.preventDefault(); submitLogin();" style="display:flex; flex-direction:column; gap:12px;">
+      <div style="padding:22px;">
+        <p style="font-size:13.5px; color:var(--text-sub); margin-bottom:14px;">
+          Rejoignez les abonnés de Bénin Connect (<strong>Objectif : 500 abonnés</strong>). Aucune création de compte n'est demandée.
+        </p>
+        <div id="subscribe-feedback" style="display:none; padding:10px 12px; border-radius:10px; font-size:13px; font-weight:600; margin-bottom:12px;"></div>
+
+        <form id="subscribe-form" onsubmit="event.preventDefault(); submitPublicSubscription();" style="display:flex; flex-direction:column; gap:12px;">
           <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Adresse Email *</label>
-            <input id="login-email" type="email" required class="bc-input" placeholder="votre@email.com" />
+            <label style="font-size:12.5px; font-weight:700; display:block; margin-bottom:4px;">Nom *</label>
+            <input id="sub-full-name" type="text" required class="bc-input" placeholder="Ex: Koffi Mensah" />
           </div>
           <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Mot de passe *</label>
-            <input id="login-password" type="password" required class="bc-input" placeholder="Votre mot de passe" />
+            <label style="font-size:12.5px; font-weight:700; display:block; margin-bottom:4px;">Numéro de téléphone *</label>
+            <input id="sub-phone" type="tel" required class="bc-input" placeholder="Ex: +229 01 97 00 00 00" />
           </div>
-          <button id="login-submit-btn" type="submit" class="btn bc-btn-blue" style="width:100%; margin-top:4px;">
-            ✅ Se connecter
+          <div>
+            <label style="font-size:12.5px; font-weight:700; display:block; margin-bottom:4px;">Adresse e-mail (facultative)</label>
+            <input id="sub-email" type="email" class="bc-input" placeholder="votre@email.com (facultatif)" />
+          </div>
+          <label style="display:flex; align-items:flex-start; gap:8px; font-size:12.5px; color:var(--text-sub); cursor:pointer; background:var(--gray-bg); padding:10px 12px; border-radius:10px; border:1px solid var(--border);">
+            <input id="sub-consent" type="checkbox" required checked style="margin-top:3px; accent-color:var(--blue);" />
+            <span>J'accepte de recevoir les communications, actualités et opportunités de Bénin Connect. *</span>
+          </label>
+          <button id="sub-submit-btn" type="submit" class="btn bc-btn-blue" style="width:100%; margin-top:4px;">
+            ✅ Valider mon abonnement
           </button>
         </form>
-        <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border); text-align:center; font-size:13px; color:var(--text-sub);">
-          Vous n'avez pas encore de compte ?
-          <button onclick="closeBcModal('login-modal'); openRegisterModal('client');" style="background:none; border:none; color:var(--blue); font-weight:800; cursor:pointer; margin-left:4px;">
-            Créer un compte →
+
+        <!-- Option simple de désabonnement -->
+        <div style="margin-top:16px; padding-top:12px; border-top:1px solid var(--border); text-align:center;">
+          <button type="button" onclick="toggleUnsubscribeBox()" style="background:none; border:none; font-size:12px; color:var(--text-muted); cursor:pointer; text-decoration:underline;">
+            Vous souhaitez vous désabonner ? Cliquez ici
           </button>
+          <div id="unsubscribe-box" style="display:none; margin-top:10px; text-align:left;">
+            <div style="display:flex; gap:8px;">
+              <input id="unsub-contact" type="text" class="bc-input" placeholder="Votre téléphone ou e-mail" style="padding:8px 12px; font-size:13px;" />
+              <button type="button" class="btn bc-btn-outline" style="padding:8px 14px; font-size:12.5px;" onclick="submitPublicUnsubscribe()">
+                Désabonner
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ================= MODALE 1B : INSCRIPTION SÉPARÉE (SECTION 5) ================= -->
-  <div id="register-modal" class="bc-modal-backdrop">
-    <div class="bc-modal-box">
-      <div class="bc-modal-header">
-        <strong style="font-size:15.5px; color:var(--blue);">🚀 Créer un compte Bénin Connect</strong>
-        <button class="bc-modal-close" onclick="closeBcModal('register-modal')">✕</button>
-      </div>
-      <div style="padding:20px;">
-        <div id="register-error-box" style="display:none; background:#fef2f2; color:#dc2626; padding:10px 12px; border-radius:10px; font-size:13px; font-weight:600; margin-bottom:12px;"></div>
-        <form onsubmit="event.preventDefault(); submitRegister();" style="display:flex; flex-direction:column; gap:11px;">
-          <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Nom et prénom *</label>
-            <input id="reg-name" type="text" required class="bc-input" placeholder="Ex: Joie Tamegnon" />
-          </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-            <div>
-              <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Téléphone *</label>
-              <input id="reg-phone" type="tel" required class="bc-input" placeholder="+229 01..." />
-            </div>
-            <div>
-              <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Ville *</label>
-              <input id="reg-city" type="text" required class="bc-input" value="Parakou" />
-            </div>
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Type de compte</label>
-            <select id="reg-role" class="bc-input">
-              <option value="client">🛒 Acheteur / Membre</option>
-              <option value="vendeur">🏪 Vendeur (Marché d'Aujourd'hui)</option>
-              <option value="prestataire">🛠️ Prestataire de services</option>
-            </select>
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Adresse Email *</label>
-            <input id="reg-email" type="email" required class="bc-input" placeholder="votre@email.com" />
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:4px;">Mot de passe *</label>
-            <input id="reg-password" type="password" required class="bc-input" placeholder="Minimum 6 caractères" />
-          </div>
-          <div>
-            <label style="font-size:12px; font-weight:700; color:var(--violet); display:block; margin-bottom:4px;">
-              🎁 Code partenaire / Code promo (Facultatif)
-            </label>
-            <input id="reg-partner-code" type="text" class="bc-input" style="border-color:var(--violet-border); background:var(--violet-soft);" placeholder="Ex: JOIE-JDSBA01" />
-          </div>
-          <button id="reg-submit-btn" type="submit" class="btn bc-btn-blue" style="width:100%; margin-top:4px;">
-            🚀 Créer mon compte
-          </button>
-        </form>
-        <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border); text-align:center; font-size:13px; color:var(--text-sub);">
-          Déjà inscrit ?
-          <button onclick="closeBcModal('register-modal'); openLoginModal();" style="background:none; border:none; color:var(--blue); font-weight:800; cursor:pointer; margin-left:4px;">
-            Se connecter →
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ================= MODALE 2 : DONNER MON AVIS (SECTION 6) ================= -->
+  <!-- ================= MODALE 2 : DONNER VOTRE AVIS (AVEC GOOGLE AUTH / PROFIL EXISTANT - SECTION 10) ================= -->
   <div id="review-modal" class="bc-modal-backdrop">
     <div class="bc-modal-box">
       <div class="bc-modal-header">
-        <strong style="font-size:15.5px; color:var(--blue);">⭐ Donner mon avis</strong>
+        <strong style="font-size:15.5px; color:var(--blue);">⭐ Donner votre avis</strong>
         <button class="bc-modal-close" onclick="closeBcModal('review-modal')">✕</button>
       </div>
-      <div style="padding:20px;">
-        <form onsubmit="event.preventDefault(); submitPlatformReview();" style="display:flex; flex-direction:column; gap:14px;">
-          <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:5px;">Catégorie à évaluer *</label>
-            <select id="modal-review-target" class="bc-input">
-              <option value="benin_connect">🏛️ Bénin Connect (Plateforme)</option>
-              <option value="marche_aujourdhui">🛒 Marché d'Aujourd'hui (Marketplace)</option>
-              <option value="mobile_app">📱 Application mobile Marché d'Aujourd'hui</option>
-            </select>
+      <div style="padding:22px;">
+        <!-- Étape 1 : Si le visiteur n'est pas encore authentifié -->
+        <div id="review-auth-step" style="display:none; flex-direction:column; gap:14px;">
+          <p style="font-size:13.5px; color:var(--text-sub); line-height:1.55;">
+            Pour garantir l'authenticité des témoignages sans créer de nouveau compte, connectez-vous rapidement avec votre compte <strong>Google</strong> ou votre compte <strong>Marché d'Aujourd'hui</strong> existant.
+          </p>
+          <button type="button" class="btn bc-btn-blue" style="width:100%; justify-content:center; padding:13px;" onclick="loginWithGoogleForReview()">
+            🌐 Continuer avec Google
+          </button>
+
+          <div style="display:flex; align-items:center; gap:10px; color:var(--text-muted); font-size:12px; margin:2px 0;">
+            <span style="flex:1; height:1px; background:var(--border);"></span>
+            <span>ou avec votre session Marché d'Aujourd'hui</span>
+            <span style="flex:1; height:1px; background:var(--border);"></span>
           </div>
-          <div style="text-align:center; background:var(--gray-bg); padding:12px; border-radius:10px; border:1px solid var(--border);">
-            <div class="star-picker" id="modal-review-stars">
-              <span onclick="setModalReviewRating(1)">★</span>
-              <span onclick="setModalReviewRating(2)">★</span>
-              <span onclick="setModalReviewRating(3)">★</span>
-              <span onclick="setModalReviewRating(4)">★</span>
-              <span onclick="setModalReviewRating(5)">★</span>
+
+          <div id="review-login-error" style="display:none; background:#FEF2F2; color:#DC2626; padding:9px 12px; border-radius:10px; font-size:12.5px; font-weight:600;"></div>
+          <form onsubmit="event.preventDefault(); submitExistingAccountLoginForReview();" style="display:flex; flex-direction:column; gap:10px;">
+            <input id="rev-login-email" type="email" required class="bc-input" placeholder="E-mail de votre compte existant" />
+            <input id="rev-login-password" type="password" required class="bc-input" placeholder="Mot de passe" />
+            <button id="rev-login-btn" type="submit" class="btn bc-btn-outline" style="width:100%;">
+              🔐 Se connecter et donner mon avis
+            </button>
+          </form>
+        </div>
+
+        <!-- Étape 2 : Visiteur authentifié (profil récupéré automatiquement) -->
+        <div id="review-form-step" style="display:none;">
+          <div id="review-user-banner" style="display:flex; align-items:center; justify-content:space-between; gap:10px; background:var(--blue-soft); border:1px solid var(--blue-border); padding:10px 14px; border-radius:12px; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="review-avatar" id="rev-modal-avatar" style="width:36px; height:36px; font-size:13px;">U</div>
+              <div>
+                <div style="font-size:13px; font-weight:800; color:var(--blue);" id="rev-modal-username">Utilisateur connecté</div>
+                <div style="font-size:11px; color:var(--text-sub);">Profil vérifié automatiquement</div>
+              </div>
             </div>
-            <div id="modal-review-rating-text" style="font-size:12px; font-weight:700; color:var(--blue); margin-top:4px;">5 / 5 étoiles</div>
+            <button type="button" onclick="logoutBcUser()" style="background:none; border:none; font-size:11.5px; color:var(--text-muted); cursor:pointer; text-decoration:underline;">
+              Changer
+            </button>
           </div>
-          <div>
-            <label style="font-size:12px; font-weight:700; display:block; margin-bottom:5px;">Votre commentaire *</label>
-            <textarea id="modal-review-comment" rows="3" required class="bc-input" placeholder="Partagez votre expérience..."></textarea>
-          </div>
-          <button type="submit" class="btn bc-btn-blue" style="width:100%;">✅ Envoyer mon avis</button>
-        </form>
+
+          <form onsubmit="event.preventDefault(); submitPlatformReview();" style="display:flex; flex-direction:column; gap:14px;">
+            <div>
+              <label style="font-size:12.5px; font-weight:700; display:block; margin-bottom:5px;">Plateforme concernée *</label>
+              <select id="modal-review-target" class="bc-input">
+                <option value="benin_connect">🏛️ Bénin Connect</option>
+                <option value="marche_aujourdhui">🛒 Marché d'Aujourd'hui</option>
+              </select>
+            </div>
+            <div style="text-align:center; background:var(--gray-bg); padding:12px; border-radius:12px; border:1px solid var(--border);">
+              <div class="star-picker" id="modal-review-stars">
+                <span onclick="setModalReviewRating(1)">★</span>
+                <span onclick="setModalReviewRating(2)">★</span>
+                <span onclick="setModalReviewRating(3)">★</span>
+                <span onclick="setModalReviewRating(4)">★</span>
+                <span onclick="setModalReviewRating(5)">★</span>
+              </div>
+              <div id="modal-review-rating-text" style="font-size:12px; font-weight:700; color:var(--blue); margin-top:4px;">5 / 5 étoiles</div>
+            </div>
+            <div>
+              <label style="font-size:12.5px; font-weight:700; display:block; margin-bottom:5px;">Votre témoignage *</label>
+              <textarea id="modal-review-comment" rows="3" required class="bc-input" placeholder="Partagez votre expérience avec Bénin Connect ou Marché d'Aujourd'hui..."></textarea>
+            </div>
+            <div style="font-size:11.5px; color:var(--text-muted);">
+              ℹ️ Votre avis sera transmis au Super Admin pour validation avant son affichage public.
+            </div>
+            <button id="rev-submit-btn" type="submit" class="btn bc-btn-blue" style="width:100%;">
+              ✅ Envoyer mon avis pour validation
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -831,23 +1192,73 @@
     </div>
   </div>
 
+  <!-- ================= MODALE 5 : INFORMATIONS LÉGALES (MENTIONS, CONFIDENTIALITÉ, CONDITIONS - SECTION 14) ================= -->
+  <div id="legal-modal" class="bc-modal-backdrop">
+    <div class="bc-modal-box" style="max-width:640px;">
+      <div class="bc-modal-header">
+        <strong id="legal-modal-title" style="font-size:15.5px; color:var(--blue);">Mentions légales</strong>
+        <button class="bc-modal-close" onclick="closeBcModal('legal-modal')">✕</button>
+      </div>
+      <div id="legal-modal-body" style="padding:22px; font-size:13.5px; color:var(--text-sub); line-height:1.65; display:flex; flex-direction:column; gap:12px;"></div>
+    </div>
+  </div>
+
   <!-- ================= SCRIPTS OPTIMISÉS & CONNEXION SUPABASE ================= -->
   <script>
     const SUPABASE_URL = 'https://ftgdgigvxjekpevujbdi.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_IA8Uc-RxIMLzhXPPDqg80g_0gHsp8jk';
     window.BC_SUPABASE_KEY = SUPABASE_ANON_KEY;
 
+    const BANNER_PREFIX = '__BANNER__:';
     const SYS_FOLLOW_PREFIX = '__BC_FOLLOW__:';
     const SYS_REVIEW_PREFIX = '__BC_REVIEW__:';
     const SYS_NEWS_PREFIX = '__BC_NEWS__:';
 
+    // Avis de démonstration clairement identifiés (affichés uniquement en l'absence d'avis réels validés)
+    const DEMO_REVIEWS = [
+      {
+        id: 'demo_1',
+        is_demo: true,
+        author_name: 'Koffi Mensah',
+        author_city: 'Parakou',
+        target_type: 'marche_aujourdhui',
+        rating: 5,
+        comment: 'La publication d’articles sur Marché d’Aujourd’hui est rapide sur smartphone et les clients me contactent directement.',
+        created_at: '2026-03-15T10:00:00Z'
+      },
+      {
+        id: 'demo_2',
+        is_demo: true,
+        author_name: 'Aïcha Sanni',
+        author_city: 'Cotonou',
+        target_type: 'benin_connect',
+        rating: 5,
+        comment: 'Une plateforme claire et bien pensée qui facilite la visibilité des commerçants et des initiatives locales au Bénin.',
+        created_at: '2026-03-18T14:30:00Z'
+      },
+      {
+        id: 'demo_3',
+        is_demo: true,
+        author_name: 'Marcel Adéoti',
+        author_city: 'Parakou',
+        target_type: 'marche_aujourdhui',
+        rating: 5,
+        comment: 'J’ai trouvé facilement des fournisseurs vérifiés dans ma ville grâce aux filtres de Marché d’Aujourd’hui.',
+        created_at: '2026-03-20T09:15:00Z'
+      }
+    ];
+
     window.currentUser = null;
     window.currentProfile = null;
-    let isFollowingPlatform = false;
     let followersCount = 0;
-    let currentReviewCategory = 'benin_connect';
+    let currentReviewCategory = 'all';
     let platformReviewsList = [];
     let modalReviewRating = 5;
+
+    // État du carrousel publicitaire Super Admin
+    let activeAdBanners = [];
+    let currentAdIndex = 0;
+    let adRotationTimer = null;
 
     function escHtml(str) {
       return String(str || '')
@@ -897,7 +1308,6 @@
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
-      // Initialisation du client Supabase dès que le script defer est prêt
       if (window.supabase) {
         window.sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
       }
@@ -906,29 +1316,33 @@
       const refCode = params.get('ref') || params.get('code');
       if (refCode) {
         localStorage.setItem('bc_pending_ref_code', refCode.trim().toUpperCase());
-        const input = document.getElementById('reg-partner-code');
-        if (input) input.value = refCode.trim().toUpperCase();
       }
       if (params.get('partner') === '1' && window.openJdsPartnerPortal) {
         setTimeout(() => window.openJdsPartnerPortal(), 250);
       }
 
       setModalReviewRating(5);
+      renderReviews();
 
       if (!window.sb) return;
       await checkUserSession();
       trackBcEvent('page_view', 'home');
 
-      // Requêtes parallèles ultra-légères (6 produits seulement + compteurs exacts)
+      if ( params.get('review') === '1' ) {
+        openGiveReviewModal();
+      }
+
+      // Chargement parallèle léger et non-bloquant
       await Promise.all([
         loadHomeSelectionAndStats(),
-        loadFollowersState(),
+        loadSuperAdminAdBanners(),
+        loadFollowersCount(),
         loadPlatformReviews(),
         loadPlatformNews()
       ]);
     });
 
-    // ================= 5. CONNEXION & INSCRIPTION SÉPARÉES =================
+    // ================= SESSION EXISTANTE (POUR AVIS & ADMIN UNIQUEMENT — PAS DE CRÉATION DE COMPTE) =================
     async function checkUserSession() {
       try {
         const { data } = await window.sb.auth.getSession();
@@ -936,7 +1350,7 @@
           window.currentUser = data.session.user;
           const { data: prof } = await window.sb
             .from('profiles')
-            .select('id, full_name, email, phone, city, role')
+            .select('id, full_name, email, phone, city, role, avatar_url')
             .eq('id', window.currentUser.id)
             .maybeSingle();
           window.currentProfile = prof || null;
@@ -946,166 +1360,102 @@
     }
 
     function updateAuthUI() {
-      const navBtn = document.getElementById('nav-auth-btn');
-      const mobBtn = document.getElementById('mobile-auth-btn');
       const adminNewsBtn = document.getElementById('admin-news-btn');
+      const authStep = document.getElementById('review-auth-step');
+      const formStep = document.getElementById('review-form-step');
 
       if (window.currentUser) {
-        const name = window.currentProfile?.full_name || window.currentUser.user_metadata?.full_name || window.currentUser.email.split('@')[0];
-        if (navBtn) navBtn.textContent = `👤 ${name} (Déconnexion)`;
-        if (mobBtn) mobBtn.textContent = `🚪 Déconnexion (${name})`;
+        const name = window.currentProfile?.full_name
+          || window.currentUser.user_metadata?.full_name
+          || window.currentUser.user_metadata?.name
+          || (window.currentUser.email ? window.currentUser.email.split('@')[0] : 'Membre vérifié');
+        const avatar = window.currentProfile?.avatar_url
+          || window.currentUser.user_metadata?.avatar_url
+          || window.currentUser.user_metadata?.picture
+          || '';
+
         const role = (window.currentProfile?.role || '').toLowerCase();
         if (adminNewsBtn && ['super_admin', 'admin', 'regional_admin'].includes(role)) {
           adminNewsBtn.style.display = 'inline-flex';
         }
-      } else {
-        if (navBtn) navBtn.textContent = 'Connexion';
-        if (mobBtn) mobBtn.textContent = 'Connexion';
-        if (adminNewsBtn) adminNewsBtn.style.display = 'none';
-      }
-    }
+        if (authStep) authStep.style.display = 'none';
+        if (formStep) formStep.style.display = 'block';
 
-    function handleNavAuthClick() {
-      if (window.currentUser) {
-        if (confirm('Voulez-vous vous déconnecter de votre session Bénin Connect ?')) {
-          logoutBcUser();
+        const nameEl = document.getElementById('rev-modal-username');
+        if (nameEl) nameEl.textContent = name;
+        const avEl = document.getElementById('rev-modal-avatar');
+        if (avEl) {
+          if (avatar) {
+            avEl.innerHTML = `<img src="${escHtml(avatar)}" alt="${escHtml(name)}" />`;
+          } else {
+            avEl.textContent = name.charAt(0).toUpperCase();
+          }
         }
       } else {
-        openLoginModal();
+        if (adminNewsBtn) adminNewsBtn.style.display = 'none';
+        if (authStep) authStep.style.display = 'flex';
+        if (formStep) formStep.style.display = 'none';
       }
     }
 
-    function openLoginModal() {
-      document.getElementById('login-error-box').style.display = 'none';
-      document.getElementById('login-modal')?.classList.add('open');
+    async function loginWithGoogleForReview() {
+      if (!window.sb) return;
+      try {
+        await window.sb.auth.signInWithOAuth({
+          provider: 'google',
+          options: {
+            redirectTo: window.location.origin + '/?review=1#avis'
+          }
+        });
+      } catch (err) {
+        const errBox = document.getElementById('review-login-error');
+        if (errBox) {
+          errBox.style.display = 'block';
+          errBox.textContent = '❌ Connexion Google indisponible : ' + (err.message || 'Veuillez réessayer.');
+        }
+      }
     }
 
-    function openRegisterModal(defaultRole = 'client') {
-      document.getElementById('register-error-box').style.display = 'none';
-      const rSel = document.getElementById('reg-role');
-      if (rSel && defaultRole) rSel.value = defaultRole;
-      const savedRef = localStorage.getItem('bc_pending_ref_code');
-      const codeInput = document.getElementById('reg-partner-code');
-      if (savedRef && codeInput && !codeInput.value) codeInput.value = savedRef;
-      document.getElementById('register-modal')?.classList.add('open');
-    }
-
-    async function submitLogin() {
-      const email = (document.getElementById('login-email')?.value || '').trim();
-      const password = document.getElementById('login-password')?.value || '';
-      const errBox = document.getElementById('login-error-box');
-      const btn = document.getElementById('login-submit-btn');
+    async function submitExistingAccountLoginForReview() {
+      const email = (document.getElementById('rev-login-email')?.value || '').trim();
+      const password = document.getElementById('rev-login-password')?.value || '';
+      const errBox = document.getElementById('review-login-error');
+      const btn = document.getElementById('rev-login-btn');
 
       if (!email || !password) return;
       btn.disabled = true;
       btn.textContent = '⏳ Connexion...';
-      errBox.style.display = 'none';
+      if (errBox) errBox.style.display = 'none';
 
       try {
         const { data, error } = await window.sb.auth.signInWithPassword({ email, password });
         if (error) throw error;
         window.currentUser = data.user;
         await checkUserSession();
-        await loadFollowersState();
-        closeBcModal('login-modal');
       } catch (err) {
-        errBox.style.display = 'block';
-        errBox.textContent = '❌ ' + (err.message || 'Identifiants incorrects.');
-      } finally {
-        btn.disabled = false;
-        btn.textContent = '✅ Se connecter';
-      }
-    }
-
-    async function submitRegister() {
-      const fullName = (document.getElementById('reg-name')?.value || '').trim();
-      const phone = (document.getElementById('reg-phone')?.value || '').trim();
-      const city = (document.getElementById('reg-city')?.value || 'Parakou').trim();
-      const role = document.getElementById('reg-role')?.value || 'client';
-      const email = (document.getElementById('reg-email')?.value || '').trim();
-      const password = document.getElementById('reg-password')?.value || '';
-      const partnerCode = (document.getElementById('reg-partner-code')?.value || '').trim().toUpperCase();
-      const errBox = document.getElementById('register-error-box');
-      const btn = document.getElementById('reg-submit-btn');
-
-      if (!fullName || !email || !password) return;
-      btn.disabled = true;
-      btn.textContent = '⏳ Création du compte...';
-      errBox.style.display = 'none';
-
-      try {
-        const { data, error } = await window.sb.auth.signUp({
-          email,
-          password,
-          options: { data: { full_name: fullName, phone, city, role } }
-        });
-        if (error) throw error;
-        window.currentUser = data.user;
-
-        if (window.currentUser) {
-          await window.sb.from('profiles').upsert({
-            id: window.currentUser.id,
-            full_name: fullName,
-            email,
-            phone,
-            city,
-            role,
-            subscription_tier: 'gratuit'
-          });
-
-          if (role === 'vendeur' || role === 'prestataire') {
-            await window.sb.from('vendors').upsert({
-              id: window.currentUser.id,
-              full_name: fullName,
-              email,
-              phone,
-              city,
-              role,
-              plan: 'gratuit',
-              is_active: true
-            });
-          }
-
-          if (partnerCode && window.applyJdsReferralOnSignup) {
-            await window.applyJdsReferralOnSignup(partnerCode, {
-              id: window.currentUser.id,
-              full_name: fullName,
-              email,
-              phone,
-              city,
-              role
-            });
-          }
-          trackBcEvent('signup', role);
+        if (errBox) {
+          errBox.style.display = 'block';
+          errBox.textContent = '❌ ' + (err.message || 'Identifiants incorrects.');
         }
-
-        await checkUserSession();
-        closeBcModal('register-modal');
-        alert(`🎉 Bienvenue sur Bénin Connect, ${fullName} !`);
-      } catch (err) {
-        errBox.style.display = 'block';
-        errBox.textContent = '❌ ' + (err.message || 'Erreur lors de la création du compte.');
       } finally {
         btn.disabled = false;
-        btn.textContent = '🚀 Créer mon compte';
+        btn.textContent = '🔐 Se connecter et donner mon avis';
       }
     }
 
     async function logoutBcUser() {
+      if (!window.sb) return;
       await window.sb.auth.signOut();
       window.currentUser = null;
       window.currentProfile = null;
-      isFollowingPlatform = false;
       updateAuthUI();
-      updateFollowUI();
     }
 
-    // ================= 3 & 4. SÉLECTION DE 6 PRODUITS RÉELS & COMPTEURS LÉGERS =================
+    // ================= SECTION 4 & 6 : STATISTIQUES FIABLES & 6 PRODUITS EN DIRECT =================
     async function loadHomeSelectionAndStats() {
       const grid = document.getElementById('home-products-grid');
       try {
-        // Cache léger de 2 minutes pour performances optimales sur Android
-        const cached = sessionStorage.getItem('bc_home_light_v2');
+        const cached = sessionStorage.getItem('bc_home_light_v3');
         let products6 = null, totalProds = 0, vendorsList = [];
 
         if (cached) {
@@ -1118,7 +1468,6 @@
         }
 
         if (!products6) {
-          // Ne charge que 6 produits maximum (Section 4 : jamais tous les produits en même temps)
           const [prodRes, prodCountRes, vendRes] = await Promise.all([
             window.sb
               .from('products')
@@ -1136,7 +1485,7 @@
           vendorsList = vendRes.data || [];
 
           try {
-            sessionStorage.setItem('bc_home_light_v2', JSON.stringify({
+            sessionStorage.setItem('bc_home_light_v3', JSON.stringify({
               ts: Date.now(),
               products6,
               totalProds,
@@ -1149,14 +1498,34 @@
         const cities = new Set();
         vendorsList.forEach(v => {
           vMap[v.id] = v.full_name;
-          if (v.city) cities.add(v.city.trim());
+          if (v.city && v.city.trim()) cities.add(v.city.trim());
         });
-        products6.forEach(p => { if (p.city) cities.add(p.city.trim()); });
-        if (cities.size === 0) cities.add('Parakou');
+        products6.forEach(p => {
+          if (p.city && p.city.trim()) cities.add(p.city.trim());
+        });
 
-        document.getElementById('stat-products').textContent = totalProds.toLocaleString('fr-FR');
-        document.getElementById('stat-vendors').textContent = vendorsList.length.toLocaleString('fr-FR');
-        document.getElementById('stat-cities').textContent = cities.size.toLocaleString('fr-FR');
+        // Section 4 : N'afficher que les statistiques réellement disponibles et > 0 (jamais de tiret ni de 0)
+        const metricsBar = document.getElementById('hero-metrics-bar');
+        let anyMetricVisible = false;
+
+        if (totalProds > 0) {
+          document.getElementById('stat-products').textContent = totalProds.toLocaleString('fr-FR');
+          document.getElementById('metric-box-products').style.display = 'block';
+          anyMetricVisible = true;
+        }
+        if (vendorsList.length > 0) {
+          document.getElementById('stat-vendors').textContent = vendorsList.length.toLocaleString('fr-FR');
+          document.getElementById('metric-box-vendors').style.display = 'block';
+          anyMetricVisible = true;
+        }
+        if (cities.size > 0) {
+          document.getElementById('stat-cities').textContent = cities.size.toLocaleString('fr-FR');
+          document.getElementById('metric-box-cities').style.display = 'block';
+          anyMetricVisible = true;
+        }
+        if (anyMetricVisible && metricsBar) {
+          metricsBar.style.display = 'flex';
+        }
 
         if (products6.length === 0) {
           grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:24px; color:var(--text-muted);">Aucun produit disponible pour le moment.</div>`;
@@ -1168,7 +1537,7 @@
             ? p.images[0]
             : 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&auto=format&fit=crop&q=70';
           const price = Number(p.price || 0).toLocaleString('fr-FR') + ' FCFA';
-          const vName = vMap[p.vendor_id] || 'Boutique vérifiée';
+          const vName = vMap[p.vendor_id] || 'Commerçant vérifié';
           const city = p.city || 'Parakou';
 
           return `
@@ -1182,7 +1551,7 @@
                 <div class="prod-price">${price}</div>
                 <div class="prod-vendor">🏪 ${escHtml(vName)}</div>
                 <a href="https://marche.benin-connect.com/?product=${encodeURIComponent(p.id)}" class="btn bc-btn-outline" style="width:100%; padding:9px; font-size:13px;">
-                  Voir sur le Marché →
+                  Voir sur Marché d'Aujourd'hui →
                 </a>
               </div>
             </article>
@@ -1193,89 +1562,286 @@
       }
     }
 
-    // ================= 6. SUIVRE BÉNIN CONNECT & AVIS DISTINCTS =================
-    async function loadFollowersState() {
+    // ================= SECTION 5 : ESPACE PUBLICITAIRE PILOTÉ PAR LE SUPER ADMIN =================
+    function parseAdBannerRow(row) {
+      if (!row?.comment?.startsWith(BANNER_PREFIX)) return null;
+      try {
+        const data = JSON.parse(row.comment.slice(BANNER_PREFIX.length));
+        return {
+          id: row.id,
+          created_at: row.created_at,
+          title: data.title || 'Annonce officielle',
+          subtitle: data.subtitle || '',
+          tag: data.tag || 'À LA UNE',
+          bg: data.bg || 'linear-gradient(135deg, #0F4C81 0%, #3B1D82 100%)',
+          cta: data.cta || 'Découvrir',
+          imageUrl: data.imageUrl || '',
+          videoUrl: data.videoUrl || '',
+          mediaType: data.mediaType || (data.videoUrl ? 'video' : 'image'),
+          productId: data.productId || null,
+          productPrice: data.productPrice || null,
+          vendorName: data.vendorName || '',
+          active: data.active !== false,
+          orderIndex: Number.isFinite(Number(data.orderIndex)) ? Number(data.orderIndex) : 1,
+          durationSeconds: Math.max(3, Math.min(60, Number(data.durationSeconds) || 6))
+        };
+      } catch (e) {
+        return null;
+      }
+    }
+
+    async function loadSuperAdminAdBanners() {
       try {
         const { data, error } = await window.sb
-          .from('platform_followers')
-          .select('user_id')
-          .eq('is_active', true);
+          .from('reviews')
+          .select('id, comment, created_at')
+          .like('comment', `${BANNER_PREFIX}%`)
+          .order('created_at', { ascending: false })
+          .limit(20);
 
-        if (!error && Array.isArray(data)) {
-          followersCount = data.length;
-          isFollowingPlatform = Boolean(window.currentUser && data.some(f => f.user_id === window.currentUser.id));
+        if (error || !Array.isArray(data)) return;
+
+        // Filtrer uniquement les publicités actives et trier par ordre d'affichage choisi par le Super Admin
+        activeAdBanners = data
+          .map(parseAdBannerRow)
+          .filter(b => b && b.active === true)
+          .sort((a, b) => {
+            if (a.orderIndex !== b.orderIndex) return a.orderIndex - b.orderIndex;
+            return new Date(b.created_at || 0) - new Date(a.created_at || 0);
+          });
+
+        const sectionEl = document.getElementById('pub-banner-section');
+        if (!sectionEl) return;
+
+        if (activeAdBanners.length === 0) {
+          sectionEl.style.display = 'none';
+          return;
+        }
+
+        sectionEl.style.display = 'block';
+        currentAdIndex = 0;
+        renderCurrentAdBanner();
+      } catch (e) {}
+    }
+
+    function renderCurrentAdBanner() {
+      if (adRotationTimer) {
+        clearTimeout(adRotationTimer);
+        adRotationTimer = null;
+      }
+      if (activeAdBanners.length === 0) return;
+
+      const banner = activeAdBanners[currentAdIndex] || activeAdBanners[0];
+      const viewport = document.getElementById('ad-slide-viewport');
+      const controlsBar = document.getElementById('ad-controls-bar');
+      const dotsContainer = document.getElementById('ad-dots-container');
+      if (!viewport) return;
+
+      const hasVideo = Boolean(banner.videoUrl);
+      const hasImage = Boolean(banner.imageUrl);
+      const hasMedia = hasVideo || hasImage;
+
+      const targetHref = banner.productId
+        ? `https://marche.benin-connect.com/?product=${encodeURIComponent(banner.productId)}`
+        : 'https://marche.benin-connect.com';
+
+      const priceHtml = banner.productPrice
+        ? `<div class="ad-slide-price">${Number(banner.productPrice).toLocaleString('fr-FR')} FCFA</div>`
+        : '';
+
+      const mediaHtml = hasVideo
+        ? `<div class="ad-slide-media">
+             <video src="${escHtml(banner.videoUrl)}" autoplay muted loop playsinline preload="metadata"></video>
+           </div>`
+        : hasImage
+        ? `<div class="ad-slide-media">
+             <img src="${escHtml(banner.imageUrl)}" alt="${escHtml(banner.title)}" loading="lazy" decoding="async" />
+           </div>`
+        : '';
+
+      viewport.innerHTML = `
+        <div class="ad-slide ${hasMedia ? '' : 'no-media'}" style="background: ${escHtml(banner.bg)};">
+          <div class="ad-slide-content">
+            <div class="ad-badge-row">
+              <span class="ad-sponsor-pill">📢 ${escHtml(banner.tag || 'PUBLICITÉ')}</span>
+              ${banner.vendorName ? `<span style="font-size:12px; font-weight:700; color:rgba(255,255,255,0.88);">🏪 ${escHtml(banner.vendorName)}</span>` : ''}
+            </div>
+            <h3 class="ad-slide-title">${escHtml(banner.title)}</h3>
+            ${banner.subtitle ? `<p class="ad-slide-sub">${escHtml(banner.subtitle)}</p>` : ''}
+            ${priceHtml}
+            <div style="margin-top:6px;">
+              <a href="${targetHref}" class="btn" style="background:var(--white); color:var(--blue); font-weight:800; padding:10px 22px; font-size:13.5px;" onclick="trackBcEvent('button_click', 'ad_banner_cta')">
+                ${escHtml(banner.cta || 'Découvrir')} →
+              </a>
+            </div>
+          </div>
+          ${mediaHtml}
+        </div>
+      `;
+
+      if (activeAdBanners.length > 1 && controlsBar && dotsContainer) {
+        controlsBar.style.display = 'flex';
+        dotsContainer.innerHTML = activeAdBanners.map((b, idx) => `
+          <button type="button" class="ad-dot ${idx === currentAdIndex ? 'active' : ''}" onclick="goToAdBanner(${idx})" aria-label="Publicité ${idx + 1}"></button>
+        `).join('');
+
+        // Rotation automatique selon le temps d'affichage défini par le Super Admin
+        const durationMs = Math.max(3, Number(banner.durationSeconds) || 6) * 1000;
+        adRotationTimer = setTimeout(() => {
+          stepAdBanner(1);
+        }, durationMs);
+      } else if (controlsBar) {
+        controlsBar.style.display = 'none';
+      }
+    }
+
+    function stepAdBanner(delta) {
+      if (activeAdBanners.length <= 1) return;
+      currentAdIndex = (currentAdIndex + delta + activeAdBanners.length) % activeAdBanners.length;
+      renderCurrentAdBanner();
+    }
+
+    function goToAdBanner(idx) {
+      if (idx < 0 || idx >= activeAdBanners.length) return;
+      currentAdIndex = idx;
+      renderCurrentAdBanner();
+    }
+
+    // ================= SECTION 10 : ABONNÉS BÉNIN CONNECT (SANS CRÉATION DE COMPTE) =================
+    async function loadFollowersCount() {
+      let total = 0;
+      try {
+        // 1. Essayer la fonction RPC sécurisée qui retourne uniquement le compteur (sans exposer les données personnelles)
+        const { data: rpcCount, error: rpcErr } = await window.sb.rpc('get_platform_followers_count');
+        if (!rpcErr && typeof rpcCount === 'number') {
+          total = rpcCount;
         } else {
-          const { data: fb } = await window.sb
-            .from('reviews')
-            .select('reviewer_id')
-            .like('comment', `${SYS_FOLLOW_PREFIX}%`);
-          const uniq = new Set((fb || []).map(r => r.reviewer_id));
-          followersCount = uniq.size;
-          isFollowingPlatform = Boolean(window.currentUser && uniq.has(window.currentUser.id));
+          // 2. Fallback head count sur platform_followers
+          const { count, error: countErr } = await window.sb
+            .from('platform_followers')
+            .select('*', { count: 'exact', head: true })
+            .eq('is_active', true);
+          if (!countErr && typeof count === 'number') {
+            total = count;
+          }
+        }
+
+        // 3. Ajouter les éventuels abonnements enregistrés via le fallback reviews
+        const { count: fbCount } = await window.sb
+          .from('reviews')
+          .select('*', { count: 'exact', head: true })
+          .like('comment', `${SYS_FOLLOW_PREFIX}%`);
+        if (typeof fbCount === 'number' && fbCount > total) {
+          total = fbCount;
         }
       } catch (e) {}
-      updateFollowUI();
+
+      followersCount = Math.max(0, total);
+      updateFollowersBadgeUI();
     }
 
-    function updateFollowUI() {
-      const statEl = document.getElementById('stat-followers');
-      if (statEl) statEl.textContent = followersCount.toLocaleString('fr-FR');
-
-      const btn = document.getElementById('follow-btn');
-      const lbl = document.getElementById('follow-status-label');
-      if (lbl) {
-        lbl.textContent = `${followersCount.toLocaleString('fr-FR')} abonné(s) suivent actuellement Bénin Connect.`;
-      }
-      if (btn) {
-        if (isFollowingPlatform) {
-          btn.textContent = '✓ Abonné (Se désabonner)';
-          btn.className = 'btn bc-btn-outline';
-        } else {
-          btn.textContent = '🔔 Suivre Bénin Connect';
-          btn.className = 'btn bc-btn-blue';
-        }
+    function updateFollowersBadgeUI() {
+      const badge = document.getElementById('public-followers-badge');
+      if (!badge) return;
+      if (followersCount > 0) {
+        badge.textContent = `${followersCount.toLocaleString('fr-FR')} abonné${followersCount > 1 ? 's' : ''} inscrit${followersCount > 1 ? 's' : ''}`;
+      } else {
+        badge.textContent = `Rejoignez les premiers abonnés`;
       }
     }
 
-    async function toggleFollowPlatform() {
-      if (!window.currentUser) {
-        openRegisterModal('client');
-        return;
-      }
-      const receiveNews = document.getElementById('follow-consent')?.checked !== false;
+    function openSubscribeModal() {
+      const fb = document.getElementById('subscribe-feedback');
+      if (fb) fb.style.display = 'none';
+      document.getElementById('subscribe-modal')?.classList.add('open');
+    }
+
+    function toggleUnsubscribeBox() {
+      const box = document.getElementById('unsubscribe-box');
+      if (!box) return;
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    }
+
+    async function submitPublicSubscription() {
+      const fullName = (document.getElementById('sub-full-name')?.value || '').trim();
+      const phone = (document.getElementById('sub-phone')?.value || '').trim();
+      const email = (document.getElementById('sub-email')?.value || '').trim();
+      const consent = document.getElementById('sub-consent')?.checked === true;
+      const fb = document.getElementById('subscribe-feedback');
+      const btn = document.getElementById('sub-submit-btn');
+
+      if (!fullName || !phone || !consent) return;
+
+      btn.disabled = true;
+      btn.textContent = '⏳ Enregistrement...';
+      if (fb) fb.style.display = 'none';
 
       try {
-        if (isFollowingPlatform) {
-          const { error } = await window.sb.from('platform_followers').delete().eq('user_id', window.currentUser.id);
-          if (error) {
-            await window.sb.from('reviews').delete().eq('reviewer_id', window.currentUser.id).like('comment', `${SYS_FOLLOW_PREFIX}%`);
-          }
-          isFollowingPlatform = false;
-          followersCount = Math.max(0, followersCount - 1);
-        } else {
-          const { error } = await window.sb.from('platform_followers').upsert({
-            user_id: window.currentUser.id,
-            email: window.currentUser.email,
-            full_name: window.currentProfile?.full_name || window.currentUser.email.split('@')[0],
-            city: window.currentProfile?.city || 'Parakou',
-            receive_news: receiveNews,
-            is_active: true
-          }, { onConflict: 'user_id' });
+        const payload = {
+          full_name: fullName,
+          phone: phone,
+          email: email || null,
+          receive_news: true,
+          is_active: true
+        };
 
-          if (error) {
-            await window.sb.from('reviews').insert({
-              reviewer_id: window.currentUser.id,
-              rating: 5,
-              comment: SYS_FOLLOW_PREFIX + JSON.stringify({ receive_news: receiveNews })
-            });
-          }
-          isFollowingPlatform = true;
-          followersCount += 1;
+        const { error } = await window.sb.from('platform_followers').insert(payload);
+
+        if (error) {
+          // Fallback compatible si la migration SQL n'a pas encore été exécutée
+          await window.sb.from('reviews').insert({
+            reviewer_id: window.currentUser?.id || null,
+            rating: 5,
+            comment: SYS_FOLLOW_PREFIX + JSON.stringify({
+              ...payload,
+              created_at: new Date().toISOString()
+            })
+          });
         }
-        updateFollowUI();
+
+        followersCount += 1;
+        updateFollowersBadgeUI();
+        trackBcEvent('follow', 'public_subscribe_form');
+
+        document.getElementById('subscribe-form')?.reset();
+        if (fb) {
+          fb.style.display = 'block';
+          fb.style.background = '#DCFCE7';
+          fb.style.color = '#15803D';
+          fb.textContent = `✅ Merci ${fullName} ! Votre abonnement à Bénin Connect est bien enregistré.`;
+        }
+      } catch (err) {
+        if (fb) {
+          fb.style.display = 'block';
+          fb.style.background = '#FEF2F2';
+          fb.style.color = '#DC2626';
+          fb.textContent = '❌ Impossible d\'enregistrer votre abonnement pour le moment. Veuillez réessayer.';
+        }
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '✅ Valider mon abonnement';
+      }
+    }
+
+    async function submitPublicUnsubscribe() {
+      const contact = (document.getElementById('unsub-contact')?.value || '').trim();
+      const fb = document.getElementById('subscribe-feedback');
+      if (!contact) return;
+
+      try {
+        await window.sb.rpc('unsubscribe_platform_follower', { p_contact: contact });
+        if (fb) {
+          fb.style.display = 'block';
+          fb.style.background = '#EFF6FF';
+          fb.style.color = '#1D4ED8';
+          fb.textContent = '✅ Votre demande de désabonnement a été prise en compte.';
+        }
+        document.getElementById('unsub-contact').value = '';
+        await loadFollowersCount();
       } catch (e) {}
     }
 
+    // ================= SECTION 10 : AVIS BÉNIN CONNECT & MARCHÉ D'AUJOURD'HUI =================
     async function loadPlatformReviews() {
       try {
         const { data, error } = await window.sb
@@ -1285,7 +1851,7 @@
           .order('created_at', { ascending: false })
           .limit(12);
 
-        if (!error && Array.isArray(data)) {
+        if (!error && Array.isArray(data) && data.length > 0) {
           platformReviewsList = data;
         } else {
           const { data: revData } = await window.sb
@@ -1305,25 +1871,43 @@
 
     function switchReviewCategory(cat) {
       currentReviewCategory = cat;
-      document.getElementById('tab-rev-bc').className = cat === 'benin_connect' ? 'btn bc-btn-blue' : 'btn bc-btn-outline';
-      document.getElementById('tab-rev-marche').className = cat === 'marche_aujourdhui' ? 'btn bc-btn-blue' : 'btn bc-btn-outline';
+      const tabAll = document.getElementById('tab-rev-all');
+      const tabBc = document.getElementById('tab-rev-bc');
+      const tabMarche = document.getElementById('tab-rev-marche');
+      if (tabAll) tabAll.className = cat === 'all' ? 'btn bc-btn-blue' : 'btn bc-btn-outline';
+      if (tabBc) tabBc.className = cat === 'benin_connect' ? 'btn bc-btn-blue' : 'btn bc-btn-outline';
+      if (tabMarche) tabMarche.className = cat === 'marche_aujourdhui' ? 'btn bc-btn-blue' : 'btn bc-btn-outline';
       renderReviews();
     }
 
     function renderReviews() {
-      const list = platformReviewsList.filter(r => r.target_type === currentReviewCategory);
+      // Utiliser les avis réels validés par le Super Admin s'ils existent ; sinon afficher les avis de démonstration identifiés
+      const hasRealApproved = platformReviewsList.length > 0;
+      const baseSource = hasRealApproved ? platformReviewsList : DEMO_REVIEWS;
+
+      const list = currentReviewCategory === 'all'
+        ? baseSource
+        : baseSource.filter(r => r.target_type === currentReviewCategory);
+
       const scoreEl = document.getElementById('rev-avg-score');
       const starsEl = document.getElementById('rev-avg-stars');
       const countEl = document.getElementById('rev-total-count');
+      const noticeEl = document.getElementById('demo-reviews-notice');
       const grid = document.getElementById('reviews-grid');
 
+      if (noticeEl) {
+        noticeEl.textContent = hasRealApproved
+          ? `✅ Avis vérifiés et validés par l'administration`
+          : `ℹ️ Affichage d'exemples illustrant la fonctionnalité (remplacés automatiquement par les avis réels validés)`;
+      }
+
       if (list.length === 0) {
-        scoreEl.textContent = '— / 5';
-        starsEl.textContent = '☆☆☆☆☆';
-        countEl.textContent = '(0 avis vérifié)';
+        if (scoreEl) scoreEl.textContent = '5.0 / 5';
+        if (starsEl) starsEl.textContent = '★★★★★';
+        if (countEl) countEl.textContent = '';
         grid.innerHTML = `
           <div style="grid-column:1/-1; text-align:center; padding:24px; background:white; border-radius:14px; border:1px dashed var(--border); color:var(--text-sub); font-size:14px;">
-            Aucun avis enregistré dans cette catégorie pour le moment. Soyez le premier à donner votre avis !
+            Aucun avis dans cette catégorie pour le moment. Cliquez sur « Donner votre avis » pour partager votre témoignage !
           </div>
         `;
         return;
@@ -1331,24 +1915,40 @@
 
       const avg = (list.reduce((s, r) => s + Number(r.rating || 5), 0) / list.length).toFixed(1);
       const starsCount = Math.round(Number(avg));
-      scoreEl.textContent = `${avg} / 5`;
-      starsEl.textContent = '★'.repeat(starsCount) + '☆'.repeat(5 - starsCount);
-      countEl.textContent = `(${list.length} avis)`;
+      if (scoreEl) scoreEl.textContent = `${avg} / 5`;
+      if (starsEl) starsEl.textContent = '★'.repeat(starsCount) + '☆'.repeat(5 - starsCount);
+      if (countEl) countEl.textContent = hasRealApproved ? `(${list.length} avis vérifié${list.length > 1 ? 's' : ''})` : `(Exemples)`;
 
       grid.innerHTML = list.slice(0, 6).map(r => {
         const stars = '★'.repeat(Math.max(1, Math.min(5, Number(r.rating) || 5)));
-        const dateStr = new Date(r.created_at).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
+        const authorName = r.author_name || 'Utilisateur Bénin Connect';
+        const initial = authorName.trim().charAt(0).toUpperCase() || 'U';
+        const avatarHtml = r.author_avatar
+          ? `<img src="${escHtml(r.author_avatar)}" alt="${escHtml(authorName)}" loading="lazy" />`
+          : initial;
+        const platformLabel = r.target_type === 'marche_aujourdhui'
+          ? '🛒 Marché d\'Aujourd\'hui'
+          : '🏛️ Bénin Connect';
+        const isDemo = Boolean(r.is_demo);
+
         return `
           <div class="review-card">
             <div>
-              <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
-                <strong style="font-size:13.5px;">👤 ${escHtml(r.author_name || 'Membre')}</strong>
-                <span style="color:var(--gold); font-size:13.5px;">${stars}</span>
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:12px;">
+                <div class="review-author-row">
+                  <div class="review-avatar">${avatarHtml}</div>
+                  <div>
+                    <strong style="font-size:14px; color:var(--text); display:block;">${escHtml(authorName)}</strong>
+                    <span style="font-size:11.5px; color:var(--text-muted);">📍 ${escHtml(r.author_city || 'Bénin')}</span>
+                  </div>
+                </div>
+                <span style="color:var(--gold); font-size:14px; letter-spacing:1px;">${stars}</span>
               </div>
-              <p style="font-size:13.5px; color:var(--text-sub);">« ${escHtml(r.comment)} »</p>
+              <p style="font-size:13.5px; color:var(--text-sub); line-height:1.6;">« ${escHtml(r.comment)} »</p>
             </div>
-            <div style="font-size:11.5px; color:var(--text-muted); border-top:1px solid var(--gray-muted); padding-top:8px;">
-              📍 ${escHtml(r.author_city || 'Bénin')} • ${dateStr}
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; border-top:1px solid var(--gray-muted); padding-top:10px;">
+              <span class="review-platform-badge">${platformLabel}</span>
+              ${isDemo ? `<span class="review-demo-badge">Avis de démonstration</span>` : `<span style="font-size:11px; color:var(--green); font-weight:700;">✓ Avis vérifié</span>`}
             </div>
           </div>
         `;
@@ -1356,11 +1956,11 @@
     }
 
     function openGiveReviewModal() {
-      if (!window.currentUser) {
-        openLoginModal();
-        return;
+      updateAuthUI();
+      if (currentReviewCategory === 'benin_connect' || currentReviewCategory === 'marche_aujourdhui') {
+        const sel = document.getElementById('modal-review-target');
+        if (sel) sel.value = currentReviewCategory;
       }
-      document.getElementById('modal-review-target').value = currentReviewCategory;
       document.getElementById('review-modal')?.classList.add('open');
     }
 
@@ -1374,38 +1974,66 @@
     }
 
     async function submitPlatformReview() {
-      if (!window.currentUser) return openLoginModal();
+      if (!window.currentUser) {
+        updateAuthUI();
+        return;
+      }
       const targetType = document.getElementById('modal-review-target').value;
       const comment = (document.getElementById('modal-review-comment')?.value || '').trim();
+      const btn = document.getElementById('rev-submit-btn');
       if (comment.length < 4) return;
 
+      btn.disabled = true;
+      btn.textContent = '⏳ Envoi en cours...';
+
+      const authorName = window.currentProfile?.full_name
+        || window.currentUser.user_metadata?.full_name
+        || window.currentUser.user_metadata?.name
+        || (window.currentUser.email ? window.currentUser.email.split('@')[0] : 'Membre vérifié');
+
+      const authorAvatar = window.currentProfile?.avatar_url
+        || window.currentUser.user_metadata?.avatar_url
+        || window.currentUser.user_metadata?.picture
+        || null;
+
+      // Statut 'pending' obligatoire : l'avis doit être validé par le Super Admin avant publication
       const payload = {
         user_id: window.currentUser.id,
-        author_name: window.currentProfile?.full_name || window.currentUser.email.split('@')[0],
-        author_city: window.currentProfile?.city || 'Parakou',
+        author_name: authorName,
+        author_avatar: authorAvatar,
+        author_city: window.currentProfile?.city || 'Bénin',
         target_type: targetType,
         rating: modalReviewRating,
         comment,
-        status: 'approved'
+        status: 'pending'
       };
 
-      const { error } = await window.sb.from('platform_reviews').upsert(payload, { onConflict: 'user_id,target_type' });
-      if (error) {
-        await window.sb.from('reviews').insert({
-          reviewer_id: window.currentUser.id,
-          rating: modalReviewRating,
-          comment: SYS_REVIEW_PREFIX + JSON.stringify(payload)
-        });
-      }
+      try {
+        const { error } = await window.sb.from('platform_reviews').insert(payload);
+        if (error) {
+          await window.sb.from('reviews').insert({
+            reviewer_id: window.currentUser.id,
+            rating: modalReviewRating,
+            comment: SYS_REVIEW_PREFIX + JSON.stringify({
+              ...payload,
+              created_at: new Date().toISOString()
+            })
+          });
+        }
 
-      document.getElementById('modal-review-comment').value = '';
-      closeBcModal('review-modal');
-      if (targetType !== 'mobile_app') currentReviewCategory = targetType;
-      await loadPlatformReviews();
-      alert('✅ Merci ! Votre avis a été publié.');
+        document.getElementById('modal-review-comment').value = '';
+        closeBcModal('review-modal');
+        trackBcEvent('review_submit', targetType);
+        alert('✅ Merci pour votre témoignage ! Votre avis a été transmis au Super Admin pour validation avant publication.');
+      } catch (e) {
+        alert('❌ Une erreur est survenue lors de l\'envoi de votre avis.');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '✅ Envoyer mon avis pour validation';
+      }
     }
 
-    // ================= 7. ACTUALITÉS BÉNIN CONNECT =================
+    // ================= ACTUALITÉS BÉNIN CONNECT =================
     async function loadPlatformNews() {
       const container = document.getElementById('news-list');
       if (!container) return;
@@ -1439,13 +2067,13 @@
         container.innerHTML = `
           <div class="news-item">
             <div style="font-size:11.5px; font-weight:800; color:var(--blue); margin-bottom:4px;">🛒 MARCHÉ D'AUJOURD'HUI</div>
-            <div style="font-weight:800; font-size:15px; margin-bottom:4px;">Vente et achat en direct partout au Bénin</div>
-            <p style="font-size:13.5px; color:var(--text-sub);">Les commerçants publient leurs produits en ligne avec messagerie instantanée et contact WhatsApp direct.</p>
+            <div style="font-weight:800; font-size:15px; margin-bottom:4px;">Achetez et vendez facilement partout au Bénin</div>
+            <p style="font-size:13.5px; color:var(--text-sub);">Les commerçants publient leurs articles en quelques minutes et échangent en direct avec les acheteurs.</p>
           </div>
           <div class="news-item">
-            <div style="font-size:11.5px; font-weight:800; color:var(--violet); margin-bottom:4px;">🤝 JDS PARTENAIRES</div>
-            <div style="font-weight:800; font-size:15px; margin-bottom:4px;">Portail Brand Ambassadors, Superviseurs & Influenceurs</div>
-            <p style="font-size:13.5px; color:var(--text-sub);">Suivez vos codes partenaires, vos inscriptions et vos objectifs depuis votre tableau de bord dédié.</p>
+            <div style="font-size:11.5px; font-weight:800; color:var(--violet); margin-bottom:4px;">🏢 JDS COMMUNICATION & JDS DIGITAL</div>
+            <div style="font-weight:800; font-size:15px; margin-bottom:4px;">Des solutions numériques pensées pour le Bénin</div>
+            <p style="font-size:13.5px; color:var(--text-sub);">À travers JDS Digital, JDS Communication accompagne la transformation numérique des entreprises et commerçants.</p>
           </div>
         `;
         return;
@@ -1485,6 +2113,39 @@
       document.getElementById('news-form-summary').value = '';
       closeBcModal('admin-news-modal');
       await loadPlatformNews();
+    }
+
+    // ================= SECTION 14 : MENTIONS LÉGALES, CONFIDENTIALITÉ & CONDITIONS =================
+    function openLegalModal(type) {
+      const titleEl = document.getElementById('legal-modal-title');
+      const bodyEl = document.getElementById('legal-modal-body');
+      if (!titleEl || !bodyEl) return;
+
+      if (type === 'mentions') {
+        titleEl.textContent = '⚖️ Mentions légales';
+        bodyEl.innerHTML = `
+          <p><strong>Éditeur de la plateforme :</strong> Bénin Connect est développé par <strong>JDS Digital</strong>, branche numérique de <strong>JDS Communication</strong>.</p>
+          <p><strong>Siège social :</strong> Parakou, République du Bénin.</p>
+          <p><strong>Contact officiel :</strong> <a href="mailto:digitaljds34@gmail.com" style="color:var(--blue); font-weight:700;">digitaljds34@gmail.com</a></p>
+          <p><strong>Services associés :</strong> Marketplace Marché d'Aujourd'hui (<a href="https://marche.benin-connect.com" style="color:var(--blue);">marche.benin-connect.com</a>) et Espace JDS Partenaires.</p>
+        `;
+      } else if (type === 'confidentialite') {
+        titleEl.textContent = '🔒 Politique de confidentialité';
+        bodyEl.innerHTML = `
+          <p><strong>Protection des données :</strong> Bénin Connect collecte uniquement les informations strictement nécessaires au fonctionnement de ses services (abonnement volontaire aux communications, dépôt d'avis vérifiés et fonctionnement de Marché d'Aujourd'hui).</p>
+          <p><strong>Confidentialité des abonnés :</strong> Les coordonnées soumises via le formulaire « S'abonner » sont enregistrées de manière sécurisée et ne sont jamais rendues publiques. Seule l'administration principale (Super Admin) y a accès.</p>
+          <p><strong>Droit de retrait et désabonnement :</strong> Tout abonné peut se désabonner à tout moment depuis le formulaire d'abonnement ou en écrivant à <a href="mailto:digitaljds34@gmail.com" style="color:var(--blue); font-weight:700;">digitaljds34@gmail.com</a>.</p>
+        `;
+      } else {
+        titleEl.textContent = '📜 Conditions d\'utilisation';
+        bodyEl.innerHTML = `
+          <p><strong>Objet :</strong> Bénin Connect met en relation les acteurs économiques, acheteurs, vendeurs et partenaires au Bénin à travers son écosystème numérique.</p>
+          <p><strong>Utilisation de Marché d'Aujourd'hui :</strong> Les achats, ventes et créations de boutiques s'effectuent directement sur la marketplace Marché d'Aujourd'hui dans le respect de la réglementation en vigueur en République du Bénin.</p>
+          <p><strong>Modération des avis et annonces :</strong> Afin de garantir un environnement fiable et professionnel, les avis déposés sur Bénin Connect sont soumis à validation avant publication et l'espace publicitaire est géré exclusivement par l'administration.</p>
+        `;
+      }
+
+      document.getElementById('legal-modal')?.classList.add('open');
     }
   </script>
 
