@@ -1274,7 +1274,7 @@
 
   window.submitBaFieldReportFromPortal = async function () {
     if (!currentPartner) return;
-    const cat = (document.getElementById('ba-rep-cat')?.value || 'difficultes_terrain').trim();
+    const cat = (document.getElementById('ba-rep-cat')?.value || 'difficulties').trim();
     const subject = (document.getElementById('ba-rep-subject')?.value || '').trim();
     const desc = (document.getElementById('ba-rep-desc')?.value || '').trim();
     if (!subject || !desc) {
@@ -1282,13 +1282,16 @@
       return;
     }
     const catLabels = {
-      difficultes_terrain: 'Difficultés rencontrées sur le terrain',
-      plaintes_suggestions_clients: 'Plaintes et suggestions des clients et vendeurs',
-      idees_recommandations_ba: 'Idées et recommandations du BA'
+      difficulties: '⚠️ Difficultés rencontrées',
+      client_feedback: '💬 Avis des clients',
+      suggestions: '💡 Suggestions d’amélioration',
+      difficultes_terrain: '⚠️ Difficultés rencontrées',
+      plaintes_suggestions_clients: '💬 Avis des clients',
+      idees_recommandations_ba: '💡 Suggestions d’amélioration'
     };
     const nowIso = new Date().toISOString();
     const newRep = {
-      id: 'rep-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+      id: 'frep-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
       partner_id: currentPartner.id,
       partner_name: currentPartner.full_name,
       partner_code: currentPartner.partner_code,
@@ -1296,10 +1299,11 @@
       region: currentPartner.region || 'Littoral (Cotonou)',
       city: currentPartner.city || 'Cotonou',
       category: cat,
-      category_label: catLabels[cat] || catLabels.difficultes_terrain,
+      category_label: catLabels[cat] || catLabels.difficulties,
       subject,
       description: desc,
-      status: 'En attente',
+      status: 'en_attente',
+      status_label: 'En attente',
       created_at: nowIso,
       updated_at: nowIso
     };
@@ -1426,7 +1430,7 @@
             <div style="background:#f8fafc; padding:12px; border-radius:12px;">
               <div style="font-weight:800; color:#2563eb; margin-bottom:6px;">📍 Localisation</div>
               <div><strong>Pays :</strong> ${esc(currentPartner.country || 'Bénin')}</div>
-              <div><strong>Département :</strong> ${esc(currentPartner.department || currentPartner.region || '—')}</div>
+              <div><strong>Département :</strong> ${esc((typeof currentPartner.department === 'object' && currentPartner.department ? currentPartner.department.department : currentPartner.department) || currentPartner.region || '—')}</div>
               <div><strong>Ville / Commune :</strong> ${esc(currentPartner.city || '—')}</div>
               <div><strong>Quartier / Zone :</strong> ${esc(currentPartner.district || currentPartner.intervention_zone || '—')}</div>
             </div>
@@ -1484,9 +1488,9 @@
           <p style="font-size:12px; color:#64748b; margin-bottom:12px;">Transmettez vos difficultés terrain, les plaintes/suggestions des clients et vendeurs ou vos idées d'amélioration.</p>
           <form onsubmit="event.preventDefault(); window.submitBaFieldReportFromPortal();" style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
             <select id="ba-rep-cat" class="bc-input">
-              <option value="difficultes_terrain">🚧 Difficultés rencontrées sur le terrain</option>
-              <option value="plaintes_suggestions_clients">💬 Plaintes et suggestions des clients et vendeurs</option>
-              <option value="idees_recommandations_ba">💡 Idées et recommandations du BA</option>
+              <option value="difficulties">⚠️ Difficultés rencontrées</option>
+              <option value="client_feedback">💬 Avis des clients</option>
+              <option value="suggestions">💡 Suggestions d’amélioration</option>
             </select>
             <input id="ba-rep-subject" type="text" required class="bc-input" placeholder="Sujet / Marché / Quartier concerné *" />
             <textarea id="ba-rep-desc" rows="3" required class="bc-input" placeholder="Description détaillée de la situation ou suggestion *"></textarea>
@@ -1497,9 +1501,10 @@
             <div style="padding:10px; border:1px solid #e2e8f0; border-radius:10px; margin-bottom:8px; font-size:12px;">
               <div style="display:flex; justify-content:space-between; font-weight:800;">
                 <span>${esc(r.subject)}</span>
-                <span style="color:#2563eb;">${esc(r.status)}</span>
+                <span style="color:#2563eb;">${esc(r.status_label || r.status)}</span>
               </div>
               <div style="color:#475569; margin-top:4px;">${esc(r.description)}</div>
+              ${r.admin_response ? `<div style="margin-top:6px; padding:6px 8px; background:#eff6ff; border-radius:6px; color:#1e40af; font-weight:700;">💬 Réponse : ${esc(r.admin_response)}</div>` : ''}
             </div>
           `).join('')}
         </div>
