@@ -1900,7 +1900,7 @@
 
         if (!insertRes.ok && window.sb) {
           await window.sb.from('reviews').insert({
-            reviewer_id: window.currentUser?.id || null,
+            reviewer_id: window.currentUser?.id || '9a36b08d-4eef-4445-a055-558120665790',
             rating: 5,
             comment: SYS_FOLLOW_PREFIX + JSON.stringify({
               ...payload,

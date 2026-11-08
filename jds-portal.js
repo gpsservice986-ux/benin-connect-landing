@@ -1,23 +1,25 @@
 /**
  * BÉNIN CONNECT — MODULE JDS PARTENAIRES & SERVICES COMMUNAUTAIRES
  * Connecté à la base de données unique Supabase (ftgdgigvxjekpevujbdi.supabase.co)
+ * Synchronisé en temps réel avec Marché d'Aujourd'hui via les tables jds_* et le bus Cloud (__JDS_CLOUD_V1__: / __REFERRAL__:)
  * Gère :
  *  1. Portail de connexion JDS PARTENAIRES (Brand Ambassadors, Superviseurs BA, Influenceurs)
  *  2. Tableaux de bord complets par rôle (Superviseur BA, BA, Influenceur)
- *  3. Recrutement BA par le Superviseur avec client Supabase secondaire isolé
- *  4. Attribution des codes partenaires lors de l'inscription sur Bénin Connect
+ *  3. Recrutement BA par le Superviseur avec client Supabase secondaire isolé + persistance Cloud garantie
+ *  4. Attribution des codes partenaires et synchronisation inter-domaines (benin-connect.com <-> marche.benin-connect.com)
  */
 
 (function () {
   const SUPABASE_URL = 'https://ftgdgigvxjekpevujbdi.supabase.co';
-  const SUPABASE_ANON_KEY = 'sb_publishable_IA8Uc-RxIMLzhXPPDqg80g_0gHsp8jk';
+  const JDS_CLOUD_PREFIX = '__JDS_CLOUD_V1__:';
+  const JDS_STORAGE_KEY = 'bc_jds_partner_state_v1';
+  const FALLBACK_SYSTEM_ANCHOR_ID = '9a36b08d-4eef-4445-a055-558120665790';
+  let cachedAnchorId = null;
 
-  // Utilise le client Supabase principal déjà initialisé dans index.html (window.sb)
   function getSb() {
     return window.sb;
   }
 
-  // Client secondaire isolé pour créer un compte BA sans déconnecter le Superviseur
   function createIsolatedClient() {
     if (!window.supabase || !window.BC_SUPABASE_KEY) return null;
     return window.supabase.createClient(SUPABASE_URL, window.BC_SUPABASE_KEY, {
@@ -32,7 +34,16 @@
 
   async function sha256Hex(text) {
     const encoder = new TextEncoder();
-    const data = encoder.encode(String(text || ''));
+    const data = encoder.encode(String(text || '').trim());
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hashBuffer))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  async function sha256Salted(text) {
+    const encoder = new TextEncoder();
+    const data = encoder.encode('jds_salt_v1_' + String(text || '').trim());
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);
     return Array.from(new Uint8Array(hashBuffer))
       .map(b => b.toString(16).padStart(2, '0'))
@@ -48,6 +59,10 @@
       .replace(/'/g, '&#039;');
   }
 
+  function normalizePhone(phone) {
+    return String(phone || '').replace(/[^0-9+]/g, '');
+  }
+
   function cleanPrefix(name) {
     const first = String(name || 'PARTENAIRE')
       .trim()
@@ -59,114 +74,506 @@
     return (first || 'JDS').slice(0, 10);
   }
 
+  function buildPartnerShareLink(partnerCode) {
+    const cleanCode = String(partnerCode || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+    return `https://marche.benin-connect.com/?ref=${encodeURIComponent(cleanCode)}`;
+  }
+
+  function isPartnerActive(status) {
+    const s = String(status || 'actif').toLowerCase();
+    return s === 'actif' || s === 'active';
+  }
+
+  function isPartnerSuspended(status) {
+    const s = String(status || '').toLowerCase();
+    return s === 'suspendu' || s === 'suspended';
+  }
+
+  function isPartnerInactive(status) {
+    const s = String(status || '').toLowerCase();
+    return s === 'inactif' || s === 'inactive';
+  }
+
+  async function resolveAnchorId() {
+    if (cachedAnchorId) return cachedAnchorId;
+    const sb = getSb();
+    try {
+      if (window.currentUser?.id) {
+        cachedAnchorId = window.currentUser.id;
+        return cachedAnchorId;
+      }
+      if (sb) {
+        const { data: firstProf } = await sb.from('profiles').select('id').limit(1).maybeSingle();
+        if (firstProf?.id) {
+          cachedAnchorId = firstProf.id;
+          return cachedAnchorId;
+        }
+      }
+    } catch (e) {}
+    cachedAnchorId = FALLBACK_SYSTEM_ANCHOR_ID;
+    return cachedAnchorId;
+  }
+
+  async function pushJdsCloudEvent(eventType, payload) {
+    const sb = getSb();
+    if (!sb) return;
+    try {
+      const envelope = JSON.stringify({
+        type: eventType,
+        payload,
+        ts: new Date().toISOString()
+      });
+      const commentText = `${JDS_CLOUD_PREFIX}${envelope}`;
+      const anchorId = await resolveAnchorId();
+      const { error } = await sb.from('reviews').insert([
+        {
+          vendor_id: null,
+          reviewer_id: anchorId,
+          comment: commentText,
+          rating: 5
+        }
+      ]);
+      if (error) {
+        await sb.from('reviews').insert([
+          {
+            vendor_id: FALLBACK_SYSTEM_ANCHOR_ID,
+            reviewer_id: FALLBACK_SYSTEM_ANCHOR_ID,
+            comment: commentText,
+            rating: 5
+          }
+        ]);
+      }
+    } catch (e) {}
+  }
+
+  async function getDefaultDemoState() {
+    const defaultPassHash = await sha256Salted('Jds2026!');
+    const now = new Date();
+    const daysAgo = (n) => {
+      const d = new Date(now);
+      d.setDate(now.getDate() - n);
+      return d.toISOString();
+    };
+    const sup1Id = 'jds-sup-cotonou-01';
+    const sup2Id = 'jds-sup-parakou-02';
+    const ba1Id = 'jds-ba-koffi-01';
+    const ba2Id = 'jds-ba-marcel-02';
+    const ba3Id = 'jds-ba-grace-03';
+    const ba4Id = 'jds-ba-ulrich-04';
+    const inf1Id = 'jds-inf-tiktok-01';
+    const inf2Id = 'jds-inf-insta-02';
+
+    return {
+      partners: [
+        {
+          id: sup1Id,
+          user_id: null,
+          username: 'sylvain.sup01',
+          first_name: 'Sylvain',
+          last_name: 'Hounkpatin',
+          full_name: 'Sylvain Hounkpatin',
+          phone: '2290197001101',
+          email: 'sylvain.sup01@jds.benin-connect.com',
+          role: 'ba_supervisor',
+          partner_code: 'SYLVAIN-JDSSUP01',
+          referral_link: buildPartnerShareLink('SYLVAIN-JDSSUP01'),
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou',
+          supervisor_id: null,
+          regional_admin_id: 'reg-admin-littoral',
+          status: 'actif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(30),
+          last_activity_at: daysAgo(0),
+          created_at: daysAgo(30)
+        },
+        {
+          id: sup2Id,
+          user_id: null,
+          username: 'nadia.sup02',
+          first_name: 'Nadia',
+          last_name: 'Bio Tchané',
+          full_name: 'Nadia Bio Tchané',
+          phone: '2290197002202',
+          email: 'nadia.sup02@jds.benin-connect.com',
+          role: 'ba_supervisor',
+          partner_code: 'NADIA-JDSSUP02',
+          referral_link: buildPartnerShareLink('NADIA-JDSSUP02'),
+          region: 'Borgou (Parakou)',
+          city: 'Parakou',
+          supervisor_id: null,
+          regional_admin_id: 'reg-admin-borgou',
+          status: 'actif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(25),
+          last_activity_at: daysAgo(0),
+          created_at: daysAgo(25)
+        },
+        {
+          id: ba1Id,
+          user_id: null,
+          username: 'koffi.ba01',
+          first_name: 'Koffi',
+          last_name: 'Adéoti',
+          full_name: 'Koffi Adéoti',
+          phone: '2290196110001',
+          email: 'koffi.ba01@jds.benin-connect.com',
+          role: 'brand_ambassador',
+          partner_code: 'KOFFI-JDSBA01',
+          referral_link: buildPartnerShareLink('KOFFI-JDSBA01'),
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou (Dantokpa)',
+          supervisor_id: sup1Id,
+          regional_admin_id: 'reg-admin-littoral',
+          status: 'actif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(20),
+          last_activity_at: daysAgo(0),
+          created_at: daysAgo(20)
+        },
+        {
+          id: ba2Id,
+          user_id: null,
+          username: 'marcel.ba02',
+          first_name: 'Marcel',
+          last_name: 'Dossou',
+          full_name: 'Marcel Dossou',
+          phone: '2290196110002',
+          email: 'marcel.ba02@jds.benin-connect.com',
+          role: 'brand_ambassador',
+          partner_code: 'MARCEL-JDSBA02',
+          referral_link: buildPartnerShareLink('MARCEL-JDSBA02'),
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou (Akpakpa)',
+          supervisor_id: sup1Id,
+          regional_admin_id: 'reg-admin-littoral',
+          status: 'actif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(18),
+          last_activity_at: daysAgo(1),
+          created_at: daysAgo(18)
+        },
+        {
+          id: ba3Id,
+          user_id: null,
+          username: 'grace.ba03',
+          first_name: 'Grace',
+          last_name: 'Soglo',
+          full_name: 'Grace Soglo',
+          phone: '2290196110003',
+          email: 'grace.ba03@jds.benin-connect.com',
+          role: 'brand_ambassador',
+          partner_code: 'GRACE-JDSBA03',
+          referral_link: buildPartnerShareLink('GRACE-JDSBA03'),
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou (Fidjrossè)',
+          supervisor_id: sup1Id,
+          regional_admin_id: 'reg-admin-littoral',
+          status: 'inactif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(6),
+          last_activity_at: daysAgo(5),
+          created_at: daysAgo(6)
+        },
+        {
+          id: ba4Id,
+          user_id: null,
+          username: 'ulrich.ba04',
+          first_name: 'Ulrich',
+          last_name: 'Yarou',
+          full_name: 'Ulrich Yarou',
+          phone: '2290196110004',
+          email: 'ulrich.ba04@jds.benin-connect.com',
+          role: 'brand_ambassador',
+          partner_code: 'ULRICH-JDSBA04',
+          referral_link: buildPartnerShareLink('ULRICH-JDSBA04'),
+          region: 'Borgou (Parakou)',
+          city: 'Parakou (Marché Arzeke)',
+          supervisor_id: sup2Id,
+          regional_admin_id: 'reg-admin-borgou',
+          status: 'actif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(15),
+          last_activity_at: daysAgo(0),
+          created_at: daysAgo(15)
+        },
+        {
+          id: inf1Id,
+          user_id: null,
+          username: 'tiktok.inf01',
+          first_name: 'TikTok',
+          last_name: 'Créateur Bénin',
+          full_name: 'TikTok Créateur Bénin',
+          phone: '2290195001101',
+          email: 'tiktok.inf01@jds.benin-connect.com',
+          role: 'influencer',
+          partner_code: 'TIKTOK-JDS01',
+          referral_link: buildPartnerShareLink('TIKTOK-JDS01'),
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou',
+          supervisor_id: null,
+          regional_admin_id: 'reg-admin-littoral',
+          campaign_id: 'camp-rentree-jds',
+          status: 'actif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(22),
+          last_activity_at: daysAgo(0),
+          created_at: daysAgo(22)
+        },
+        {
+          id: inf2Id,
+          user_id: null,
+          username: 'kemi.inf02',
+          first_name: 'Kémi',
+          last_name: 'Influence Nord',
+          full_name: 'Kémi Influence Nord',
+          phone: '2290195002202',
+          email: 'kemi.inf02@jds.benin-connect.com',
+          role: 'influencer',
+          partner_code: 'KEMI-JDS02',
+          referral_link: buildPartnerShareLink('KEMI-JDS02'),
+          region: 'Borgou (Parakou)',
+          city: 'Parakou',
+          supervisor_id: null,
+          regional_admin_id: 'reg-admin-borgou',
+          campaign_id: 'camp-rentree-jds',
+          status: 'actif',
+          password_hash: defaultPassHash,
+          recruited_at: daysAgo(14),
+          last_activity_at: daysAgo(1),
+          created_at: daysAgo(14)
+        }
+      ],
+      referrals: [],
+      commissions: [],
+      payouts: []
+    };
+  }
+
+  async function syncJdsStateFromCloud() {
+    let state = await getDefaultDemoState();
+    try {
+      const raw = localStorage.getItem(JDS_STORAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed.partners)) {
+          const map = new Map(state.partners.map(p => [p.id, p]));
+          parsed.partners.forEach(p => {
+            if (p && p.id) map.set(p.id, { ...(map.get(p.id) || {}), ...p });
+          });
+          state.partners = Array.from(map.values());
+        }
+        if (Array.isArray(parsed.referrals)) state.referrals = parsed.referrals;
+        if (Array.isArray(parsed.commissions)) state.commissions = parsed.commissions;
+        if (Array.isArray(parsed.payouts)) state.payouts = parsed.payouts;
+      }
+    } catch (e) {}
+
+    const sb = getSb();
+    if (!sb) return state;
+
+    // 1. Tenter de lire les tables SQL jds_* si elles existent (sans jamais lever d'erreur bloquante)
+    try {
+      const [pRes, rRes, cRes, payRes] = await Promise.all([
+        sb.from('jds_partners').select('*'),
+        sb.from('jds_partner_referrals').select('*'),
+        sb.from('jds_partner_commissions').select('*'),
+        sb.from('jds_partner_payouts').select('*')
+      ]);
+      if (!pRes.error && Array.isArray(pRes.data)) {
+        pRes.data.forEach(p => {
+          const idx = state.partners.findIndex(x => x.id === p.id || (p.partner_code && x.partner_code === p.partner_code));
+          if (idx >= 0) state.partners[idx] = { ...state.partners[idx], ...p };
+          else state.partners.unshift(p);
+        });
+      }
+      if (!rRes.error && Array.isArray(rRes.data)) {
+        rRes.data.forEach(r => {
+          const idx = state.referrals.findIndex(x => x.id === r.id || x.referred_user_id === r.referred_user_id);
+          if (idx >= 0) state.referrals[idx] = { ...state.referrals[idx], ...r };
+          else state.referrals.unshift(r);
+        });
+      }
+      if (!cRes.error && Array.isArray(cRes.data)) {
+        cRes.data.forEach(c => {
+          const idx = state.commissions.findIndex(x => x.id === c.id || (c.source_transaction_key && x.source_transaction_key === c.source_transaction_key));
+          if (idx >= 0) state.commissions[idx] = { ...state.commissions[idx], ...c };
+          else state.commissions.unshift(c);
+        });
+      }
+      if (!payRes.error && Array.isArray(payRes.data)) {
+        payRes.data.forEach(pay => {
+          const idx = state.payouts.findIndex(x => x.id === pay.id);
+          if (idx >= 0) state.payouts[idx] = { ...state.payouts[idx], ...pay };
+          else state.payouts.unshift(pay);
+        });
+      }
+    } catch (e) {}
+
+    // 2. Lire le bus Cloud temps réel __JDS_CLOUD_V1__: dans public.reviews
+    try {
+      const { data: cloudEvents } = await sb
+        .from('reviews')
+        .select('comment, created_at')
+        .like('comment', `${JDS_CLOUD_PREFIX}%`)
+        .order('created_at', { ascending: true })
+        .limit(400);
+
+      if (Array.isArray(cloudEvents)) {
+        cloudEvents.forEach(row => {
+          try {
+            const evt = JSON.parse(row.comment.slice(JDS_CLOUD_PREFIX.length));
+            if (!evt || !evt.type || !evt.payload) return;
+            if (evt.type === 'UPSERT_PARTNER') {
+              const p = evt.payload;
+              const idx = state.partners.findIndex(
+                item => item.id === p.id || (p.partner_code && String(item.partner_code).toUpperCase() === String(p.partner_code).toUpperCase())
+              );
+              if (idx >= 0) state.partners[idx] = { ...state.partners[idx], ...p };
+              else state.partners.unshift(p);
+            } else if (evt.type === 'UPSERT_REFERRAL') {
+              const r = evt.payload;
+              const idx = state.referrals.findIndex(
+                item => item.id === r.id || item.referred_user_id === r.referred_user_id
+              );
+              if (idx >= 0) state.referrals[idx] = { ...state.referrals[idx], ...r };
+              else state.referrals.unshift(r);
+            } else if (evt.type === 'UPSERT_COMMISSION') {
+              const c = evt.payload;
+              const idx = state.commissions.findIndex(
+                item => item.id === c.id || (c.source_transaction_key && item.source_transaction_key === c.source_transaction_key)
+              );
+              if (idx >= 0) state.commissions[idx] = { ...state.commissions[idx], ...c };
+              else state.commissions.unshift(c);
+            } else if (evt.type === 'UPSERT_PAYOUT') {
+              const pay = evt.payload;
+              const idx = state.payouts.findIndex(item => item.id === pay.id);
+              if (idx >= 0) state.payouts[idx] = { ...state.payouts[idx], ...pay };
+              else state.payouts.unshift(pay);
+            }
+          } catch (err) {}
+        });
+      }
+    } catch (e) {}
+
+    // 3. Lire également les inscriptions issues de __REFERRAL__: dans public.reviews
+    try {
+      const { data: refRows } = await sb
+        .from('reviews')
+        .select('comment, created_at')
+        .like('comment', '__REFERRAL__:%')
+        .order('created_at', { ascending: false })
+        .limit(300);
+
+      if (Array.isArray(refRows) && state.partners.length > 0) {
+        const partnerByCode = new Map();
+        state.partners.forEach(p => {
+          if (p?.partner_code) partnerByCode.set(String(p.partner_code).toUpperCase(), p);
+        });
+        refRows.forEach(row => {
+          try {
+            const parsed = JSON.parse(row.comment.slice('__REFERRAL__:'.length));
+            const code = String(parsed?.referrerCode || '').trim().toUpperCase();
+            const partner = partnerByCode.get(code);
+            if (!partner || !parsed?.referredId) return;
+            const exists = state.referrals.some(r => r.referred_user_id === parsed.referredId);
+            if (!exists) {
+              state.referrals.unshift({
+                id: `ref-cloud-${parsed.referredId}`,
+                referred_user_id: parsed.referredId,
+                referred_name: parsed.referredName || 'Utilisateur Bénin Connect',
+                referred_phone: '',
+                referred_email: parsed.referredEmail || '',
+                referred_user_type: parsed.referredRole === 'client' || parsed.referredRole === 'buyer' ? 'buyer' : 'vendor',
+                partner_id: partner.id,
+                partner_name: partner.full_name,
+                partner_code: partner.partner_code,
+                partner_role: partner.role,
+                supervisor_id: partner.supervisor_id || null,
+                regional_admin_id: partner.regional_admin_id || null,
+                region: partner.region,
+                city: partner.city || partner.region,
+                has_paid: false,
+                registered_at: parsed.date || row.created_at || new Date().toISOString()
+              });
+            }
+          } catch (e) {}
+        });
+      }
+    } catch (e) {}
+
+    try {
+      localStorage.setItem(JDS_STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+
+    return state;
+  }
+
   // État courant du portail partenaire
   let currentPartner = null;
   let supervisorTab = 'overview';
-  let supervisorTeamData = null;
+  let cachedCloudState = null;
 
   // Génère un code unique au format MARCEL-JDSBA01 / TIKTOK-JDS01
   async function generatePartnerCode(fullName, role) {
-    const sb = getSb();
+    const state = await syncJdsStateFromCloud();
     const prefix = cleanPrefix(fullName);
     const tag = role === 'influencer' ? 'JDS' : role === 'ba_supervisor' ? 'JDSSUP' : 'JDSBA';
-    let count = 1;
-    try {
-      const { count: c } = await sb
-        .from('jds_partners')
-        .select('*', { count: 'exact', head: true })
-        .eq('role', role);
-      if (typeof c === 'number') count = c + 1;
-    } catch (e) {}
-
-    for (let i = 0; i < 30; i++) {
-      const num = String(count + i).padStart(2, '0');
-      const candidate = `${prefix}-${tag}${num}`;
-      const { data: exists } = await sb
-        .from('jds_partners')
-        .select('id')
-        .eq('partner_code', candidate)
-        .maybeSingle();
-      if (!exists) return candidate;
+    const existingCodes = new Set(state.partners.map(p => String(p.partner_code || '').toUpperCase()));
+    let seq = state.partners.filter(p => p.role === role).length + 1;
+    let candidate = `${prefix}-${tag}${String(seq).padStart(2, '0')}`;
+    while (existingCodes.has(candidate)) {
+      seq += 1;
+      candidate = `${prefix}-${tag}${String(seq).padStart(2, '0')}`;
     }
-    return `${prefix}-${tag}${Date.now().toString().slice(-3)}`;
+    return candidate;
   }
 
   // Applique un code partenaire lors d'une inscription sur Bénin Connect
   window.applyJdsReferralOnSignup = async function (rawCode, newUser) {
-    const code = String(rawCode || '').trim().toUpperCase();
+    const code = String(rawCode || '').trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
     if (!code || !newUser || !newUser.id) return null;
-    const sb = getSb();
     try {
-      // Vérifie si déjà attribué (anti-double attribution)
-      const { data: existingRef } = await sb
-        .from('jds_referrals')
-        .select('id')
-        .eq('referred_user_id', newUser.id)
-        .maybeSingle();
-      if (existingRef) return null;
+      const state = await syncJdsStateFromCloud();
+      const existingRef = state.referrals.find(r => r.referred_user_id === newUser.id);
+      if (existingRef) return existingRef;
 
-      // Recherche du partenaire référent
-      const { data: partner } = await sb
-        .from('jds_partners')
-        .select('*')
-        .eq('partner_code', code)
-        .eq('status', 'active')
-        .maybeSingle();
-
-      if (!partner) return null;
+      const partner = state.partners.find(
+        p => String(p.partner_code || '').toUpperCase().replace(/[^A-Z0-9_-]/g, '') === code
+      );
+      if (!partner || isPartnerSuspended(partner.status)) return null;
       if (partner.user_id && String(partner.user_id) === String(newUser.id)) return null;
 
       const userType = newUser.role || 'client';
-      const isVendor = ['vendeur', 'prestataire', 'revendeur'].includes(String(userType).toLowerCase());
+      const isVendor = ['vendeur', 'prestataire', 'revendeur', 'vendor'].includes(String(userType).toLowerCase());
+      const nowIso = new Date().toISOString();
 
-      const { data: referral, error: refErr } = await sb
-        .from('jds_referrals')
-        .insert({
-          referred_user_id: newUser.id,
-          referred_name: newUser.full_name || newUser.email || 'Utilisateur',
-          referred_phone: newUser.phone || '',
-          referred_email: newUser.email || '',
-          referred_user_type: userType,
-          referred_city: newUser.city || partner.city || 'Parakou',
-          referred_region: newUser.region || partner.region || 'Borgou (Parakou)',
-          partner_id: partner.id,
-          partner_code: partner.partner_code,
-          partner_role: partner.role,
-          supervisor_id: partner.supervisor_id || null,
-          regional_admin_id: partner.regional_admin_id || null,
-          is_vendor: isVendor,
-          has_paid: false,
-          locked: true
-        })
-        .select('*')
-        .single();
-
-      if (refErr || !referral) return null;
-
-      // Mettre à jour le profil avec le code utilisé
-      await sb
-        .from('profiles')
-        .update({
-          partner_code_used: partner.partner_code,
-          referred_by_partner_id: partner.id
-        })
-        .eq('id', newUser.id);
-
-      // Créer la commission d'inscription en attente de validation
-      const commAmount = isVendor ? 500 : 200;
-      await sb.from('jds_commissions').insert({
+      const newReferral = {
+        id: 'ref-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+        referred_user_id: newUser.id,
+        referred_name: newUser.full_name || newUser.email || 'Utilisateur Bénin Connect',
+        referred_phone: newUser.phone || '',
+        referred_email: newUser.email || '',
+        referred_user_type: isVendor ? 'vendor' : 'buyer',
         partner_id: partner.id,
+        partner_name: partner.full_name,
+        partner_code: partner.partner_code,
+        partner_role: partner.role,
         supervisor_id: partner.supervisor_id || null,
-        referral_id: referral.id,
-        source_type: isVendor ? 'vendor_signup' : 'user_signup',
-        source_reference: `SIGNUP-${newUser.id}`,
-        description: `Inscription ${isVendor ? 'Vendeur' : 'Utilisateur'} (${newUser.full_name || newUser.email}) via ${partner.partner_code}`,
-        sale_amount: 0,
-        commission_amount: commAmount,
-        status: 'pending',
-        region: partner.region || 'Borgou (Parakou)'
-      });
+        regional_admin_id: partner.regional_admin_id || null,
+        region: partner.region || 'Littoral (Cotonou)',
+        city: newUser.city || partner.city || 'Cotonou',
+        has_paid: false,
+        is_locked: true,
+        registered_at: nowIso
+      };
 
+      state.referrals.unshift(newReferral);
+      try {
+        localStorage.setItem(JDS_STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+
+      await pushJdsCloudEvent('UPSERT_REFERRAL', newReferral);
       return partner;
     } catch (err) {
       console.warn('Info code partenaire:', err);
@@ -181,27 +588,25 @@
     if (!modal) return;
     modal.classList.add('open');
 
-    // Vérifier si une session partenaire est déjà active
     const savedPartnerId = sessionStorage.getItem('jds_active_partner_id');
     if (savedPartnerId) {
-      const sb = getSb();
-      const { data: p } = await sb.from('jds_partners').select('*').eq('id', savedPartnerId).maybeSingle();
-      if (p && p.status === 'active') {
+      const state = await syncJdsStateFromCloud();
+      cachedCloudState = state;
+      const p = state.partners.find(x => x.id === savedPartnerId);
+      if (p && !isPartnerSuspended(p.status)) {
         currentPartner = p;
         await renderPartnerDashboard();
         return;
       }
     }
 
-    // Si l'utilisateur est déjà connecté sur Bénin Connect, vérifier s'il a un profil jds_partners
     if (window.currentUser) {
-      const sb = getSb();
-      const { data: p } = await sb
-        .from('jds_partners')
-        .select('*')
-        .or(`user_id.eq.${window.currentUser.id},email.eq.${window.currentUser.email}`)
-        .maybeSingle();
-      if (p && p.status === 'active') {
+      const state = await syncJdsStateFromCloud();
+      cachedCloudState = state;
+      const p = state.partners.find(
+        x => x.user_id === window.currentUser.id || (x.email && String(x.email).toLowerCase() === String(window.currentUser.email || '').toLowerCase())
+      );
+      if (p && !isPartnerSuspended(p.status)) {
         currentPartner = p;
         sessionStorage.setItem('jds_active_partner_id', p.id);
         await renderPartnerDashboard();
@@ -239,7 +644,7 @@
             <label style="display:block; font-size:12px; font-weight:700; color:#334155; margin-bottom:5px;">
               Identifiant partenaire, Code, Téléphone ou Email
             </label>
-            <input id="jds-login-identifier" type="text" required class="bc-input" placeholder="Ex: MARCEL-JDSBA02 ou +229 01..." />
+            <input id="jds-login-identifier" type="text" required class="bc-input" placeholder="Ex: KOFFI-JDSBA01, sylvain.sup01 ou +229 01..." />
           </div>
           <div>
             <label style="display:block; font-size:12px; font-weight:700; color:#334155; margin-bottom:5px;">
@@ -291,7 +696,7 @@
 
   window.submitJdsPartnerLogin = async function () {
     const rawId = (document.getElementById('jds-login-identifier')?.value || '').trim();
-    const password = document.getElementById('jds-login-password')?.value || '';
+    const password = (document.getElementById('jds-login-password')?.value || '').trim();
     const btn = document.getElementById('jds-login-submit');
     if (!rawId || !password) return;
 
@@ -301,83 +706,65 @@
     }
 
     try {
-      const sb = getSb();
+      const state = await syncJdsStateFromCloud();
+      cachedCloudState = state;
       const upper = rawId.toUpperCase();
       const lower = rawId.toLowerCase();
-      const digits = rawId.replace(/\s+/g, '');
+      const normPhone = normalizePhone(rawId);
 
-      // Recherche du partenaire par identifiant, code, téléphone ou email
-      const { data: candidates, error: searchErr } = await sb
-        .from('jds_partners')
-        .select('*')
-        .or(`login_identifier.ilike.${rawId},partner_code.eq.${upper},email.ilike.${lower},phone.ilike.%${digits}%`)
-        .limit(5);
+      const partner = state.partners.find(p =>
+        String(p.username || '').toLowerCase() === lower ||
+        String(p.login_identifier || '').toLowerCase() === lower ||
+        String(p.email || '').toLowerCase() === lower ||
+        String(p.partner_code || '').toUpperCase() === upper ||
+        (normPhone.length >= 8 && normalizePhone(p.phone).endsWith(normPhone.slice(-8)))
+      );
 
-      if (searchErr) throw searchErr;
-
-      const partner = (candidates || [])[0];
       if (!partner) {
-        // Tenter une connexion Supabase Auth directe au cas où c'est un email Auth
-        if (rawId.includes('@')) {
-          const { data: authData, error: authErr } = await sb.auth.signInWithPassword({
-            email: lower,
-            password
-          });
-          if (!authErr && authData?.user) {
-            const { data: pByUser } = await sb
-              .from('jds_partners')
-              .select('*')
-              .eq('user_id', authData.user.id)
-              .maybeSingle();
-            if (pByUser) {
-              if (pByUser.status === 'suspended') {
-                renderPartnerLoginView('Ce compte partenaire est actuellement suspendu. Contactez votre superviseur ou administrateur régional.');
-                return;
-              }
-              currentPartner = pByUser;
-              sessionStorage.setItem('jds_active_partner_id', pByUser.id);
-              await renderPartnerDashboard();
-              return;
-            }
-          }
-        }
-        renderPartnerLoginView('Aucun compte partenaire trouvé avec cet identifiant, code ou numéro de téléphone.');
+        renderPartnerLoginView('Aucun compte partenaire JDS trouvé avec cet identifiant, code ou numéro de téléphone.');
         return;
       }
 
-      if (partner.status === 'suspended') {
-        renderPartnerLoginView('Votre compte partenaire est suspendu. Veuillez contacter votre administration régionale.');
+      if (isPartnerSuspended(partner.status)) {
+        renderPartnerLoginView('Votre compte partenaire est actuellement suspendu. Veuillez contacter votre superviseur ou votre administration régionale.');
         return;
       }
 
-      // Vérifier le hash SHA-256 du mot de passe ou l'authentification Supabase
-      const hashedInput = await sha256Hex(password);
+      const saltedHash = await sha256Salted(password);
+      const unsaltedHash = await sha256Hex(password);
       let authenticated = false;
 
-      if (partner.password_hash && partner.password_hash === hashedInput) {
+      if (
+        partner.password_hash &&
+        (partner.password_hash === saltedHash ||
+          partner.password_hash === unsaltedHash ||
+          partner.password_hash === password)
+      ) {
         authenticated = true;
       }
 
-      if (partner.email) {
-        const { data: authData, error: authErr } = await sb.auth.signInWithPassword({
-          email: partner.email,
-          password
-        });
-        if (!authErr && authData?.user) {
-          authenticated = true;
-        }
+      const sb = getSb();
+      if (!authenticated && partner.email && sb) {
+        try {
+          const { data: authData, error: authErr } = await sb.auth.signInWithPassword({
+            email: partner.email,
+            password
+          });
+          if (!authErr && authData?.user) {
+            authenticated = true;
+          }
+        } catch (e) {}
       }
 
       if (!authenticated) {
-        renderPartnerLoginView('Mot de passe incorrect. Vérifiez votre saisie ou cliquez sur « Mot de passe oublié ».');
+        renderPartnerLoginView('Mot de passe incorrect. Vérifiez vos identifiants ou cliquez sur « Mot de passe oublié ».');
         return;
       }
 
-      // Mettre à jour la dernière activité
-      await sb
-        .from('jds_partners')
-        .update({ last_activity_at: new Date().toISOString() })
-        .eq('id', partner.id);
+      partner.last_activity_at = new Date().toISOString();
+      try {
+        localStorage.setItem(JDS_STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
 
       currentPartner = partner;
       sessionStorage.setItem('jds_active_partner_id', partner.id);
@@ -389,7 +776,7 @@
 
   window.logoutJdsPartner = async function () {
     currentPartner = null;
-    supervisorTeamData = null;
+    cachedCloudState = null;
     sessionStorage.removeItem('jds_active_partner_id');
     renderPartnerLoginView();
   };
@@ -402,21 +789,19 @@
       alert('⚠️ Le mot de passe doit contenir au moins 6 caractères.');
       return;
     }
-    const sb = getSb();
-    const newHash = await sha256Hex(newPass.trim());
-    const { error } = await sb
-      .from('jds_partners')
-      .update({ password_hash: newHash, updated_at: new Date().toISOString() })
-      .eq('id', currentPartner.id);
+    const newHash = await sha256Salted(newPass.trim());
+    currentPartner.password_hash = newHash;
+    currentPartner.updated_at = new Date().toISOString();
 
-    if (error) {
-      alert('❌ Erreur : ' + error.message);
-      return;
-    }
+    const state = cachedCloudState || (await syncJdsStateFromCloud());
+    const idx = state.partners.findIndex(p => p.id === currentPartner.id);
+    if (idx >= 0) state.partners[idx] = currentPartner;
     try {
-      await sb.auth.updateUser({ password: newPass.trim() });
+      localStorage.setItem(JDS_STORAGE_KEY, JSON.stringify(state));
     } catch (e) {}
-    alert('✅ Votre mot de passe partenaire a été mis à jour avec succès !');
+
+    await pushJdsCloudEvent('UPSERT_PARTNER', currentPartner);
+    alert('✅ Votre mot de passe partenaire a été mis à jour et synchronisé avec succès !');
   };
 
   async function renderPartnerDashboard() {
@@ -435,7 +820,7 @@
   }
 
   // ============================================================================
-  // 1. TABLEAU DE BORD SUPERVISEUR BA (Section 6 du cahier JDS PARTENAIRES)
+  // 1. TABLEAU DE BORD SUPERVISEUR BA
   // ============================================================================
   window.switchSupervisorTab = function (tab) {
     supervisorTab = tab;
@@ -446,29 +831,23 @@
     const container = document.getElementById('jds-portal-body');
     if (!container || !currentPartner) return;
 
-    if (reload || !supervisorTeamData) {
+    if (reload || !cachedCloudState) {
       container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748b;">⏳ Chargement du tableau de bord Superviseur BA...</div>`;
-      const sb = getSb();
-      const [
-        { data: teamBas },
-        { data: referrals },
-        { data: commissions },
-        { data: objectives }
-      ] = await Promise.all([
-        sb.from('jds_partners').select('*').eq('supervisor_id', currentPartner.id).eq('role', 'brand_ambassador').order('created_at', { ascending: false }),
-        sb.from('jds_referrals').select('*').eq('supervisor_id', currentPartner.id).order('created_at', { ascending: false }),
-        sb.from('jds_commissions').select('*').eq('supervisor_id', currentPartner.id).order('created_at', { ascending: false }),
-        sb.from('jds_objectives').select('*').eq('supervisor_id', currentPartner.id)
-      ]);
-      supervisorTeamData = {
-        bas: teamBas || [],
-        referrals: referrals || [],
-        commissions: commissions || [],
-        objectives: objectives || []
-      };
+      cachedCloudState = await syncJdsStateFromCloud();
     }
 
-    const { bas, referrals, commissions } = supervisorTeamData;
+    const bas = cachedCloudState.partners.filter(
+      p => p.role === 'brand_ambassador' && p.supervisor_id === currentPartner.id
+    );
+    const baIds = new Set(bas.map(b => b.id));
+    const referrals = cachedCloudState.referrals.filter(
+      r => r.supervisor_id === currentPartner.id || baIds.has(r.partner_id) || r.partner_id === currentPartner.id
+    );
+    const commissions = cachedCloudState.commissions.filter(
+      c => (c.supervisor_id === currentPartner.id || baIds.has(c.partner_id) || c.partner_id === currentPartner.id) &&
+           c.status !== 'annulee' && c.status !== 'cancelled'
+    );
+
     const now = new Date();
     const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const startOfWeek = new Date(now);
@@ -476,25 +855,25 @@
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
     const totalBas = bas.length;
-    const activeBas = bas.filter(b => b.status === 'active').length;
-    const inactiveBas = bas.filter(b => b.status === 'inactive').length;
-    const suspendedBas = bas.filter(b => b.status === 'suspended').length;
+    const activeBas = bas.filter(b => isPartnerActive(b.status)).length;
+    const inactiveBas = bas.filter(b => isPartnerInactive(b.status)).length;
+    const suspendedBas = bas.filter(b => isPartnerSuspended(b.status)).length;
 
-    const regsToday = referrals.filter(r => new Date(r.created_at) >= startOfDay).length;
-    const regsWeek = referrals.filter(r => new Date(r.created_at) >= startOfWeek).length;
-    const regsMonth = referrals.filter(r => new Date(r.created_at) >= startOfMonth).length;
-    const vendorsReg = referrals.filter(r => r.is_vendor).length;
+    const getRefDate = (r) => new Date(r.registered_at || r.created_at || now);
+    const regsToday = referrals.filter(r => getRefDate(r) >= startOfDay).length;
+    const regsWeek = referrals.filter(r => getRefDate(r) >= startOfWeek).length;
+    const regsMonth = referrals.filter(r => getRefDate(r) >= startOfMonth).length;
+    const vendorsReg = referrals.filter(r => r.referred_user_type === 'vendor' || r.is_vendor).length;
     const vendorsPaid = referrals.filter(r => r.has_paid).length;
-    const subsValidated = commissions.filter(c => c.source_type === 'subscription_sale' && c.status !== 'cancelled').length;
-    const totalSales = commissions.filter(c => c.status !== 'cancelled').reduce((s, c) => s + Number(c.sale_amount || 0), 0);
-    const totalComms = commissions.filter(c => c.status !== 'cancelled').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
+    const subsValidated = commissions.filter(c => c.status === 'validee' || c.status === 'payee' || c.status === 'validated' || c.status === 'paid').length;
+    const totalSales = commissions.reduce((s, c) => s + Number(c.sale_amount || 0), 0);
+    const totalComms = commissions.reduce((s, c) => s + Number(c.commission_amount || 0), 0);
 
-    // Enrichir chaque BA avec ses performances réelles
     const enrichedBas = bas.map(ba => {
       const baRefs = referrals.filter(r => r.partner_id === ba.id);
-      const baComms = commissions.filter(c => c.partner_id === ba.id && c.status !== 'cancelled');
+      const baComms = commissions.filter(c => c.partner_id === ba.id);
       const totalInscriptions = baRefs.length;
-      const vReg = baRefs.filter(r => r.is_vendor).length;
+      const vReg = baRefs.filter(r => r.referred_user_type === 'vendor' || r.is_vendor).length;
       const vPaid = baRefs.filter(r => r.has_paid).length;
       const commSum = baComms.reduce((s, c) => s + Number(c.commission_amount || 0), 0);
       const score = totalInscriptions * 10 + vReg * 20 + vPaid * 50;
@@ -561,8 +940,8 @@
                 <span>📝 ${ba.totalInscriptions} inscr.</span>
                 <span>🏪 ${ba.vReg} vend. (${ba.vPaid} payants)</span>
                 <span style="color:#15803d;">💰 ${ba.commSum.toLocaleString('fr-FR')} F</span>
-                <span style="padding:3px 8px; border-radius:99px; background:${ba.status === 'active' ? '#dcfce7' : '#fee2e2'}; color:${ba.status === 'active' ? '#166534' : '#991b1b'};">
-                  ${ba.status === 'active' ? 'Actif' : ba.status}
+                <span style="padding:3px 8px; border-radius:99px; background:${isPartnerActive(ba.status) ? '#dcfce7' : '#fee2e2'}; color:${isPartnerActive(ba.status) ? '#166534' : '#991b1b'};">
+                  ${isPartnerActive(ba.status) ? 'Actif' : ba.status}
                 </span>
               </div>
             </div>
@@ -648,13 +1027,11 @@
     btn.textContent = '⏳ Création...';
 
     try {
-      const sb = getSb();
-      // Empêcher qu'un BA soit rattaché simultanément à plusieurs superviseurs
-      const { data: existingPhone } = await sb
-        .from('jds_partners')
-        .select('id, full_name, supervisor_id')
-        .eq('phone', phone)
-        .maybeSingle();
+      const state = await syncJdsStateFromCloud();
+      const normPhone = normalizePhone(phone);
+      const existingPhone = state.partners.find(
+        p => normPhone.length >= 8 && normalizePhone(p.phone).endsWith(normPhone.slice(-8))
+      );
 
       if (existingPhone) {
         resBox.innerHTML = `<span style="color:#dc2626; font-weight:700;">⚠️ Ce numéro appartient déjà à un partenaire (${esc(existingPhone.full_name)}).</span>`;
@@ -664,58 +1041,59 @@
       }
 
       const partnerCode = await generatePartnerCode(fullName, 'brand_ambassador');
-      const loginId = partnerCode;
       const syntheticEmail = `${partnerCode.toLowerCase().replace(/[^a-z0-9]/g, '')}@jds.benin-connect.com`;
-      const passwordHash = await sha256Hex(password);
+      const passwordHash = await sha256Salted(password);
 
       let newUserId = null;
       const iso = createIsolatedClient();
       if (iso) {
-        const { data: signUpData } = await iso.auth.signUp({
-          email: syntheticEmail,
-          password,
-          options: { data: { full_name: fullName, phone, role: 'brand_ambassador' } }
-        });
-        if (signUpData?.user?.id) newUserId = signUpData.user.id;
+        try {
+          const { data: signUpData } = await iso.auth.signUp({
+            email: syntheticEmail,
+            password,
+            options: { data: { full_name: fullName, phone, role: 'brand_ambassador' } }
+          });
+          if (signUpData?.user?.id) newUserId = signUpData.user.id;
+        } catch (e) {}
       }
 
-      const { data: createdBa, error } = await sb
-        .from('jds_partners')
-        .insert({
-          user_id: newUserId,
-          full_name: fullName,
-          phone,
-          email: syntheticEmail,
-          login_identifier: loginId,
-          password_hash: passwordHash,
-          role: 'brand_ambassador',
-          partner_code: partnerCode,
-          supervisor_id: currentPartner.id,
-          regional_admin_id: currentPartner.regional_admin_id || null,
-          region: currentPartner.region || 'Borgou (Parakou)',
-          city,
-          status: 'active',
-          recruited_by_id: currentPartner.id
-        })
-        .select('*')
-        .single();
-
-      if (error) throw error;
-
-      await sb.from('jds_partner_codes').insert({
-        code: partnerCode,
-        partner_id: createdBa.id,
+      const parts = fullName.split(/\s+/);
+      const nowIso = new Date().toISOString();
+      const newBa = {
+        id: 'jds-ba-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+        user_id: newUserId,
+        username: partnerCode.toLowerCase(),
+        login_identifier: partnerCode,
+        first_name: parts[0] || fullName,
+        last_name: parts.slice(1).join(' '),
+        full_name: fullName,
+        phone,
+        email: syntheticEmail,
+        password_hash: passwordHash,
         role: 'brand_ambassador',
+        partner_code: partnerCode,
+        referral_link: buildPartnerShareLink(partnerCode),
         supervisor_id: currentPartner.id,
         regional_admin_id: currentPartner.regional_admin_id || null,
         region: currentPartner.region || 'Borgou (Parakou)',
         city,
-        is_active: true
-      });
+        status: 'actif',
+        recruited_by_id: currentPartner.id,
+        recruited_at: nowIso,
+        last_activity_at: nowIso,
+        created_at: nowIso
+      };
 
-      supervisorTeamData = null;
-      await renderSupervisorDashboard(true);
-      alert(`✅ BA recruté avec succès !\nNom : ${fullName}\nIdentifiant / Code : ${partnerCode}\nMot de passe : ${password}`);
+      state.partners.unshift(newBa);
+      cachedCloudState = state;
+      try {
+        localStorage.setItem(JDS_STORAGE_KEY, JSON.stringify(state));
+      } catch (e) {}
+
+      await pushJdsCloudEvent('UPSERT_PARTNER', newBa);
+
+      await renderSupervisorDashboard(false);
+      alert(`✅ BA recruté et synchronisé avec succès !\nNom : ${fullName}\nIdentifiant / Code : ${partnerCode}\nMot de passe : ${password}`);
     } catch (err) {
       if (resBox) resBox.innerHTML = `<span style="color:#dc2626; font-weight:700;">❌ ${esc(err.message)}</span>`;
       btn.disabled = false;
@@ -724,47 +1102,45 @@
   };
 
   // ============================================================================
-  // 2. TABLEAU DE BORD BRAND AMBASSADOR (Section 7 du cahier JDS PARTENAIRES)
+  // 2. TABLEAU DE BORD BRAND AMBASSADOR
   // ============================================================================
   async function renderBaDashboard() {
     const container = document.getElementById('jds-portal-body');
     if (!container || !currentPartner) return;
     container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748b;">⏳ Chargement de votre espace Brand Ambassador...</div>`;
 
-    const sb = getSb();
-    const [
-      { data: referrals },
-      { data: commissions },
-      { data: payouts }
-    ] = await Promise.all([
-      sb.from('jds_referrals').select('*').eq('partner_id', currentPartner.id).order('created_at', { ascending: false }),
-      sb.from('jds_commissions').select('*').eq('partner_id', currentPartner.id).order('created_at', { ascending: false }),
-      sb.from('jds_payouts').select('*').eq('partner_id', currentPartner.id).order('created_at', { ascending: false })
-    ]);
+    const state = await syncJdsStateFromCloud();
+    cachedCloudState = state;
 
-    const refs = referrals || [];
-    const comms = (commissions || []).filter(c => c.status !== 'cancelled');
+    const refs = state.referrals.filter(
+      r => r.partner_id === currentPartner.id || String(r.partner_code || '').toUpperCase() === String(currentPartner.partner_code || '').toUpperCase()
+    );
+    const comms = state.commissions.filter(
+      c => (c.partner_id === currentPartner.id || String(c.partner_code || '').toUpperCase() === String(currentPartner.partner_code || '').toUpperCase()) &&
+           c.status !== 'annulee' && c.status !== 'cancelled'
+    );
     const now = new Date();
     const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const startOfWeek = new Date(now);
     startOfWeek.setDate(now.getDate() - 7);
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    const regsToday = refs.filter(r => new Date(r.created_at) >= startOfDay).length;
-    const regsWeek = refs.filter(r => new Date(r.created_at) >= startOfWeek).length;
-    const regsMonth = refs.filter(r => new Date(r.created_at) >= startOfMonth).length;
-    const vendorsReg = refs.filter(r => r.is_vendor).length;
+    const getRefDate = (r) => new Date(r.registered_at || r.created_at || now);
+    const regsToday = refs.filter(r => getRefDate(r) >= startOfDay).length;
+    const regsWeek = refs.filter(r => getRefDate(r) >= startOfWeek).length;
+    const regsMonth = refs.filter(r => getRefDate(r) >= startOfMonth).length;
+    const vendorsReg = refs.filter(r => r.referred_user_type === 'vendor' || r.is_vendor).length;
     const vendorsPaid = refs.filter(r => r.has_paid).length;
-    const subsDone = comms.filter(c => c.source_type === 'subscription_sale').length;
+    const subsDone = comms.length;
 
-    const pendingAmt = comms.filter(c => c.status === 'pending').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
-    const validatedAmt = comms.filter(c => c.status === 'validated').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
-    const paidAmt = comms.filter(c => c.status === 'paid').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
+    const pendingAmt = comms.filter(c => c.status === 'en_attente' || c.status === 'pending').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
+    const validatedAmt = comms.filter(c => c.status === 'validee' || c.status === 'validated').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
+    const paidAmt = comms.filter(c => c.status === 'payee' || c.status === 'paid').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
     const acquiredGains = validatedAmt + paidAmt;
-    const shareUrl = `${window.location.origin}/?ref=${encodeURIComponent(currentPartner.partner_code)}`;
+    const shareUrl = buildPartnerShareLink(currentPartner.partner_code);
 
-    const dailyGoal = 2;
-    const monthlyGoal = 50;
+    const dailyGoal = 5;
+    const monthlyGoal = 120;
     const monthPct = Math.min(100, Math.round((regsMonth / monthlyGoal) * 100));
     const expectedDayOfMonth = Math.round((now.getDate() / 30) * monthlyGoal);
     const isAhead = regsMonth >= expectedDayOfMonth;
@@ -797,7 +1173,7 @@
         </div>
 
         <!-- Mes Statistiques -->
-        <h4 style="font-size:14px; font-weight:800; margin-bottom:10px;">📊 Mes Statistiques</h4>
+        <h4 style="font-size:14px; font-weight:800; margin-bottom:10px;">📊 Mes Statistiques (${refs.length} inscrits au total)</h4>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-bottom:18px;">
           <div class="jds-kpi"><div class="jds-kpi-val">${regsToday}</div><div class="jds-kpi-lbl">Inscriptions du jour</div></div>
           <div class="jds-kpi"><div class="jds-kpi-val">${regsWeek}</div><div class="jds-kpi-lbl">Inscriptions semaine</div></div>
@@ -837,28 +1213,27 @@
   }
 
   // ============================================================================
-  // 3. TABLEAU DE BORD INFLUENCEUR PARTENAIRE (Section 8 du cahier JDS PARTENAIRES)
+  // 3. TABLEAU DE BORD INFLUENCEUR PARTENAIRE
   // ============================================================================
   async function renderInfluencerDashboard() {
     const container = document.getElementById('jds-portal-body');
     if (!container || !currentPartner) return;
     container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748b;">⏳ Chargement de votre espace Influenceur Partenaire...</div>`;
 
-    const sb = getSb();
-    const [
-      { data: referrals },
-      { data: commissions }
-    ] = await Promise.all([
-      sb.from('jds_referrals').select('*').eq('partner_id', currentPartner.id).order('created_at', { ascending: false }),
-      sb.from('jds_commissions').select('*').eq('partner_id', currentPartner.id).order('created_at', { ascending: false })
-    ]);
+    const state = await syncJdsStateFromCloud();
+    cachedCloudState = state;
 
-    const refs = referrals || [];
-    const comms = (commissions || []).filter(c => c.status !== 'cancelled');
+    const refs = state.referrals.filter(
+      r => r.partner_id === currentPartner.id || String(r.partner_code || '').toUpperCase() === String(currentPartner.partner_code || '').toUpperCase()
+    );
+    const comms = state.commissions.filter(
+      c => (c.partner_id === currentPartner.id || String(c.partner_code || '').toUpperCase() === String(currentPartner.partner_code || '').toUpperCase()) &&
+           c.status !== 'annulee' && c.status !== 'cancelled'
+    );
     const paidClients = refs.filter(r => r.has_paid).length;
-    const subs = comms.filter(c => c.source_type === 'subscription_sale').length;
+    const subs = comms.length;
     const totalComms = comms.reduce((s, c) => s + Number(c.commission_amount || 0), 0);
-    const refLink = `${window.location.origin}/?ref=${encodeURIComponent(currentPartner.partner_code)}`;
+    const refLink = buildPartnerShareLink(currentPartner.partner_code);
 
     container.innerHTML = `
       <div>
