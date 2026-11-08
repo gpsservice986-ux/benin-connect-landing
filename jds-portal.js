@@ -11,6 +11,7 @@
 
 (function () {
   const SUPABASE_URL = 'https://ftgdgigvxjekpevujbdi.supabase.co';
+  const DEFAULT_ANON_KEY = 'sb_publishable_IA8Uc-RxIMLzhXPPDqg80g_0gHsp8jk';
   const JDS_CLOUD_PREFIX = '__JDS_CLOUD_V1__:';
   const JDS_STORAGE_KEY = 'bc_jds_partner_state_v1';
   const FALLBACK_SYSTEM_ANCHOR_ID = '9a36b08d-4eef-4445-a055-558120665790';
@@ -18,6 +19,39 @@
 
   function getSb() {
     return window.sb;
+  }
+
+  function getAnonKey() {
+    return window.BC_SUPABASE_KEY || DEFAULT_ANON_KEY;
+  }
+
+  async function restSelect(queryPath) {
+    const key = getAnonKey();
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${queryPath}`, {
+      method: 'GET',
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        Accept: 'application/json'
+      }
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  }
+
+  async function restInsert(table, rowObj) {
+    const key = getAnonKey();
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify(rowObj)
+    });
+    return res.ok;
   }
 
   function createIsolatedClient() {
@@ -108,6 +142,12 @@
           cachedAnchorId = firstProf.id;
           return cachedAnchorId;
         }
+      } else {
+        const rows = await restSelect('profiles?select=id&limit=1');
+        if (Array.isArray(rows) && rows[0]?.id) {
+          cachedAnchorId = rows[0].id;
+          return cachedAnchorId;
+        }
       }
     } catch (e) {}
     cachedAnchorId = FALLBACK_SYSTEM_ANCHOR_ID;
@@ -115,8 +155,6 @@
   }
 
   async function pushJdsCloudEvent(eventType, payload) {
-    const sb = getSb();
-    if (!sb) return;
     try {
       const envelope = JSON.stringify({
         type: eventType,
@@ -125,23 +163,41 @@
       });
       const commentText = `${JDS_CLOUD_PREFIX}${envelope}`;
       const anchorId = await resolveAnchorId();
-      const { error } = await sb.from('reviews').insert([
-        {
-          vendor_id: null,
-          reviewer_id: anchorId,
-          comment: commentText,
-          rating: 5
-        }
-      ]);
-      if (error) {
-        await sb.from('reviews').insert([
+      const sb = getSb();
+      if (sb) {
+        const { error } = await sb.from('reviews').insert([
           {
-            vendor_id: FALLBACK_SYSTEM_ANCHOR_ID,
-            reviewer_id: FALLBACK_SYSTEM_ANCHOR_ID,
+            vendor_id: null,
+            reviewer_id: anchorId,
             comment: commentText,
             rating: 5
           }
         ]);
+        if (error) {
+          await sb.from('reviews').insert([
+            {
+              vendor_id: FALLBACK_SYSTEM_ANCHOR_ID,
+              reviewer_id: FALLBACK_SYSTEM_ANCHOR_ID,
+              comment: commentText,
+              rating: 5
+            }
+          ]);
+        }
+      } else {
+        const ok = await restInsert('reviews', {
+          vendor_id: null,
+          reviewer_id: anchorId,
+          comment: commentText,
+          rating: 5
+        });
+        if (!ok) {
+          await restInsert('reviews', {
+            vendor_id: FALLBACK_SYSTEM_ANCHOR_ID,
+            reviewer_id: FALLBACK_SYSTEM_ANCHOR_ID,
+            comment: commentText,
+            rating: 5
+          });
+        }
       }
     } catch (e) {}
   }
@@ -344,9 +400,277 @@
           created_at: daysAgo(14)
         }
       ],
-      referrals: [],
-      commissions: [],
-      payouts: []
+      referrals: [
+        {
+          id: 'ref-demo-01',
+          referred_user_id: 'usr-demo-vendor-01',
+          referred_name: 'Boutique Maman Clarisse',
+          referred_phone: '2290197100001',
+          referred_user_type: 'vendor',
+          partner_id: ba1Id,
+          partner_name: 'Koffi Adéoti',
+          partner_code: 'KOFFI-JDSBA01',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou',
+          has_paid: true,
+          first_paid_at: daysAgo(0),
+          is_locked: true,
+          registered_at: daysAgo(0)
+        },
+        {
+          id: 'ref-demo-02',
+          referred_user_id: 'usr-demo-vendor-02',
+          referred_name: 'Électro Dantokpa Express',
+          referred_phone: '2290197100002',
+          referred_user_type: 'vendor',
+          partner_id: ba1Id,
+          partner_name: 'Koffi Adéoti',
+          partner_code: 'KOFFI-JDSBA01',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou',
+          has_paid: true,
+          first_paid_at: daysAgo(1),
+          is_locked: true,
+          registered_at: daysAgo(1)
+        },
+        {
+          id: 'ref-demo-03',
+          referred_user_id: 'usr-demo-vendor-03',
+          referred_name: 'Mode Africaine Fifamè',
+          referred_phone: '2290197100003',
+          referred_user_type: 'vendor',
+          partner_id: ba1Id,
+          partner_name: 'Koffi Adéoti',
+          partner_code: 'KOFFI-JDSBA01',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou',
+          has_paid: false,
+          first_paid_at: null,
+          is_locked: true,
+          registered_at: daysAgo(0)
+        },
+        {
+          id: 'ref-demo-04',
+          referred_user_id: 'usr-demo-vendor-04',
+          referred_name: 'Quincaillerie Akpakpa Pro',
+          referred_phone: '2290197100004',
+          referred_user_type: 'vendor',
+          partner_id: ba2Id,
+          partner_name: 'Marcel Dossou',
+          partner_code: 'MARCEL-JDSBA02',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou',
+          has_paid: true,
+          first_paid_at: daysAgo(2),
+          is_locked: true,
+          registered_at: daysAgo(2)
+        },
+        {
+          id: 'ref-demo-05',
+          referred_user_id: 'usr-demo-vendor-05',
+          referred_name: 'Coopérative Karité Borgou',
+          referred_phone: '2290197100005',
+          referred_user_type: 'vendor',
+          partner_id: ba4Id,
+          partner_name: 'Ulrich Yarou',
+          partner_code: 'ULRICH-JDSBA04',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup2Id,
+          region: 'Borgou (Parakou)',
+          city: 'Parakou',
+          has_paid: true,
+          first_paid_at: daysAgo(1),
+          is_locked: true,
+          registered_at: daysAgo(1)
+        },
+        {
+          id: 'ref-demo-06',
+          referred_user_id: 'usr-demo-vendor-06',
+          referred_name: 'Fashion Beauty Cotonou',
+          referred_phone: '2290197100006',
+          referred_user_type: 'vendor',
+          partner_id: inf1Id,
+          partner_name: 'TikTok Créateur Bénin',
+          partner_code: 'TIKTOK-JDS01',
+          partner_role: 'influencer',
+          supervisor_id: null,
+          region: 'Littoral (Cotonou)',
+          city: 'Cotonou',
+          has_paid: true,
+          first_paid_at: daysAgo(0),
+          is_locked: true,
+          registered_at: daysAgo(0)
+        }
+      ],
+      commissions: [
+        {
+          id: 'comm-demo-01',
+          source_transaction_key: 'demo_tx_01',
+          referral_id: 'ref-demo-01',
+          referred_user_id: 'usr-demo-vendor-01',
+          referred_user_name: 'Boutique Maman Clarisse',
+          partner_id: ba1Id,
+          partner_name: 'Koffi Adéoti',
+          partner_code: 'KOFFI-JDSBA01',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          plan_key: 'gold_5000',
+          plan_name: 'Forfait 5 000 F (Gold)',
+          sale_amount: 5000,
+          commission_amount: 1000,
+          supervisor_bonus_amount: 100,
+          status: 'validee',
+          payment_method: 'MTN MoMo',
+          payment_reference: 'MOMO-884120',
+          validated_at: daysAgo(0),
+          created_at: daysAgo(0)
+        },
+        {
+          id: 'comm-demo-02',
+          source_transaction_key: 'demo_tx_02',
+          referral_id: 'ref-demo-02',
+          referred_user_id: 'usr-demo-vendor-02',
+          referred_user_name: 'Électro Dantokpa Express',
+          partner_id: ba1Id,
+          partner_name: 'Koffi Adéoti',
+          partner_code: 'KOFFI-JDSBA01',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          plan_key: 'premium_10000',
+          plan_name: 'Forfait 10 000 F (Premium)',
+          sale_amount: 10000,
+          commission_amount: 1500,
+          supervisor_bonus_amount: 200,
+          status: 'payee',
+          payment_method: 'MTN MoMo',
+          payment_reference: 'MOMO-771920',
+          validated_at: daysAgo(1),
+          paid_at: daysAgo(1),
+          payout_id: 'pay-demo-01',
+          created_at: daysAgo(1)
+        },
+        {
+          id: 'comm-demo-03',
+          source_transaction_key: 'demo_tx_03',
+          referral_id: 'ref-demo-03',
+          referred_user_id: 'usr-demo-vendor-03',
+          referred_user_name: 'Mode Africaine Fifamè',
+          partner_id: ba1Id,
+          partner_name: 'Koffi Adéoti',
+          partner_code: 'KOFFI-JDSBA01',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          plan_key: 'bronze_2000',
+          plan_name: 'Forfait 2 000 F (Bronze)',
+          sale_amount: 2000,
+          commission_amount: 500,
+          supervisor_bonus_amount: 50,
+          status: 'en_attente',
+          payment_method: 'Moov Money',
+          payment_reference: 'MOOV-991023',
+          created_at: daysAgo(0)
+        },
+        {
+          id: 'comm-demo-04',
+          source_transaction_key: 'demo_tx_04',
+          referral_id: 'ref-demo-04',
+          referred_user_id: 'usr-demo-vendor-04',
+          referred_user_name: 'Quincaillerie Akpakpa Pro',
+          partner_id: ba2Id,
+          partner_name: 'Marcel Dossou',
+          partner_code: 'MARCEL-JDSBA02',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup1Id,
+          region: 'Littoral (Cotonou)',
+          plan_key: 'service_pub_jds',
+          plan_name: 'Service publicitaire JDS 15 000 F',
+          sale_amount: 15000,
+          commission_amount: 2000,
+          supervisor_bonus_amount: 300,
+          status: 'validee',
+          payment_method: 'MTN MoMo',
+          payment_reference: 'MOMO-665109',
+          validated_at: daysAgo(2),
+          created_at: daysAgo(2)
+        },
+        {
+          id: 'comm-demo-05',
+          source_transaction_key: 'demo_tx_05',
+          referral_id: 'ref-demo-05',
+          referred_user_id: 'usr-demo-vendor-05',
+          referred_user_name: 'Coopérative Karité Borgou',
+          partner_id: ba4Id,
+          partner_name: 'Ulrich Yarou',
+          partner_code: 'ULRICH-JDSBA04',
+          partner_role: 'brand_ambassador',
+          supervisor_id: sup2Id,
+          region: 'Borgou (Parakou)',
+          plan_key: 'gold_5000',
+          plan_name: 'Forfait 5 000 F (Gold)',
+          sale_amount: 5000,
+          commission_amount: 1000,
+          supervisor_bonus_amount: 100,
+          status: 'validee',
+          payment_method: 'MTN MoMo',
+          payment_reference: 'MOMO-554012',
+          validated_at: daysAgo(1),
+          created_at: daysAgo(1)
+        },
+        {
+          id: 'comm-demo-06',
+          source_transaction_key: 'demo_tx_06',
+          referral_id: 'ref-demo-06',
+          referred_user_id: 'usr-demo-vendor-06',
+          referred_user_name: 'Fashion Beauty Cotonou',
+          partner_id: inf1Id,
+          partner_name: 'TikTok Créateur Bénin',
+          partner_code: 'TIKTOK-JDS01',
+          partner_role: 'influencer',
+          supervisor_id: null,
+          region: 'Littoral (Cotonou)',
+          plan_key: 'service_pub_jds',
+          plan_name: 'Service publicitaire JDS 15 000 F',
+          sale_amount: 15000,
+          commission_amount: 2500,
+          supervisor_bonus_amount: 0,
+          status: 'validee',
+          payment_method: 'MTN MoMo',
+          payment_reference: 'MOMO-339104',
+          validated_at: daysAgo(0),
+          created_at: daysAgo(0)
+        }
+      ],
+      payouts: [
+        {
+          id: 'pay-demo-01',
+          partner_id: ba1Id,
+          partner_name: 'Koffi Adéoti',
+          partner_code: 'KOFFI-JDSBA01',
+          partner_role: 'brand_ambassador',
+          region: 'Littoral (Cotonou)',
+          amount: 1500,
+          payment_method: 'MTN MoMo',
+          recipient_phone: '2290196110001',
+          transaction_reference: 'MOMO-PAY-771920',
+          period_label: 'Novembre 2026',
+          status: 'paye',
+          notes: 'Paiement commission Forfait Premium',
+          processed_by_name: 'Super Administrateur',
+          paid_at: daysAgo(1),
+          created_at: daysAgo(1)
+        }
+      ]
     };
   }
 
@@ -363,61 +687,88 @@
           });
           state.partners = Array.from(map.values());
         }
-        if (Array.isArray(parsed.referrals)) state.referrals = parsed.referrals;
-        if (Array.isArray(parsed.commissions)) state.commissions = parsed.commissions;
-        if (Array.isArray(parsed.payouts)) state.payouts = parsed.payouts;
+        if (Array.isArray(parsed.referrals)) {
+          const refMap = new Map(state.referrals.map(r => [r.id, r]));
+          parsed.referrals.forEach(r => {
+            if (r && r.id) refMap.set(r.id, { ...(refMap.get(r.id) || {}), ...r });
+          });
+          state.referrals = Array.from(refMap.values());
+        }
+        if (Array.isArray(parsed.commissions)) {
+          const commMap = new Map(state.commissions.map(c => [c.id, c]));
+          parsed.commissions.forEach(c => {
+            if (c && c.id) commMap.set(c.id, { ...(commMap.get(c.id) || {}), ...c });
+          });
+          state.commissions = Array.from(commMap.values());
+        }
+        if (Array.isArray(parsed.payouts)) {
+          const payMap = new Map(state.payouts.map(pay => [pay.id, pay]));
+          parsed.payouts.forEach(pay => {
+            if (pay && pay.id) payMap.set(pay.id, { ...(payMap.get(pay.id) || {}), ...pay });
+          });
+          state.payouts = Array.from(payMap.values());
+        }
       }
     } catch (e) {}
 
     const sb = getSb();
-    if (!sb) return state;
 
     // 1. Tenter de lire les tables SQL jds_* si elles existent (sans jamais lever d'erreur bloquante)
-    try {
-      const [pRes, rRes, cRes, payRes] = await Promise.all([
-        sb.from('jds_partners').select('*'),
-        sb.from('jds_partner_referrals').select('*'),
-        sb.from('jds_partner_commissions').select('*'),
-        sb.from('jds_partner_payouts').select('*')
-      ]);
-      if (!pRes.error && Array.isArray(pRes.data)) {
-        pRes.data.forEach(p => {
-          const idx = state.partners.findIndex(x => x.id === p.id || (p.partner_code && x.partner_code === p.partner_code));
-          if (idx >= 0) state.partners[idx] = { ...state.partners[idx], ...p };
-          else state.partners.unshift(p);
-        });
-      }
-      if (!rRes.error && Array.isArray(rRes.data)) {
-        rRes.data.forEach(r => {
-          const idx = state.referrals.findIndex(x => x.id === r.id || x.referred_user_id === r.referred_user_id);
-          if (idx >= 0) state.referrals[idx] = { ...state.referrals[idx], ...r };
-          else state.referrals.unshift(r);
-        });
-      }
-      if (!cRes.error && Array.isArray(cRes.data)) {
-        cRes.data.forEach(c => {
-          const idx = state.commissions.findIndex(x => x.id === c.id || (c.source_transaction_key && x.source_transaction_key === c.source_transaction_key));
-          if (idx >= 0) state.commissions[idx] = { ...state.commissions[idx], ...c };
-          else state.commissions.unshift(c);
-        });
-      }
-      if (!payRes.error && Array.isArray(payRes.data)) {
-        payRes.data.forEach(pay => {
-          const idx = state.payouts.findIndex(x => x.id === pay.id);
-          if (idx >= 0) state.payouts[idx] = { ...state.payouts[idx], ...pay };
-          else state.payouts.unshift(pay);
-        });
-      }
-    } catch (e) {}
+    if (sb) {
+      try {
+        const [pRes, rRes, cRes, payRes] = await Promise.all([
+          sb.from('jds_partners').select('*'),
+          sb.from('jds_partner_referrals').select('*'),
+          sb.from('jds_partner_commissions').select('*'),
+          sb.from('jds_partner_payouts').select('*')
+        ]);
+        if (!pRes.error && Array.isArray(pRes.data)) {
+          pRes.data.forEach(p => {
+            const idx = state.partners.findIndex(x => x.id === p.id || (p.partner_code && x.partner_code === p.partner_code));
+            if (idx >= 0) state.partners[idx] = { ...state.partners[idx], ...p };
+            else state.partners.unshift(p);
+          });
+        }
+        if (!rRes.error && Array.isArray(rRes.data)) {
+          rRes.data.forEach(r => {
+            const idx = state.referrals.findIndex(x => x.id === r.id || x.referred_user_id === r.referred_user_id);
+            if (idx >= 0) state.referrals[idx] = { ...state.referrals[idx], ...r };
+            else state.referrals.unshift(r);
+          });
+        }
+        if (!cRes.error && Array.isArray(cRes.data)) {
+          cRes.data.forEach(c => {
+            const idx = state.commissions.findIndex(x => x.id === c.id || (c.source_transaction_key && x.source_transaction_key === c.source_transaction_key));
+            if (idx >= 0) state.commissions[idx] = { ...state.commissions[idx], ...c };
+            else state.commissions.unshift(c);
+          });
+        }
+        if (!payRes.error && Array.isArray(payRes.data)) {
+          payRes.data.forEach(pay => {
+            const idx = state.payouts.findIndex(x => x.id === pay.id);
+            if (idx >= 0) state.payouts[idx] = { ...state.payouts[idx], ...pay };
+            else state.payouts.unshift(pay);
+          });
+        }
+      } catch (e) {}
+    }
 
-    // 2. Lire le bus Cloud temps réel __JDS_CLOUD_V1__: dans public.reviews
+    // 2. Lire le bus Cloud temps réel __JDS_CLOUD_V1__: dans public.reviews (via sb ou REST direct)
     try {
-      const { data: cloudEvents } = await sb
-        .from('reviews')
-        .select('comment, created_at')
-        .like('comment', `${JDS_CLOUD_PREFIX}%`)
-        .order('created_at', { ascending: true })
-        .limit(400);
+      let cloudEvents = null;
+      if (sb) {
+        const { data } = await sb
+          .from('reviews')
+          .select('comment, created_at')
+          .like('comment', `${JDS_CLOUD_PREFIX}%`)
+          .order('created_at', { ascending: true })
+          .limit(400);
+        cloudEvents = data;
+      } else {
+        cloudEvents = await restSelect(
+          `reviews?select=comment,created_at&comment=like.${encodeURIComponent(JDS_CLOUD_PREFIX + '*')}&order=created_at.asc&limit=400`
+        );
+      }
 
       if (Array.isArray(cloudEvents)) {
         cloudEvents.forEach(row => {
@@ -456,14 +807,22 @@
       }
     } catch (e) {}
 
-    // 3. Lire également les inscriptions issues de __REFERRAL__: dans public.reviews
+    // 3. Lire également les inscriptions issues de __REFERRAL__: dans public.reviews (via sb ou REST direct)
     try {
-      const { data: refRows } = await sb
-        .from('reviews')
-        .select('comment, created_at')
-        .like('comment', '__REFERRAL__:%')
-        .order('created_at', { ascending: false })
-        .limit(300);
+      let refRows = null;
+      if (sb) {
+        const { data } = await sb
+          .from('reviews')
+          .select('comment, created_at')
+          .like('comment', '__REFERRAL__:%')
+          .order('created_at', { ascending: false })
+          .limit(300);
+        refRows = data;
+      } else {
+        refRows = await restSelect(
+          `reviews?select=comment,created_at&comment=like.${encodeURIComponent('__REFERRAL__:*')}&order=created_at.desc&limit=300`
+        );
+      }
 
       if (Array.isArray(refRows) && state.partners.length > 0) {
         const partnerByCode = new Map();
@@ -682,10 +1041,25 @@
               <div style="font-weight:700; font-size:11px; color:#0f172a;">Influenceur</div>
             </div>
           </div>
+          <div style="margin-top:12px; padding-top:10px; border-top:1px dashed #cbd5e1;">
+            <div style="font-weight:800; color:#475569; margin-bottom:6px; font-size:11px;">🧪 Accès rapide de démonstration (cliquez pour pré-remplir) :</div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button type="button" onclick="window.prefillJdsDemo('KOFFI-JDSBA01', 'Jds2026!')" style="background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; border-radius:8px; padding:5px 10px; font-size:11px; font-weight:700; cursor:pointer;">🎖️ BA (KOFFI-JDSBA01)</button>
+              <button type="button" onclick="window.prefillJdsDemo('sylvain.sup01', 'Jds2026!')" style="background:#f5f3ff; color:#6d28d9; border:1px solid #ddd6fe; border-radius:8px; padding:5px 10px; font-size:11px; font-weight:700; cursor:pointer;">👔 Superviseur (sylvain.sup01)</button>
+              <button type="button" onclick="window.prefillJdsDemo('TIKTOK-JDS01', 'Jds2026!')" style="background:#fdf4ff; color:#a21caf; border:1px solid #f5d0fe; border-radius:8px; padding:5px 10px; font-size:11px; font-weight:700; cursor:pointer;">🌟 Influenceur (TIKTOK-JDS01)</button>
+            </div>
+          </div>
         </div>
       </div>
     `;
   }
+
+  window.prefillJdsDemo = function (idVal, passVal) {
+    const idInput = document.getElementById('jds-login-identifier');
+    const passInput = document.getElementById('jds-login-password');
+    if (idInput) idInput.value = idVal;
+    if (passInput) passInput.value = passVal;
+  };
 
   window.openJdsForgotPassword = function () {
     const idVal = document.getElementById('jds-login-identifier')?.value || '';
@@ -1168,6 +1542,7 @@
           </div>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <button class="btn" style="background:white; color:#0f4c81; padding:9px 14px; font-size:12px;" onclick="navigator.clipboard.writeText('${esc(currentPartner.partner_code)}'); alert('✅ Code copié : ${esc(currentPartner.partner_code)}');">📋 Copier le code</button>
+            <button class="btn" style="background:rgba(255,255,255,0.18); color:white; border:1px solid rgba(255,255,255,0.4); padding:9px 14px; font-size:12px;" onclick="navigator.clipboard.writeText('${esc(shareUrl)}'); alert('✅ Lien de parrainage copié : ${esc(shareUrl)}');">🔗 Copier mon lien</button>
             <button class="btn" style="background:#25D366; color:white; padding:9px 14px; font-size:12px;" onclick="window.open('https://wa.me/?text=' + encodeURIComponent('Rejoignez Bénin Connect et Marché d\\'Aujourd\\'hui avec mon code partenaire ${esc(currentPartner.partner_code)} : ${esc(shareUrl)}'), '_blank')">📲 Partager WhatsApp</button>
           </div>
         </div>
