@@ -400,278 +400,23 @@
           created_at: daysAgo(14)
         }
       ],
-      referrals: [
-        {
-          id: 'ref-demo-01',
-          referred_user_id: 'usr-demo-vendor-01',
-          referred_name: 'Boutique Maman Clarisse',
-          referred_phone: '2290197100001',
-          referred_user_type: 'vendor',
-          partner_id: ba1Id,
-          partner_name: 'Koffi Adéoti',
-          partner_code: 'KOFFI-JDSBA01',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          city: 'Cotonou',
-          has_paid: true,
-          first_paid_at: daysAgo(0),
-          is_locked: true,
-          registered_at: daysAgo(0)
-        },
-        {
-          id: 'ref-demo-02',
-          referred_user_id: 'usr-demo-vendor-02',
-          referred_name: 'Électro Dantokpa Express',
-          referred_phone: '2290197100002',
-          referred_user_type: 'vendor',
-          partner_id: ba1Id,
-          partner_name: 'Koffi Adéoti',
-          partner_code: 'KOFFI-JDSBA01',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          city: 'Cotonou',
-          has_paid: true,
-          first_paid_at: daysAgo(1),
-          is_locked: true,
-          registered_at: daysAgo(1)
-        },
-        {
-          id: 'ref-demo-03',
-          referred_user_id: 'usr-demo-vendor-03',
-          referred_name: 'Mode Africaine Fifamè',
-          referred_phone: '2290197100003',
-          referred_user_type: 'vendor',
-          partner_id: ba1Id,
-          partner_name: 'Koffi Adéoti',
-          partner_code: 'KOFFI-JDSBA01',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          city: 'Cotonou',
-          has_paid: false,
-          first_paid_at: null,
-          is_locked: true,
-          registered_at: daysAgo(0)
-        },
-        {
-          id: 'ref-demo-04',
-          referred_user_id: 'usr-demo-vendor-04',
-          referred_name: 'Quincaillerie Akpakpa Pro',
-          referred_phone: '2290197100004',
-          referred_user_type: 'vendor',
-          partner_id: ba2Id,
-          partner_name: 'Marcel Dossou',
-          partner_code: 'MARCEL-JDSBA02',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          city: 'Cotonou',
-          has_paid: true,
-          first_paid_at: daysAgo(2),
-          is_locked: true,
-          registered_at: daysAgo(2)
-        },
-        {
-          id: 'ref-demo-05',
-          referred_user_id: 'usr-demo-vendor-05',
-          referred_name: 'Coopérative Karité Borgou',
-          referred_phone: '2290197100005',
-          referred_user_type: 'vendor',
-          partner_id: ba4Id,
-          partner_name: 'Ulrich Yarou',
-          partner_code: 'ULRICH-JDSBA04',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup2Id,
-          region: 'Borgou (Parakou)',
-          city: 'Parakou',
-          has_paid: true,
-          first_paid_at: daysAgo(1),
-          is_locked: true,
-          registered_at: daysAgo(1)
-        },
-        {
-          id: 'ref-demo-06',
-          referred_user_id: 'usr-demo-vendor-06',
-          referred_name: 'Fashion Beauty Cotonou',
-          referred_phone: '2290197100006',
-          referred_user_type: 'vendor',
-          partner_id: inf1Id,
-          partner_name: 'TikTok Créateur Bénin',
-          partner_code: 'TIKTOK-JDS01',
-          partner_role: 'influencer',
-          supervisor_id: null,
-          region: 'Littoral (Cotonou)',
-          city: 'Cotonou',
-          has_paid: true,
-          first_paid_at: daysAgo(0),
-          is_locked: true,
-          registered_at: daysAgo(0)
-        }
-      ],
-      commissions: [
-        {
-          id: 'comm-demo-01',
-          source_transaction_key: 'demo_tx_01',
-          referral_id: 'ref-demo-01',
-          referred_user_id: 'usr-demo-vendor-01',
-          referred_user_name: 'Boutique Maman Clarisse',
-          partner_id: ba1Id,
-          partner_name: 'Koffi Adéoti',
-          partner_code: 'KOFFI-JDSBA01',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          plan_key: 'gold_5000',
-          plan_name: 'Forfait 5 000 F (Gold)',
-          sale_amount: 5000,
-          commission_amount: 1000,
-          supervisor_bonus_amount: 100,
-          status: 'validee',
-          payment_method: 'MTN MoMo',
-          payment_reference: 'MOMO-884120',
-          validated_at: daysAgo(0),
-          created_at: daysAgo(0)
-        },
-        {
-          id: 'comm-demo-02',
-          source_transaction_key: 'demo_tx_02',
-          referral_id: 'ref-demo-02',
-          referred_user_id: 'usr-demo-vendor-02',
-          referred_user_name: 'Électro Dantokpa Express',
-          partner_id: ba1Id,
-          partner_name: 'Koffi Adéoti',
-          partner_code: 'KOFFI-JDSBA01',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          plan_key: 'premium_10000',
-          plan_name: 'Forfait 10 000 F (Premium)',
-          sale_amount: 10000,
-          commission_amount: 1500,
-          supervisor_bonus_amount: 200,
-          status: 'payee',
-          payment_method: 'MTN MoMo',
-          payment_reference: 'MOMO-771920',
-          validated_at: daysAgo(1),
-          paid_at: daysAgo(1),
-          payout_id: 'pay-demo-01',
-          created_at: daysAgo(1)
-        },
-        {
-          id: 'comm-demo-03',
-          source_transaction_key: 'demo_tx_03',
-          referral_id: 'ref-demo-03',
-          referred_user_id: 'usr-demo-vendor-03',
-          referred_user_name: 'Mode Africaine Fifamè',
-          partner_id: ba1Id,
-          partner_name: 'Koffi Adéoti',
-          partner_code: 'KOFFI-JDSBA01',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          plan_key: 'bronze_2000',
-          plan_name: 'Forfait 2 000 F (Bronze)',
-          sale_amount: 2000,
-          commission_amount: 500,
-          supervisor_bonus_amount: 50,
-          status: 'en_attente',
-          payment_method: 'Moov Money',
-          payment_reference: 'MOOV-991023',
-          created_at: daysAgo(0)
-        },
-        {
-          id: 'comm-demo-04',
-          source_transaction_key: 'demo_tx_04',
-          referral_id: 'ref-demo-04',
-          referred_user_id: 'usr-demo-vendor-04',
-          referred_user_name: 'Quincaillerie Akpakpa Pro',
-          partner_id: ba2Id,
-          partner_name: 'Marcel Dossou',
-          partner_code: 'MARCEL-JDSBA02',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup1Id,
-          region: 'Littoral (Cotonou)',
-          plan_key: 'service_pub_jds',
-          plan_name: 'Service publicitaire JDS 15 000 F',
-          sale_amount: 15000,
-          commission_amount: 2000,
-          supervisor_bonus_amount: 300,
-          status: 'validee',
-          payment_method: 'MTN MoMo',
-          payment_reference: 'MOMO-665109',
-          validated_at: daysAgo(2),
-          created_at: daysAgo(2)
-        },
-        {
-          id: 'comm-demo-05',
-          source_transaction_key: 'demo_tx_05',
-          referral_id: 'ref-demo-05',
-          referred_user_id: 'usr-demo-vendor-05',
-          referred_user_name: 'Coopérative Karité Borgou',
-          partner_id: ba4Id,
-          partner_name: 'Ulrich Yarou',
-          partner_code: 'ULRICH-JDSBA04',
-          partner_role: 'brand_ambassador',
-          supervisor_id: sup2Id,
-          region: 'Borgou (Parakou)',
-          plan_key: 'gold_5000',
-          plan_name: 'Forfait 5 000 F (Gold)',
-          sale_amount: 5000,
-          commission_amount: 1000,
-          supervisor_bonus_amount: 100,
-          status: 'validee',
-          payment_method: 'MTN MoMo',
-          payment_reference: 'MOMO-554012',
-          validated_at: daysAgo(1),
-          created_at: daysAgo(1)
-        },
-        {
-          id: 'comm-demo-06',
-          source_transaction_key: 'demo_tx_06',
-          referral_id: 'ref-demo-06',
-          referred_user_id: 'usr-demo-vendor-06',
-          referred_user_name: 'Fashion Beauty Cotonou',
-          partner_id: inf1Id,
-          partner_name: 'TikTok Créateur Bénin',
-          partner_code: 'TIKTOK-JDS01',
-          partner_role: 'influencer',
-          supervisor_id: null,
-          region: 'Littoral (Cotonou)',
-          plan_key: 'service_pub_jds',
-          plan_name: 'Service publicitaire JDS 15 000 F',
-          sale_amount: 15000,
-          commission_amount: 2500,
-          supervisor_bonus_amount: 0,
-          status: 'validee',
-          payment_method: 'MTN MoMo',
-          payment_reference: 'MOMO-339104',
-          validated_at: daysAgo(0),
-          created_at: daysAgo(0)
-        }
-      ],
-      payouts: [
-        {
-          id: 'pay-demo-01',
-          partner_id: ba1Id,
-          partner_name: 'Koffi Adéoti',
-          partner_code: 'KOFFI-JDSBA01',
-          partner_role: 'brand_ambassador',
-          region: 'Littoral (Cotonou)',
-          amount: 1500,
-          payment_method: 'MTN MoMo',
-          recipient_phone: '2290196110001',
-          transaction_reference: 'MOMO-PAY-771920',
-          period_label: 'Novembre 2026',
-          status: 'paye',
-          notes: 'Paiement commission Forfait Premium',
-          processed_by_name: 'Super Administrateur',
-          paid_at: daysAgo(1),
-          created_at: daysAgo(1)
-        }
-      ]
+      // RÈGLE STRICTE CONDITION 4 : ZÉRO CHIFFRE FICTIF — uniquement les inscriptions et paiements réels de la base
+      referrals: [],
+      commissions: [],
+      payouts: [],
+      fieldReports: [],
+      notifications: []
     };
+  }
+
+  function isFictitiousId(id) {
+    const s = String(id || '');
+    return (
+      s.startsWith('ref-demo-') ||
+      s.startsWith('comm-demo-') ||
+      s.startsWith('pay-demo-') ||
+      s.startsWith('usr-demo-')
+    );
   }
 
   async function syncJdsStateFromCloud() {
@@ -801,11 +546,28 @@
               const idx = state.payouts.findIndex(item => item.id === pay.id);
               if (idx >= 0) state.payouts[idx] = { ...state.payouts[idx], ...pay };
               else state.payouts.unshift(pay);
+            } else if (evt.type === 'UPSERT_FIELD_REPORT') {
+              const rep = evt.payload;
+              if (!Array.isArray(state.fieldReports)) state.fieldReports = [];
+              const idx = state.fieldReports.findIndex(item => item.id === rep.id);
+              if (idx >= 0) state.fieldReports[idx] = { ...state.fieldReports[idx], ...rep };
+              else state.fieldReports.unshift(rep);
+            } else if (evt.type === 'UPSERT_JDS_NOTIFICATION') {
+              const notif = evt.payload;
+              if (!Array.isArray(state.notifications)) state.notifications = [];
+              const idx = state.notifications.findIndex(item => item.id === notif.id);
+              if (idx >= 0) state.notifications[idx] = { ...state.notifications[idx], ...notif };
+              else state.notifications.unshift(notif);
             }
           } catch (err) {}
         });
       }
     } catch (e) {}
+
+    // Purger toute donnée fictive héritée (ref-demo-*, comm-demo-*, pay-demo-*)
+    state.referrals = (state.referrals || []).filter(r => !isFictitiousId(r?.id) && !isFictitiousId(r?.referred_user_id));
+    state.commissions = (state.commissions || []).filter(c => !isFictitiousId(c?.id) && !isFictitiousId(c?.referral_id));
+    state.payouts = (state.payouts || []).filter(p => !isFictitiousId(p?.id));
 
     // 3. Lire également les inscriptions issues de __REFERRAL__: dans public.reviews (via sb ou REST direct)
     try {
@@ -1476,23 +1238,95 @@
   };
 
   // ============================================================================
-  // 2. TABLEAU DE BORD BRAND AMBASSADOR
+  // 2. TABLEAU DE BORD BRAND AMBASSADOR (REFONTE COMPLÈTE SECTIONS 1 À 10)
   // ============================================================================
-  async function renderBaDashboard() {
+  let baActiveView = 'dashboard'; // 'dashboard' | 'objectives' | 'field_reports' | 'profile' | 'notifications'
+  let baSelectedKpiFilter = 'total';
+  let baMenuOpen = false;
+
+  window.switchBaPortalView = function (view) {
+    baActiveView = view;
+    baMenuOpen = false;
+    renderBaDashboard(false);
+  };
+
+  window.selectBaPortalKpi = function (kpiKey) {
+    baSelectedKpiFilter = kpiKey;
+    renderBaDashboard(false);
+  };
+
+  window.toggleBaPortalDotsMenu = function () {
+    baMenuOpen = !baMenuOpen;
+    renderBaDashboard(false);
+  };
+
+  window.submitBaFieldReportFromPortal = async function () {
+    if (!currentPartner) return;
+    const cat = (document.getElementById('ba-rep-cat')?.value || 'difficultes_terrain').trim();
+    const subject = (document.getElementById('ba-rep-subject')?.value || '').trim();
+    const desc = (document.getElementById('ba-rep-desc')?.value || '').trim();
+    if (!subject || !desc) {
+      alert('Veuillez renseigner le sujet et la description détaillée.');
+      return;
+    }
+    const catLabels = {
+      difficultes_terrain: 'Difficultés rencontrées sur le terrain',
+      plaintes_suggestions_clients: 'Plaintes et suggestions des clients et vendeurs',
+      idees_recommandations_ba: 'Idées et recommandations du BA'
+    };
+    const nowIso = new Date().toISOString();
+    const newRep = {
+      id: 'rep-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+      partner_id: currentPartner.id,
+      partner_name: currentPartner.full_name,
+      partner_code: currentPartner.partner_code,
+      supervisor_id: currentPartner.supervisor_id || null,
+      region: currentPartner.region || 'Littoral (Cotonou)',
+      city: currentPartner.city || 'Cotonou',
+      category: cat,
+      category_label: catLabels[cat] || catLabels.difficultes_terrain,
+      subject,
+      description: desc,
+      status: 'En attente',
+      created_at: nowIso,
+      updated_at: nowIso
+    };
+    const state = cachedCloudState || (await syncJdsStateFromCloud());
+    if (!Array.isArray(state.fieldReports)) state.fieldReports = [];
+    state.fieldReports.unshift(newRep);
+    cachedCloudState = state;
+    try {
+      localStorage.setItem(JDS_STORAGE_KEY, JSON.stringify(state));
+    } catch (e) {}
+    await pushJdsCloudEvent('UPSERT_FIELD_REPORT', newRep);
+    alert('✅ Votre retour terrain a été transmis à votre Superviseur, à la Direction Régionale et au Super Administrateur.');
+    renderBaDashboard(false);
+  };
+
+  async function renderBaDashboard(reload = true) {
     const container = document.getElementById('jds-portal-body');
     if (!container || !currentPartner) return;
-    container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748b;">⏳ Chargement de votre espace Brand Ambassador...</div>`;
+    if (reload || !cachedCloudState) {
+      container.innerHTML = `<div style="padding:40px; text-align:center; color:#64748b;">⏳ Chargement de votre espace Grand Ambassadeur...</div>`;
+      cachedCloudState = await syncJdsStateFromCloud();
+    }
 
-    const state = await syncJdsStateFromCloud();
-    cachedCloudState = state;
-
-    const refs = state.referrals.filter(
+    const state = cachedCloudState;
+    const refs = (state.referrals || []).filter(
       r => r.partner_id === currentPartner.id || String(r.partner_code || '').toUpperCase() === String(currentPartner.partner_code || '').toUpperCase()
     );
-    const comms = state.commissions.filter(
+    const comms = (state.commissions || []).filter(
       c => (c.partner_id === currentPartner.id || String(c.partner_code || '').toUpperCase() === String(currentPartner.partner_code || '').toUpperCase()) &&
            c.status !== 'annulee' && c.status !== 'cancelled'
     );
+    const supervisor = (state.partners || []).find(p => p.id === currentPartner.supervisor_id) || null;
+    const myReports = (state.fieldReports || []).filter(r => r.partner_id === currentPartner.id);
+    const myNotifs = (state.notifications || []).filter(
+      n => n.target_scope === 'all_ba' || n.target_scope === 'all_partners' || n.target_partner_id === currentPartner.id ||
+           (n.target_scope === 'region_ba' && n.target_region === currentPartner.region) ||
+           (n.target_scope === 'team_ba' && n.target_supervisor_id === currentPartner.supervisor_id)
+    );
+
     const now = new Date();
     const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const startOfWeek = new Date(now);
@@ -1500,89 +1334,319 @@
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
     const getRefDate = (r) => new Date(r.registered_at || r.created_at || now);
-    const regsToday = refs.filter(r => getRefDate(r) >= startOfDay).length;
-    const regsWeek = refs.filter(r => getRefDate(r) >= startOfWeek).length;
-    const regsMonth = refs.filter(r => getRefDate(r) >= startOfMonth).length;
-    const vendorsReg = refs.filter(r => r.referred_user_type === 'vendor' || r.is_vendor).length;
-    const vendorsPaid = refs.filter(r => r.has_paid).length;
-    const subsDone = comms.length;
+    const regsTodayList = refs.filter(r => getRefDate(r) >= startOfDay);
+    const regsWeekList = refs.filter(r => getRefDate(r) >= startOfWeek);
+    const regsMonthList = refs.filter(r => getRefDate(r) >= startOfMonth);
 
-    const pendingAmt = comms.filter(c => c.status === 'en_attente' || c.status === 'pending').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
-    const validatedAmt = comms.filter(c => c.status === 'validee' || c.status === 'validated').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
-    const paidAmt = comms.filter(c => c.status === 'payee' || c.status === 'paid').reduce((s, c) => s + Number(c.commission_amount || 0), 0);
-    const acquiredGains = validatedAmt + paidAmt;
+    const clientsList = refs.filter(r => ['buyer', 'client'].includes(String(r.referred_user_type || '').toLowerCase()));
+    const providersList = refs.filter(r => ['provider', 'prestataire'].includes(String(r.referred_user_type || '').toLowerCase()));
+    const vendorsList = refs.filter(r => !['buyer', 'client', 'provider', 'prestataire'].includes(String(r.referred_user_type || '').toLowerCase()));
+
+    const confirmedComms = comms.filter(c => c.status === 'validee' || c.status === 'payee' || c.status === 'validated' || c.status === 'paid');
+    const pendingComms = comms.filter(c => c.status === 'en_attente' || c.status === 'pending');
+
+    const confirmedPaymentsToday = confirmedComms.filter(c => {
+      const d = new Date(c.validated_at || c.created_at || now);
+      return d >= startOfDay && Number(c.sale_amount || 0) >= 500;
+    });
+
+    const confirmedMonthComms = confirmedComms.filter(c => {
+      const d = new Date(c.validated_at || c.created_at || now);
+      return d >= startOfMonth;
+    });
+
+    const plan2000Month = confirmedMonthComms.filter(c => Number(c.sale_amount) === 2000 || String(c.plan_key || '').includes('2000'));
+    const plan5000And10000Month = confirmedMonthComms.filter(c => {
+      const amt = Number(c.sale_amount || 0);
+      return amt === 5000 || amt === 10000 || String(c.plan_key || '').includes('5000') || String(c.plan_key || '').includes('10000');
+    });
+
+    const paidVendorsList = refs.filter(r => r.has_paid || confirmedComms.some(c => c.referred_user_id === r.referred_user_id));
+    const pendingSubsList = refs.filter(r => pendingComms.some(c => c.referred_user_id === r.referred_user_id));
+
+    // Objectifs officiels validés (Condition 3)
+    const dailyRegTarget = 20;
+    const weeklyRegTarget = 120;
+    const monthlyRegTarget = 520;
+    const dailyPayTarget = 3;
+    const monthly2000Target = 10;
+    const monthly5000Target = 10;
+
+    const pct = (cur, tgt) => Math.min(100, Math.round((cur / Math.max(1, tgt)) * 100));
+    const barColor = (cur, tgt) => (cur >= tgt ? '#2563eb' : '#dc2626');
+    const msgGoal = (cur, tgt) =>
+      cur >= tgt
+        ? 'Félicitations ! Vous avez atteint votre objectif. Continuez ainsi !'
+        : 'Vous êtes en retard sur votre objectif. Continuez vos efforts pour atteindre votre résultat.';
+
     const shareUrl = buildPartnerShareLink(currentPartner.partner_code);
+    const civility = currentPartner.civility || 'Monsieur';
+    const displayName = currentPartner.last_name || currentPartner.full_name || 'Ambassadeur';
 
-    const dailyGoal = 5;
-    const monthlyGoal = 120;
-    const monthPct = Math.min(100, Math.round((regsMonth / monthlyGoal) * 100));
-    const expectedDayOfMonth = Math.round((now.getDate() / 30) * monthlyGoal);
-    const isAhead = regsMonth >= expectedDayOfMonth;
+    const kpiCards = [
+      { key: 'today', label: 'Inscriptions du jour', val: regsTodayList.length, list: regsTodayList },
+      { key: 'week', label: 'Inscriptions semaine', val: regsWeekList.length, list: regsWeekList },
+      { key: 'month', label: 'Inscriptions du mois', val: regsMonthList.length, list: regsMonthList },
+      { key: 'total', label: 'Total des inscriptions', val: refs.length, list: refs },
+      { key: 'clients', label: 'Clients inscrits', val: clientsList.length, list: clientsList },
+      { key: 'vendors', label: 'Vendeurs inscrits', val: vendorsList.length, list: vendorsList },
+      { key: 'providers', label: 'Prestataires inscrits', val: providersList.length, list: providersList },
+      { key: 'paid_vendors', label: 'Vendeurs payants', val: paidVendorsList.length, list: paidVendorsList },
+      { key: 'confirmed_payments', label: 'Paiements confirmés', val: confirmedComms.length, list: paidVendorsList },
+      { key: 'pending_subs', label: 'Abonnements en attente', val: pendingComms.length, list: pendingSubsList }
+    ];
+
+    const activeKpiObj = kpiCards.find(k => k.key === baSelectedKpiFilter) || kpiCards[3];
+
+    let bodyHtml = '';
+    if (baActiveView === 'profile') {
+      bodyHtml = `
+        <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; padding:18px;">
+          <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:12px;">👤 Profil Complet du Grand Ambassadeur</h4>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; font-size:13px;">
+            <div style="background:#f8fafc; padding:12px; border-radius:12px;">
+              <div style="font-weight:800; color:#2563eb; margin-bottom:6px;">🪪 Identité</div>
+              <div><strong>Nom & Prénoms :</strong> ${esc(currentPartner.full_name)}</div>
+              <div><strong>Téléphone :</strong> ${esc(currentPartner.phone || '—')}</div>
+              <div><strong>Numéro CIP :</strong> ${esc(currentPartner.cip_number || 'Enregistré')}</div>
+              <div><strong>Numéro CCIB :</strong> ${esc(currentPartner.ccib_number || 'Non applicable')}</div>
+            </div>
+            <div style="background:#f8fafc; padding:12px; border-radius:12px;">
+              <div style="font-weight:800; color:#2563eb; margin-bottom:6px;">📍 Localisation</div>
+              <div><strong>Pays :</strong> ${esc(currentPartner.country || 'Bénin')}</div>
+              <div><strong>Département :</strong> ${esc(currentPartner.department || currentPartner.region || '—')}</div>
+              <div><strong>Ville / Commune :</strong> ${esc(currentPartner.city || '—')}</div>
+              <div><strong>Quartier / Zone :</strong> ${esc(currentPartner.district || currentPartner.intervention_zone || '—')}</div>
+            </div>
+            <div style="background:#f8fafc; padding:12px; border-radius:12px;">
+              <div style="font-weight:800; color:#2563eb; margin-bottom:6px;">👔 Encadrement & Contrat</div>
+              <div><strong>Superviseur BA :</strong> ${esc(supervisor ? supervisor.full_name : 'Direction Régionale JDS')}</div>
+              <div><strong>Tél. Superviseur :</strong> ${esc(supervisor ? supervisor.phone : '+229 01 97 00 11 01')}</div>
+              <div><strong>Nomination :</strong> ${new Date(currentPartner.nomination_date || currentPartner.recruited_at || now).toLocaleDateString('fr-FR')}</div>
+              <div><strong>Statut :</strong> Actif • Contrat officiel BA signé</div>
+            </div>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px;">
+            <button class="btn bc-btn-outline" style="padding:10px 14px; font-size:12px;" onclick="alert('📄 CONTRAT OFFICIEL BRAND AMBASSADOR BÉNIN CONNECT\\n\\nTitulaire : ${esc(currentPartner.full_name)}\\nCode BA : ${esc(currentPartner.partner_code)}\\nObjectifs : 20 inscriptions/jour, 3 paiements confirmés/jour, 10 abonnements 2000F/mois et 10 abonnements 5000F-10000F/mois.');">📄 Consulter mon contrat</button>
+            <button class="btn bc-btn-violet" style="padding:10px 14px; font-size:12px;" onclick="window.openChangePartnerPasswordModal()">🔒 Changer mon mot de passe</button>
+          </div>
+        </div>
+      `;
+    } else if (baActiveView === 'objectives') {
+      const goalsList = [
+        { title: '1. Objectif journalier d’inscription (Clients + Vendeurs)', cur: regsTodayList.length, tgt: dailyRegTarget },
+        { title: '2. Objectif hebdomadaire d’inscription (6 jours ouvrables)', cur: regsWeekList.length, tgt: weeklyRegTarget },
+        { title: '3. Objectif mensuel d’inscription (26 jours ouvrables)', cur: regsMonthList.length, tgt: monthlyRegTarget },
+        { title: '4. Objectif journalier de paiements vendeurs confirmés (≥ 500 FCFA)', cur: confirmedPaymentsToday.length, tgt: dailyPayTarget },
+        { title: '5. Objectif mensuel : Vendeurs au forfait 2 000 FCFA confirmés', cur: plan2000Month.length, tgt: monthly2000Target },
+        { title: '6. Objectif mensuel : Vendeurs aux forfaits 5 000 F / 10 000 F confirmés', cur: plan5000And10000Month.length, tgt: monthly5000Target }
+      ];
+      bodyHtml = `
+        <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; padding:18px;">
+          <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:14px;">🎯 Page détaillée « Mes objectifs »</h4>
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            ${goalsList.map(g => {
+              const p = pct(g.cur, g.tgt);
+              const col = barColor(g.cur, g.tgt);
+              const rem = Math.max(0, g.tgt - g.cur);
+              return `
+                <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:14px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:6px;">
+                    <span style="font-size:13px; font-weight:800; color:#0f172a;">${g.title}</span>
+                    <span style="font-size:12px; font-weight:900; color:${col};">Réalisé : ${g.cur} / ${g.tgt} • Restant : ${rem} (${p}%)</span>
+                  </div>
+                  <div style="height:12px; background:#e2e8f0; border-radius:99px; overflow:hidden; margin-bottom:6px;">
+                    <div style="width:${Math.max(4, p)}%; height:100%; background:${col}; border-radius:99px;"></div>
+                  </div>
+                  <div style="font-size:11.5px; font-weight:700; color:${col};">${msgGoal(g.cur, g.tgt)}</div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    } else if (baActiveView === 'field_reports') {
+      bodyHtml = `
+        <div style="background:white; border:1px solid #e2e8f0; border-radius:16px; padding:18px;">
+          <h4 style="font-size:16px; font-weight:900; color:#0f172a; margin-bottom:8px;">📣 Retours et difficultés du terrain</h4>
+          <p style="font-size:12px; color:#64748b; margin-bottom:12px;">Transmettez vos difficultés terrain, les plaintes/suggestions des clients et vendeurs ou vos idées d'amélioration.</p>
+          <form onsubmit="event.preventDefault(); window.submitBaFieldReportFromPortal();" style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+            <select id="ba-rep-cat" class="bc-input">
+              <option value="difficultes_terrain">🚧 Difficultés rencontrées sur le terrain</option>
+              <option value="plaintes_suggestions_clients">💬 Plaintes et suggestions des clients et vendeurs</option>
+              <option value="idees_recommandations_ba">💡 Idées et recommandations du BA</option>
+            </select>
+            <input id="ba-rep-subject" type="text" required class="bc-input" placeholder="Sujet / Marché / Quartier concerné *" />
+            <textarea id="ba-rep-desc" rows="3" required class="bc-input" placeholder="Description détaillée de la situation ou suggestion *"></textarea>
+            <button type="submit" class="btn bc-btn-violet" style="justify-content:center; padding:11px;">📤 Envoyer le rapport à l'encadrement</button>
+          </form>
+          <h5 style="font-size:13px; font-weight:800; margin-bottom:8px;">Mes signalements envoyés (${myReports.length})</h5>
+          ${myReports.length === 0 ? `<p style="font-size:12px; color:#64748b;">Aucun retour envoyé pour le moment.</p>` : myReports.map(r => `
+            <div style="padding:10px; border:1px solid #e2e8f0; border-radius:10px; margin-bottom:8px; font-size:12px;">
+              <div style="display:flex; justify-content:space-between; font-weight:800;">
+                <span>${esc(r.subject)}</span>
+                <span style="color:#2563eb;">${esc(r.status)}</span>
+              </div>
+              <div style="color:#475569; margin-top:4px;">${esc(r.description)}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    } else {
+      const dailyPct = pct(regsTodayList.length, dailyRegTarget);
+      const dailyCol = barColor(regsTodayList.length, dailyRegTarget);
+      const payTodayPct = pct(confirmedPaymentsToday.length, dailyPayTarget);
+      const payTodayCol = barColor(confirmedPaymentsToday.length, dailyPayTarget);
+
+      bodyHtml = `
+        <!-- Code Promo & 3 boutons compacts horizontaux sur une seule ligne (Section 8) -->
+        <div style="background:linear-gradient(135deg, #1d4ed8 0%, #2563eb 55%, #7c3aed 100%); color:white; border-radius:16px; padding:14px 16px; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+            <div>
+              <div style="font-size:10px; text-transform:uppercase; opacity:0.9; font-weight:800;">Mon Code Promo Personnel BA</div>
+              <div style="font-size:21px; font-weight:900; letter-spacing:0.8px;">${esc(currentPartner.partner_code)}</div>
+            </div>
+            <div style="font-size:11px; opacity:0.92; max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${esc(shareUrl)}</div>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:6px;">
+            <button type="button" onclick="navigator.clipboard.writeText('${esc(currentPartner.partner_code)}'); alert('✅ Code copié : ${esc(currentPartner.partner_code)}');" style="background:#ffffff; color:#1d4ed8; border:none; border-radius:9px; padding:8px 6px; font-size:11.5px; font-weight:800; cursor:pointer; white-space:nowrap;">📋 Copier code</button>
+            <button type="button" onclick="navigator.clipboard.writeText('${esc(shareUrl)}'); alert('✅ Lien copié : ${esc(shareUrl)}');" style="background:rgba(255,255,255,0.2); color:#ffffff; border:1px solid rgba(255,255,255,0.4); border-radius:9px; padding:8px 6px; font-size:11.5px; font-weight:800; cursor:pointer; white-space:nowrap;">🔗 Copier lien</button>
+            <button type="button" onclick="window.open('https://wa.me/?text=' + encodeURIComponent('Inscrivez-vous gratuitement sur Bénin Connect & Marché d\\'Aujourd\\'hui avec mon code promo ${esc(currentPartner.partner_code)} : ${esc(shareUrl)}'), '_blank')" style="background:#25D366; color:#ffffff; border:none; border-radius:9px; padding:8px 6px; font-size:11.5px; font-weight:800; cursor:pointer; white-space:nowrap;">📲 WhatsApp</button>
+          </div>
+        </div>
+
+        <!-- Section 4 : Mon tableau de bord (Indicateurs cliquables) -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <h4 style="font-size:15px; font-weight:900; color:#0f172a; margin:0;">📊 Mon tableau de bord</h4>
+          <span style="font-size:11px; color:#64748b; font-weight:700;">Cliquez sur un indicateur pour filtrer la liste réelle</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(132px, 1fr)); gap:8px; margin-bottom:14px;">
+          ${kpiCards.map(k => {
+            const active = baSelectedKpiFilter === k.key;
+            return `
+              <div onclick="window.selectBaPortalKpi('${k.key}')" class="jds-kpi" style="cursor:pointer; border:${active ? '2px solid #2563eb' : '1px solid #e2e8f0'}; background:${active ? '#eff6ff' : '#ffffff'};">
+                <div class="jds-kpi-val" style="color:${active ? '#2563eb' : '#0f172a'};">${k.val}</div>
+                <div class="jds-kpi-lbl">${esc(k.label)}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+
+        <!-- Liste réelle des personnes inscrites correspondant à l'indicateur cliqué -->
+        <div style="background:white; border:1px solid #e2e8f0; border-radius:14px; padding:14px; margin-bottom:16px;">
+          <div style="font-size:13px; font-weight:800; color:#0f172a; margin-bottom:8px;">
+            👥 Liste réelle : ${esc(activeKpiObj.label)} (${activeKpiObj.list.length})
+          </div>
+          ${activeKpiObj.list.length === 0 ? `
+            <div style="font-size:12px; color:#64748b; padding:10px 0;">Aucune personne enregistrée dans cette catégorie pour le moment.</div>
+          ` : `
+            <div style="overflow-x:auto;">
+              <table style="width:100%; border-collapse:collapse; font-size:11.5px;">
+                <thead>
+                  <tr style="background:#f8fafc; text-align:left; color:#334155;">
+                    <th style="padding:7px;">Nom & Prénom</th>
+                    <th style="padding:7px;">Téléphone</th>
+                    <th style="padding:7px;">Compte</th>
+                    <th style="padding:7px;">Localité</th>
+                    <th style="padding:7px;">Code utilisé</th>
+                    <th style="padding:7px;">Paiement</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${activeKpiObj.list.slice(0, 12).map(r => `
+                    <tr style="border-top:1px solid #f1f5f9;">
+                      <td style="padding:7px; font-weight:700;">${esc(r.referred_name)}</td>
+                      <td style="padding:7px;">${esc(r.referred_phone || '—')}</td>
+                      <td style="padding:7px;">${r.referred_user_type === 'buyer' ? 'Client' : r.referred_user_type === 'provider' ? 'Prestataire' : 'Vendeur'}</td>
+                      <td style="padding:7px;">${esc(r.city || '—')}</td>
+                      <td style="padding:7px; color:#2563eb; font-weight:800;">${esc(r.partner_code)}</td>
+                      <td style="padding:7px; font-weight:700; color:${r.has_paid ? '#2563eb' : '#d97706'};">${r.has_paid ? '✅ Confirmé' : '⏳ En attente'}</td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          `}
+        </div>
+
+        <!-- Aperçu général des objectifs (Barres ROUGE / BLEU) -->
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:14px; padding:14px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+            <span style="font-size:13.5px; font-weight:900; color:#0f172a;">🎯 Aperçu général de mes objectifs</span>
+            <button type="button" onclick="window.switchBaPortalView('objectives')" style="background:#2563eb; color:white; border:none; border-radius:8px; padding:6px 12px; font-size:11.5px; font-weight:800; cursor:pointer;">Mes objectifs détaillés →</button>
+          </div>
+          <div style="margin-bottom:10px;">
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800; margin-bottom:4px;">
+              <span>Inscriptions du jour (Objectif : 20/jour)</span>
+              <span style="color:${dailyCol};">${regsTodayList.length} / ${dailyRegTarget} (${dailyPct}%)</span>
+            </div>
+            <div style="height:10px; background:#e2e8f0; border-radius:99px; overflow:hidden;">
+              <div style="width:${Math.max(4, dailyPct)}%; height:100%; background:${dailyCol};"></div>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex; justify-content:space-between; font-size:12px; font-weight:800; margin-bottom:4px;">
+              <span>Paiements vendeurs confirmés du jour (Min. 3/jour ≥ 500 F)</span>
+              <span style="color:${payTodayCol};">${confirmedPaymentsToday.length} / ${dailyPayTarget} (${payTodayPct}%)</span>
+            </div>
+            <div style="height:10px; background:#e2e8f0; border-radius:99px; overflow:hidden;">
+              <div style="width:${Math.max(4, payTodayPct)}%; height:100%; background:${payTodayCol};"></div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
 
     container.innerHTML = `
       <div>
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; padding-bottom:14px; border-bottom:1px solid #e2e8f0; margin-bottom:16px;">
-          <div>
-            <span style="background:#0f4c81; color:white; padding:3px 10px; border-radius:99px; font-size:11px; font-weight:800;">🎖️ BRAND AMBASSADOR</span>
-            <h3 style="font-size:19px; font-weight:900; color:#0f172a; margin-top:4px;">${esc(currentPartner.full_name)}</h3>
-            <div style="font-size:12px; color:#64748b;">📍 ${esc(currentPartner.city || 'Parakou')} (${esc(currentPartner.region || 'Borgou')})</div>
+        <!-- SECTION 1 : EN-TÊTE OFFICIEL DE L'INTERFACE BA -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:10px; padding-bottom:14px; border-bottom:1px solid #e2e8f0; margin-bottom:14px; position:relative;">
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <div onclick="window.switchBaPortalView('profile')" title="Ouvrir mon profil" style="width:54px; height:54px; border-radius:50%; overflow:hidden; border:2.5px solid #2563eb; background:#eff6ff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-weight:900; font-size:20px; color:#2563eb;">
+                ${currentPartner.profile_photo_url ? `<img src="${esc(currentPartner.profile_photo_url)}" style="width:100%; height:100%; object-fit:cover;" />` : esc((currentPartner.first_name || 'B').charAt(0))}
+              </div>
+              <span style="margin-top:4px; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; padding:2px 7px; border-radius:99px; font-size:9.5px; font-weight:800; white-space:nowrap;">
+                🎖️ Grand Ambassadeur
+              </span>
+            </div>
+            <div onclick="window.switchBaPortalView('profile')" style="cursor:pointer;">
+              <div style="font-size:16px; font-weight:900; color:#0f172a;">
+                Bienvenue, ${esc(civility)} ${esc(displayName)}
+              </div>
+              <div style="font-size:11.5px; color:#64748b; margin-top:2px;">
+                📍 ${esc(currentPartner.city || 'Cotonou')} • Touchez pour ouvrir votre profil complet
+              </div>
+            </div>
           </div>
-          <div style="display:flex; gap:8px;">
-            <button class="btn bc-btn-outline" style="padding:7px 12px; font-size:12px;" onclick="window.openChangePartnerPasswordModal()">🔑 Mot de passe</button>
-            <button class="btn" style="background:#fee2e2; color:#dc2626; padding:7px 12px; font-size:12px;" onclick="window.logoutJdsPartner()">🚪 Déconnexion</button>
+
+          <div style="display:flex; align-items:center; gap:8px;">
+            <button type="button" onclick="alert('🔔 Vous avez ${myNotifs.length} notification(s) officielle(s).');" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:7px 10px; cursor:pointer; font-size:14px;">
+              🔔 ${myNotifs.length > 0 ? `<strong style="color:#dc2626; font-size:11px;">${myNotifs.length}</strong>` : ''}
+            </button>
+            <button type="button" onclick="window.toggleBaPortalDotsMenu()" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:10px; padding:7px 11px; cursor:pointer; font-size:16px; font-weight:900;">
+              ⋮
+            </button>
           </div>
+
+          ${baMenuOpen ? `
+            <div style="position:absolute; right:0; top:52px; background:white; border:1px solid #cbd5e1; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.15); padding:6px; z-index:50; min-width:210px;">
+              <button type="button" onclick="window.switchBaPortalView('profile')" style="width:100%; text-align:left; background:none; border:none; padding:9px 10px; font-size:12.5px; font-weight:700; cursor:pointer; border-radius:8px;">👤 Mon profil complet</button>
+              <button type="button" onclick="window.openChangePartnerPasswordModal()" style="width:100%; text-align:left; background:none; border:none; padding:9px 10px; font-size:12.5px; font-weight:700; cursor:pointer; border-radius:8px;">🔒 Changer mon mot de passe</button>
+              <button type="button" onclick="window.logoutJdsPartner()" style="width:100%; text-align:left; background:none; border:none; padding:9px 10px; font-size:12.5px; font-weight:700; color:#dc2626; cursor:pointer; border-radius:8px;">🚪 Déconnexion</button>
+            </div>
+          ` : ''}
         </div>
 
-        <!-- Mon Code Partenaire -->
-        <div style="background:linear-gradient(135deg, #0f4c81 0%, #6d28d9 100%); color:white; border-radius:16px; padding:18px; margin-bottom:18px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-          <div>
-            <div style="font-size:11px; text-transform:uppercase; opacity:0.85; font-weight:700;">Mon Code Partenaire Personnel</div>
-            <div style="font-size:26px; font-weight:900; letter-spacing:1px; margin:4px 0;">${esc(currentPartner.partner_code)}</div>
-            <div style="font-size:12px; opacity:0.9;">Lien : ${esc(shareUrl)}</div>
-          </div>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <button class="btn" style="background:white; color:#0f4c81; padding:9px 14px; font-size:12px;" onclick="navigator.clipboard.writeText('${esc(currentPartner.partner_code)}'); alert('✅ Code copié : ${esc(currentPartner.partner_code)}');">📋 Copier le code</button>
-            <button class="btn" style="background:rgba(255,255,255,0.18); color:white; border:1px solid rgba(255,255,255,0.4); padding:9px 14px; font-size:12px;" onclick="navigator.clipboard.writeText('${esc(shareUrl)}'); alert('✅ Lien de parrainage copié : ${esc(shareUrl)}');">🔗 Copier mon lien</button>
-            <button class="btn" style="background:#25D366; color:white; padding:9px 14px; font-size:12px;" onclick="window.open('https://wa.me/?text=' + encodeURIComponent('Rejoignez Bénin Connect et Marché d\\'Aujourd\\'hui avec mon code partenaire ${esc(currentPartner.partner_code)} : ${esc(shareUrl)}'), '_blank')">📲 Partager WhatsApp</button>
-          </div>
+        <!-- Navigation BA -->
+        <div style="display:flex; gap:6px; overflow-x:auto; margin-bottom:14px; padding-bottom:2px;">
+          <button type="button" onclick="window.switchBaPortalView('dashboard')" class="btn ${baActiveView === 'dashboard' ? 'bc-btn-violet' : 'bc-btn-outline'}" style="padding:7px 12px; font-size:11.5px; white-space:nowrap;">📊 Mon tableau de bord</button>
+          <button type="button" onclick="window.switchBaPortalView('objectives')" class="btn ${baActiveView === 'objectives' ? 'bc-btn-violet' : 'bc-btn-outline'}" style="padding:7px 12px; font-size:11.5px; white-space:nowrap;">🎯 Mes objectifs</button>
+          <button type="button" onclick="window.switchBaPortalView('field_reports')" class="btn ${baActiveView === 'field_reports' ? 'bc-btn-violet' : 'bc-btn-outline'}" style="padding:7px 12px; font-size:11.5px; white-space:nowrap;">📣 Retours du terrain</button>
+          <button type="button" onclick="window.switchBaPortalView('profile')" class="btn ${baActiveView === 'profile' ? 'bc-btn-violet' : 'bc-btn-outline'}" style="padding:7px 12px; font-size:11.5px; white-space:nowrap;">👤 Mon profil</button>
         </div>
 
-        <!-- Mes Statistiques -->
-        <h4 style="font-size:14px; font-weight:800; margin-bottom:10px;">📊 Mes Statistiques (${refs.length} inscrits au total)</h4>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:10px; margin-bottom:18px;">
-          <div class="jds-kpi"><div class="jds-kpi-val">${regsToday}</div><div class="jds-kpi-lbl">Inscriptions du jour</div></div>
-          <div class="jds-kpi"><div class="jds-kpi-val">${regsWeek}</div><div class="jds-kpi-lbl">Inscriptions semaine</div></div>
-          <div class="jds-kpi"><div class="jds-kpi-val">${regsMonth}</div><div class="jds-kpi-lbl">Inscriptions du mois</div></div>
-          <div class="jds-kpi"><div class="jds-kpi-val">${vendorsReg}</div><div class="jds-kpi-lbl">Vendeurs inscrits</div></div>
-          <div class="jds-kpi"><div class="jds-kpi-val">${vendorsPaid}</div><div class="jds-kpi-lbl">Vendeurs payants</div></div>
-          <div class="jds-kpi"><div class="jds-kpi-val">${subsDone}</div><div class="jds-kpi-lbl">Souscriptions réalisées</div></div>
-        </div>
-
-        <!-- Mes Commissions (Acquis vs Prévisionnels) -->
-        <h4 style="font-size:14px; font-weight:800; margin-bottom:10px;">💰 Mes Commissions & Gains</h4>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:10px; margin-bottom:18px;">
-          <div class="jds-kpi" style="border-color:#fde68a; background:#fffbeb;">
-            <div class="jds-kpi-val" style="color:#d97706;">${pendingAmt.toLocaleString('fr-FR')} F</div>
-            <div class="jds-kpi-lbl">En attente (Gains prévisionnels)</div>
-          </div>
-          <div class="jds-kpi" style="border-color:#bbf7d0; background:#f0fdf4;">
-            <div class="jds-kpi-val" style="color:#15803d;">${acquiredGains.toLocaleString('fr-FR')} F</div>
-            <div class="jds-kpi-lbl">Gains acquis (${validatedAmt.toLocaleString('fr-FR')} F validés + ${paidAmt.toLocaleString('fr-FR')} F payés)</div>
-          </div>
-        </div>
-
-        <!-- Mes Objectifs -->
-        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:14px; padding:16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:6px;">
-            <span style="font-size:13px; font-weight:800;">🎯 Objectif Mensuel (${regsMonth} / ${monthlyGoal}) • Jour : ${regsToday} / ${dailyGoal}</span>
-            <span style="font-size:11px; font-weight:800; padding:3px 10px; border-radius:99px; background:${isAhead ? '#dcfce7' : '#fef3c7'}; color:${isAhead ? '#166534' : '#92400e'};">
-              ${isAhead ? '🚀 En avance sur votre objectif' : '⚡ En retard — continuez vos partages !'}
-            </span>
-          </div>
-          <div style="height:10px; background:#e2e8f0; border-radius:99px; overflow:hidden;">
-            <div style="width:${monthPct}%; height:100%; background:#0f4c81;"></div>
-          </div>
-        </div>
+        ${bodyHtml}
       </div>
     `;
   }
