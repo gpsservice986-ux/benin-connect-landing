@@ -599,13 +599,20 @@
             if (!partner || !parsed?.referredId) return;
             const exists = state.referrals.some(r => r.referred_user_id === parsed.referredId);
             if (!exists) {
+              const rawRole = String(parsed.referredRole || 'client').toLowerCase();
+              const normUserType =
+                rawRole === 'prestataire' || rawRole === 'provider'
+                  ? 'provider'
+                  : rawRole === 'client' || rawRole === 'buyer'
+                  ? 'buyer'
+                  : 'vendor';
               state.referrals.unshift({
                 id: `ref-cloud-${parsed.referredId}`,
                 referred_user_id: parsed.referredId,
                 referred_name: parsed.referredName || 'Utilisateur Bénin Connect',
-                referred_phone: '',
+                referred_phone: parsed.referredPhone || '',
                 referred_email: parsed.referredEmail || '',
-                referred_user_type: parsed.referredRole === 'client' || parsed.referredRole === 'buyer' ? 'buyer' : 'vendor',
+                referred_user_type: normUserType,
                 partner_id: partner.id,
                 partner_name: partner.full_name,
                 partner_code: partner.partner_code,
@@ -613,7 +620,7 @@
                 supervisor_id: partner.supervisor_id || null,
                 regional_admin_id: partner.regional_admin_id || null,
                 region: partner.region,
-                city: partner.city || partner.region,
+                city: parsed.city || partner.city || partner.region,
                 has_paid: false,
                 registered_at: parsed.date || row.created_at || new Date().toISOString()
               });
@@ -665,8 +672,13 @@
       if (!partner || isPartnerSuspended(partner.status)) return null;
       if (partner.user_id && String(partner.user_id) === String(newUser.id)) return null;
 
-      const userType = newUser.role || 'client';
-      const isVendor = ['vendeur', 'prestataire', 'revendeur', 'vendor'].includes(String(userType).toLowerCase());
+      const userType = String(newUser.role || 'client').toLowerCase();
+      const normType =
+        userType === 'prestataire' || userType === 'provider'
+          ? 'provider'
+          : ['vendeur', 'revendeur', 'vendor'].includes(userType)
+          ? 'vendor'
+          : 'buyer';
       const nowIso = new Date().toISOString();
 
       const newReferral = {
@@ -675,7 +687,7 @@
         referred_name: newUser.full_name || newUser.email || 'Utilisateur Bénin Connect',
         referred_phone: newUser.phone || '',
         referred_email: newUser.email || '',
-        referred_user_type: isVendor ? 'vendor' : 'buyer',
+        referred_user_type: normType,
         partner_id: partner.id,
         partner_name: partner.full_name,
         partner_code: partner.partner_code,
@@ -1604,7 +1616,7 @@
           <div style="display:flex; align-items:center; gap:12px;">
             <div style="display:flex; flex-direction:column; align-items:center;">
               <div onclick="window.switchBaPortalView('profile')" title="Ouvrir mon profil" style="width:54px; height:54px; border-radius:50%; overflow:hidden; border:2.5px solid #2563eb; background:#eff6ff; display:flex; align-items:center; justify-content:center; cursor:pointer; font-weight:900; font-size:20px; color:#2563eb;">
-                ${currentPartner.profile_photo_url ? `<img src="${esc(currentPartner.profile_photo_url)}" style="width:100%; height:100%; object-fit:cover;" />` : esc((currentPartner.first_name || 'B').charAt(0))}
+                ${(currentPartner.profile_photo_url || currentPartner.photo_url) ? `<img src="${esc(currentPartner.profile_photo_url || currentPartner.photo_url)}" style="width:100%; height:100%; object-fit:cover;" />` : esc((currentPartner.first_name || 'B').charAt(0))}
               </div>
               <span style="margin-top:4px; background:#eff6ff; color:#1d4ed8; border:1px solid #bfdbfe; padding:2px 7px; border-radius:99px; font-size:9.5px; font-weight:800; white-space:nowrap;">
                 🎖️ Grand Ambassadeur
